@@ -1,4 +1,3 @@
-import React from 'react';
 import { Users, Target, Award, Lightbulb } from 'lucide-react';
 import { CircularTestimonials } from './ui/circular-testimonials';
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { ExternalLink, ArrowRight, Bot, TrendingUp, Clock, Users, Star } from 'lucide-react';
 import { Marquee } from './ui/Marquee';
 
@@ -297,16 +296,6 @@ const Portfolio = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 };

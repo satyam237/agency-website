@@ -1,4 +1,3 @@
-import React from 'react';
 import ScrollCardServices from './ui/ScrollCard';
 import { AIBentoGrid } from './ui/ai-bento-grid';
 
