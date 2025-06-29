@@ -24,28 +24,28 @@ const defaultSpringConfig: SpringConfig = {
   restDelta: 0.001,
 };
 
+// Black arrow head cursor
 const DefaultCursorSVG = () => (
   <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     className="pointer-events-none"
   >
-    <circle
-      cx="12"
-      cy="12"
-      r="8"
-      fill="rgba(0, 0, 0, 0.1)"
-      stroke="rgba(0, 0, 0, 0.3)"
-      strokeWidth="1"
+    {/* Arrow head shape */}
+    <path
+      d="M2 2L18 10L10 12L8 18L2 2Z"
+      fill="#000000"
+      stroke="#000000"
+      strokeWidth="0.5"
+      strokeLinejoin="round"
     />
-    <circle
-      cx="12"
-      cy="12"
-      r="3"
-      fill="rgba(0, 0, 0, 0.6)"
+    {/* Small white highlight for depth */}
+    <path
+      d="M3 3L15 9L9 10.5L7.5 15L3 3Z"
+      fill="#000000"
     />
   </svg>
 );
@@ -84,13 +84,14 @@ export function SmoothCursor({
 
       const { clientX, clientY } = e;
       
-      // Calculate rotation based on movement direction
+      // Calculate rotation based on movement direction for arrow
       const deltaX = clientX - lastPosition.current.x;
       const deltaY = clientY - lastPosition.current.y;
       
-      if (Math.abs(deltaX) > 1 || Math.abs(deltaY) > 1) {
+      if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) {
+        // Arrow points in direction of movement
         const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-        setRotation(angle);
+        setRotation(angle + 45); // Add 45 degrees to align arrow properly
         lastPosition.current = { x: clientX, y: clientY };
       }
 
@@ -182,29 +183,36 @@ export function SmoothCursor({
         style={{
           x: springX,
           y: springY,
-          translateX: "-50%",
-          translateY: "-50%",
+          translateX: "-10%", // Adjust for arrow tip positioning
+          translateY: "-10%",
         }}
         animate={{
-          scale: isVisible ? (isHovering ? 1.5 : 1) : 0,
+          scale: isVisible ? (isHovering ? 1.3 : 1) : 0,
           rotate: rotation,
           opacity: isVisible ? 1 : 0,
         }}
         transition={{
           scale: { duration: 0.2, ease: "easeOut" },
-          rotate: { duration: 0.3, ease: "easeOut" },
+          rotate: { duration: 0.4, ease: "easeOut" },
           opacity: { duration: 0.2 },
         }}
       >
         <div className="relative">
           {cursor}
           
-          {/* Hover effect ring */}
+          {/* Hover effect - subtle glow for arrow */}
           {isHovering && (
             <motion.div
-              className="absolute inset-0 rounded-full border-2 border-gray-400"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 2, opacity: 0.3 }}
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: "radial-gradient(circle, rgba(0,0,0,0.1) 0%, transparent 70%)",
+                width: "40px",
+                height: "40px",
+                left: "-10px",
+                top: "-10px",
+              }}
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1.5, opacity: 0.6 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             />
           )}
@@ -228,7 +236,7 @@ export function SmoothCursorDemo() {
       <div className="text-center space-y-8">
         <div>
           <span className="hidden md:block text-lg text-gray-700">
-            Move your mouse around to see the smooth cursor
+            Move your mouse around to see the smooth arrow cursor
           </span>
           <span className="block md:hidden text-lg text-gray-700">
             Tap anywhere to see interactions
