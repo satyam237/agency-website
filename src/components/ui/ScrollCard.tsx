@@ -127,35 +127,11 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
           </section>
         </div>
 
-        {/* Mobile Layout: Text First, Then Stacked Cards with Animation */}
+        {/* Mobile Layout: Stacked Cards First, Then Text */}
         <section className='block lg:hidden text-gray-900 w-full bg-gradient-to-b from-white to-gray-50 py-16' role="main">
           <div className='px-4 md:px-8'>
-            {/* Text Section - Mobile */}
-            <div className="text-center mb-12">
-              <h3 className='text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent'>
-                Transform Your Business
-              </h3>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
-                Each service is designed to integrate seamlessly with your existing operations while delivering measurable results.
-              </p>
-              <div className="space-y-4 max-w-sm mx-auto" role="list" aria-label="Key benefits">
-                <div className="flex items-center space-x-3" role="listitem">
-                  <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
-                  <span className="text-gray-700">98% Client Satisfaction</span>
-                </div>
-                <div className="flex items-center space-x-3" role="listitem">
-                  <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
-                  <span className="text-gray-700">24/7 Support Included</span>
-                </div>
-                <div className="flex items-center space-x-3" role="listitem">
-                  <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
-                  <span className="text-gray-700">Custom Implementation</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Animated Stacked Cards Section - Mobile */}
-            <ContainerScroll className="min-h-[800px] max-w-sm mx-auto">
+            {/* Animated Stacked Cards Section - Mobile (Now First) */}
+            <ContainerScroll className="min-h-[800px] max-w-sm mx-auto mb-16">
               {servicesData.map((service, i) => (
                 <CardSticky
                   key={i}
@@ -192,6 +168,30 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
                 </CardSticky>
               ))}
             </ContainerScroll>
+
+            {/* Text Section - Mobile (Now Second with added spacing) */}
+            <div className="text-center pt-8">
+              <h3 className='text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent'>
+                Transform Your Business
+              </h3>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+                Each service is designed to integrate seamlessly with your existing operations while delivering measurable results.
+              </p>
+              <div className="space-y-4 max-w-sm mx-auto" role="list" aria-label="Key benefits">
+                <div className="flex items-center space-x-3" role="listitem">
+                  <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
+                  <span className="text-gray-700">98% Client Satisfaction</span>
+                </div>
+                <div className="flex items-center space-x-3" role="listitem">
+                  <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
+                  <span className="text-gray-700">24/7 Support Included</span>
+                </div>
+                <div className="flex items-center space-x-3" role="listitem">
+                  <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
+                  <span className="text-gray-700">Custom Implementation</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
