@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gradient-start: #000000;
+    --gradient-middle: #6b7280;
+    --gradient-end: #d1d5db;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --gradient-start: #d1d5db;
+      --gradient-middle: #9ca3af;
+      --gradient-end: #000000;
+    }
+  }
+}
+
+@layer utilities {
+  .animate-gradient-shift {
+    background-size: 200% 100%;
+    animation: gradient-shift var(--duration, 3s) ease-in-out infinite;
+  }
+}
