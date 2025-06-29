@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import { GlassFilter } from './components/ui/liquid-glass-button';
-import { SmoothCursor } from './components/magicui/smooth-cursor';
 
 // Lazy load components that are not immediately visible
 const Services = React.lazy(() => import('./components/Services'));
@@ -47,9 +46,6 @@ const HomePage = () => (
 function App() {
   return (
     <Router>
-      {/* Global Smooth Cursor - only shows on desktop */}
-      <SmoothCursor />
-      
       <Routes>
         {/* Main homepage */}
         <Route path="/" element={<HomePage />} />
