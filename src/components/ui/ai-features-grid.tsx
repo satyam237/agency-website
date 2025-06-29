@@ -1,11 +1,12 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Zap, Bot, TrendingUp, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function AIFeaturesGrid() {
     return (
         <section className="bg-gray-50 py-16 md:py-32 dark:bg-transparent">
-            <div className="mx-auto max-w-3xl lg:max-w-5xl px-6">
+            <div className="mx-auto max-w-3xl lg:max-w-5xl px-6 relative">
                 {/* Header Section - Always at top */}
                 <div className="text-center mb-12 md:mb-16">
                     <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 md:mb-4 lg:mb-6">
@@ -18,6 +19,16 @@ export function AIFeaturesGrid() {
                         and unmatched support to transform your business operations.
                     </p>
                 </div>
+
+                {/* Animated Arrow - Only visible on large screens */}
+                <motion.img
+                    src="/arrow5.webp"
+                    alt="Arrow pointing to features"
+                    className="absolute right-4 top-[180px] w-24 md:w-32 transform scale-x-[-1] z-20 hidden lg:block"
+                    initial={{ opacity: 0, y: -50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+                />
                 
                 {/* Cards Grid - Mobile: Single column, Desktop: Complex grid */}
                 <div className="relative">
