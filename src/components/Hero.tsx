@@ -96,11 +96,11 @@ const Hero = () => {
           }}
           className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          <div className="space-y-6 md:space-y-8">
-            {/* Badge */}
-            <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-4 py-3 md:px-5 md:py-3 shadow-sm">
-              <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-gray-600" />
-              <span className="text-sm md:text-base font-medium text-gray-700">AI-Powered Solutions</span>
+          <div className="space-y-6 md:space-y-8 pt-16 md:pt-20">
+            {/* Badge - Made smaller and moved down */}
+            <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-3 py-2 md:px-4 md:py-2 shadow-sm">
+              <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-gray-600" />
+              <span className="text-xs md:text-sm font-medium text-gray-700">AI-Powered Solutions</span>
             </div>
 
             {/* Main Heading with Gradient AI Text */}
