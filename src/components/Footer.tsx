@@ -2,6 +2,13 @@ import React from 'react';
 import { Bot, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
+  const handleLegalPageClick = (page: string) => {
+    // For now, we'll use window.open to open in a new tab
+    // In a real application, you'd use React Router or similar
+    const baseUrl = window.location.origin;
+    window.open(`${baseUrl}/${page}`, '_blank');
+  };
+
   return (
     <footer className="bg-gradient-to-b from-gray-900 to-black text-white">
       {/* Main Footer */}
@@ -20,11 +27,15 @@ const Footer = () => {
             <div className="space-y-2 md:space-y-3">
               <div className="flex items-center space-x-3 text-gray-400 text-sm md:text-base">
                 <Mail className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
-                <span>hello@aiagency.com</span>
+                <a href="mailto:hello@aiagency.com" className="hover:text-white transition-colors">
+                  hello@aiagency.com
+                </a>
               </div>
               <div className="flex items-center space-x-3 text-gray-400 text-sm md:text-base">
                 <Phone className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
-                <span>+1 (555) 123-4567</span>
+                <a href="tel:+15551234567" className="hover:text-white transition-colors">
+                  +1 (555) 123-4567
+                </a>
               </div>
               <div className="flex items-center space-x-3 text-gray-400 text-sm md:text-base">
                 <MapPin className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
@@ -59,18 +70,27 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
             <div className="text-gray-400 text-xs md:text-sm">
-              © 2024 AI Agency. All rights reserved.
+              © 2025 AI Agency. All rights reserved.
             </div>
             <div className="flex space-x-4 md:space-x-6 text-xs md:text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+              <button 
+                onClick={() => handleLegalPageClick('privacy-policy')}
+                className="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+              >
                 Privacy Policy
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+              </button>
+              <button 
+                onClick={() => handleLegalPageClick('terms-of-service')}
+                className="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+              >
                 Terms of Service
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+              </button>
+              <button 
+                onClick={() => handleLegalPageClick('cookie-policy')}
+                className="text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
+              >
                 Cookie Policy
-              </a>
+              </button>
             </div>
           </div>
         </div>
