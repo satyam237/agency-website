@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight, Sparkles, Zap, Bot } from 'lucide-react';
 import { AnimatedText } from './ui/animated-underline-text-one';
 import { GradientText } from './ui/gradient-text';
+import { AuroraBackground } from './ui/aurora-background';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   const [animatedStats, setAnimatedStats] = useState({
@@ -81,19 +83,19 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="relative overflow-hidden pt-20">
-      {/* Main Hero Content */}
-      <div className="min-h-screen flex items-center justify-center">
-        {/* Background Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-gray-100"></div>
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 md:w-64 md:h-64 bg-gradient-to-r from-gray-200/30 to-gray-300/30 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-gradient-to-r from-gray-300/20 to-gray-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section id="home" className="relative overflow-hidden">
+      {/* Aurora Background with Hero Content */}
+      <AuroraBackground className="relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0.0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        >
           <div className="space-y-6 md:space-y-8">
             {/* Badge */}
             <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-4 py-3 md:px-5 md:py-3 shadow-sm">
@@ -153,8 +155,8 @@ const Hero = () => {
               </button>
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </AuroraBackground>
 
       {/* Stats Section */}
       <div className="stats-section w-full bg-gradient-to-r from-gray-100/50 via-gray-50 to-gray-100/50 backdrop-blur-sm border-t border-gray-200/50 py-16 md:py-20">
