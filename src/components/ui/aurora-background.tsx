@@ -21,28 +21,29 @@ export const AuroraBackground = ({
       )}
       {...props}
     >
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className={cn(
             `
-            [--white-gradient:repeating-linear-gradient(100deg,var(--white)_0%,var(--white)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--white)_16%)]
-            [--aurora:repeating-linear-gradient(100deg,var(--blue-200)_10%,var(--indigo-200)_15%,var(--purple-200)_20%,var(--pink-200)_25%,var(--blue-300)_30%,var(--indigo-300)_35%,var(--purple-300)_40%)]
-            [background-image:var(--white-gradient),var(--aurora)]
-            [background-size:400%,_300%]
-            [background-position:50%_50%,50%_50%]
-            filter blur-[12px]
-            after:content-[""] after:absolute after:inset-0 after:[background-image:var(--white-gradient),var(--aurora)] 
-            after:[background-size:300%,_200%] 
-            after:animate-aurora after:[background-attachment:fixed] after:mix-blend-difference
+            [--aurora:linear-gradient(90deg,transparent_0%,rgba(147,197,253,0.3)_20%,rgba(196,181,253,0.25)_40%,rgba(147,197,253,0.3)_60%,transparent_100%)]
+            [background-image:var(--aurora)]
+            [background-size:200%_100%]
+            [background-position:0%_0%]
+            filter blur-[8px]
+            after:content-[""] after:absolute after:inset-0 after:[background-image:var(--aurora)]
+            after:[background-size:150%_100%] 
+            after:animate-aurora after:[background-attachment:fixed]
             pointer-events-none
-            absolute -inset-[10px] opacity-40 will-change-transform`,
+            absolute inset-0 opacity-60 will-change-transform`,
 
             showRadialGradient &&
-              `[mask-image:linear-gradient(to_bottom,black_0%,black_50%,transparent_85%)]`
+              `[mask-image:linear-gradient(to_bottom,black_0%,black_30%,transparent_70%)]`
           )}
         ></div>
       </div>
-      {children}
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
   );
 };
