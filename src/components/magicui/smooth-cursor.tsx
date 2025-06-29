@@ -34,7 +34,7 @@ const DefaultCursorSVG = () => (
     xmlns="http://www.w3.org/2000/svg"
     className="pointer-events-none"
   >
-    {/* Arrow head shape */}
+    {/* Arrow head shape pointing right by default */}
     <path
       d="M2 2L18 10L10 12L8 18L2 2Z"
       fill="#000000"
@@ -42,7 +42,7 @@ const DefaultCursorSVG = () => (
       strokeWidth="0.5"
       strokeLinejoin="round"
     />
-    {/* Small white highlight for depth */}
+    {/* Small highlight for depth */}
     <path
       d="M3 3L15 9L9 10.5L7.5 15L3 3Z"
       fill="#000000"
@@ -67,32 +67,50 @@ export function SmoothCursor({
   const springX = useSpring(mouseX, springConfig);
   const springY = useSpring(mouseY, springConfig);
 
-  // Rotation based on movement direction
+  // Rotation and movement tracking
   const [rotation, setRotation] = useState(0);
-  const lastPosition = useRef({ x: 0, y: 0 });
+  const lastPosition = useRef({ x: 0, y: 0, time: 0 });
+  const velocityHistory = useRef<Array<{ x: number; y: number; time: number }>>([]);
 
   useEffect(() => {
     let animationFrameId: number;
-    let lastTime = 0;
 
     const updateCursor = (e: MouseEvent) => {
       const currentTime = Date.now();
-      
-      // Throttle updates for better performance
-      if (currentTime - lastTime < 16) return; // ~60fps
-      lastTime = currentTime;
-
       const { clientX, clientY } = e;
       
-      // Calculate rotation based on movement direction for arrow
+      // Calculate velocity and direction
       const deltaX = clientX - lastPosition.current.x;
       const deltaY = clientY - lastPosition.current.y;
+      const deltaTime = currentTime - lastPosition.current.time;
       
-      if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) {
-        // Arrow points in direction of movement
-        const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
-        setRotation(angle + 45); // Add 45 degrees to align arrow properly
-        lastPosition.current = { x: clientX, y: clientY };
+      // Only update rotation if there's significant movement
+      if ((Math.abs(deltaX) > 1 || Math.abs(deltaY) > 1) && deltaTime > 0) {
+        // Add current velocity to history
+        velocityHistory.current.push({
+          x: deltaX / deltaTime,
+          y: deltaY / deltaTime,
+          time: currentTime
+        });
+        
+        // Keep only recent history (last 100ms)
+        velocityHistory.current = velocityHistory.current.filter(
+          v => currentTime - v.time < 100
+        );
+        
+        // Calculate average velocity for smoother direction
+        if (velocityHistory.current.length > 0) {
+          const avgVelX = velocityHistory.current.reduce((sum, v) => sum + v.x, 0) / velocityHistory.current.length;
+          const avgVelY = velocityHistory.current.reduce((sum, v) => sum + v.y, 0) / velocityHistory.current.length;
+          
+          // Calculate angle from average velocity
+          if (Math.abs(avgVelX) > 0.01 || Math.abs(avgVelY) > 0.01) {
+            const angle = Math.atan2(avgVelY, avgVelX) * (180 / Math.PI);
+            setRotation(angle);
+          }
+        }
+        
+        lastPosition.current = { x: clientX, y: clientY, time: currentTime };
       }
 
       // Update motion values
@@ -110,6 +128,8 @@ export function SmoothCursor({
 
     const handleMouseLeave = () => {
       setIsVisible(false);
+      // Clear velocity history when mouse leaves
+      velocityHistory.current = [];
     };
 
     const handleMouseDown = () => {
@@ -123,7 +143,7 @@ export function SmoothCursor({
     // Check for interactive elements
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isInteractive = target.closest('button, a, input, textarea, select, [role="button"], [tabindex]');
+      const isInteractive = target.closest('button, a, input, textarea, select, [role="button"], [tabindex], .cursor-pointer');
       setIsHovering(!!isInteractive);
     };
 
@@ -183,17 +203,17 @@ export function SmoothCursor({
         style={{
           x: springX,
           y: springY,
-          translateX: "-10%", // Adjust for arrow tip positioning
-          translateY: "-10%",
+          translateX: "-50%", // Center the cursor
+          translateY: "-50%",
         }}
         animate={{
-          scale: isVisible ? (isHovering ? 1.3 : 1) : 0,
+          scale: isVisible ? (isHovering ? 1.4 : 1) : 0,
           rotate: rotation,
           opacity: isVisible ? 1 : 0,
         }}
         transition={{
           scale: { duration: 0.2, ease: "easeOut" },
-          rotate: { duration: 0.4, ease: "easeOut" },
+          rotate: { duration: 0.3, ease: "easeOut" },
           opacity: { duration: 0.2 },
         }}
       >
@@ -205,14 +225,14 @@ export function SmoothCursor({
             <motion.div
               className="absolute inset-0 rounded-full"
               style={{
-                background: "radial-gradient(circle, rgba(0,0,0,0.1) 0%, transparent 70%)",
-                width: "40px",
-                height: "40px",
-                left: "-10px",
-                top: "-10px",
+                background: "radial-gradient(circle, rgba(0,0,0,0.15) 0%, transparent 70%)",
+                width: "32px",
+                height: "32px",
+                left: "-6px",
+                top: "-6px",
               }}
               initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1.5, opacity: 0.6 }}
+              animate={{ scale: 1.8, opacity: 0.7 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             />
           )}
@@ -236,7 +256,7 @@ export function SmoothCursorDemo() {
       <div className="text-center space-y-8">
         <div>
           <span className="hidden md:block text-lg text-gray-700">
-            Move your mouse around to see the smooth arrow cursor
+            Move your mouse around to see the arrow follow your movement direction
           </span>
           <span className="block md:hidden text-lg text-gray-700">
             Tap anywhere to see interactions
@@ -244,12 +264,12 @@ export function SmoothCursorDemo() {
         </div>
         
         <div className="space-y-4">
-          <button className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors">
+          <button className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors cursor-pointer">
             Hover over me
           </button>
           
           <div>
-            <a href="#" className="text-blue-500 underline hover:text-blue-700">
+            <a href="#" className="text-blue-500 underline hover:text-blue-700 cursor-pointer">
               This is a link
             </a>
           </div>
@@ -257,8 +277,12 @@ export function SmoothCursorDemo() {
           <input
             type="text"
             placeholder="Type here..."
-            className="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
           />
+          
+          <div className="mt-8 p-6 border-2 border-dashed border-gray-300 rounded-lg">
+            <p className="text-gray-600">Move your mouse in different directions to see the arrow point in the flow direction</p>
+          </div>
         </div>
       </div>
       
