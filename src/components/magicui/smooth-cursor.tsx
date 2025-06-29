@@ -79,13 +79,13 @@ export function SmoothCursor({
       const currentTime = Date.now();
       const { clientX, clientY } = e;
       
-      // Calculate velocity and direction
+      // Calculate movement delta
       const deltaX = clientX - lastPosition.current.x;
       const deltaY = clientY - lastPosition.current.y;
       const deltaTime = currentTime - lastPosition.current.time;
       
       // Only update rotation if there's significant movement
-      if ((Math.abs(deltaX) > 1 || Math.abs(deltaY) > 1) && deltaTime > 0) {
+      if ((Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2) && deltaTime > 0) {
         // Add current velocity to history
         velocityHistory.current.push({
           x: deltaX / deltaTime,
@@ -93,18 +93,19 @@ export function SmoothCursor({
           time: currentTime
         });
         
-        // Keep only recent history (last 100ms)
+        // Keep only recent history (last 150ms for smoother averaging)
         velocityHistory.current = velocityHistory.current.filter(
-          v => currentTime - v.time < 100
+          v => currentTime - v.time < 150
         );
         
         // Calculate average velocity for smoother direction
-        if (velocityHistory.current.length > 0) {
+        if (velocityHistory.current.length > 2) {
           const avgVelX = velocityHistory.current.reduce((sum, v) => sum + v.x, 0) / velocityHistory.current.length;
           const avgVelY = velocityHistory.current.reduce((sum, v) => sum + v.y, 0) / velocityHistory.current.length;
           
-          // Calculate angle from average velocity
-          if (Math.abs(avgVelX) > 0.01 || Math.abs(avgVelY) > 0.01) {
+          // Calculate angle from average velocity - this points in the direction of movement
+          if (Math.abs(avgVelX) > 0.02 || Math.abs(avgVelY) > 0.02) {
+            // atan2 gives us the angle the movement is heading towards
             const angle = Math.atan2(avgVelY, avgVelX) * (180 / Math.PI);
             setRotation(angle);
           }
@@ -213,7 +214,7 @@ export function SmoothCursor({
         }}
         transition={{
           scale: { duration: 0.2, ease: "easeOut" },
-          rotate: { duration: 0.3, ease: "easeOut" },
+          rotate: { duration: 0.4, ease: "easeOut" },
           opacity: { duration: 0.2 },
         }}
       >
@@ -256,7 +257,7 @@ export function SmoothCursorDemo() {
       <div className="text-center space-y-8">
         <div>
           <span className="hidden md:block text-lg text-gray-700">
-            Move your mouse around to see the arrow follow your movement direction
+            Move your mouse around - the arrow points in the direction you're moving
           </span>
           <span className="block md:hidden text-lg text-gray-700">
             Tap anywhere to see interactions
@@ -281,7 +282,7 @@ export function SmoothCursorDemo() {
           />
           
           <div className="mt-8 p-6 border-2 border-dashed border-gray-300 rounded-lg">
-            <p className="text-gray-600">Move your mouse in different directions to see the arrow point in the flow direction</p>
+            <p className="text-gray-600">Move your mouse in circles, straight lines, or any direction - the arrow will point where you're going!</p>
           </div>
         </div>
       </div>
