@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { ArrowRight, Sparkles, Zap } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowRight, Sparkles, Zap, Bot } from 'lucide-react';
 import { AnimatedText } from './ui/animated-underline-text-one';
 import { GradientText } from './ui/gradient-text';
 import { AuroraBackground } from './ui/aurora-background';

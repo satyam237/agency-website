@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import { SlideButton } from './ui/slide-button';
 import { Calendar } from './ui/calendar';
+import { motion } from 'framer-motion';
 
 interface FormData {
   name: string;

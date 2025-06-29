@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Bot } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, Bot, Zap, Globe, MessageSquare } from 'lucide-react';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

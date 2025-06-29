@@ -1,3 +1,4 @@
+import React from 'react';
 import { Bot, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
