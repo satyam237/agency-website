@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Zap, Bot, TrendingUp, Clock } from 'lucide-react';
+import ScrollFloat from './ScrollFloat';
 
 export function AIFeaturesGrid() {
     return (
@@ -8,11 +9,17 @@ export function AIFeaturesGrid() {
             <div className="mx-auto max-w-3xl lg:max-w-5xl px-6">
                 {/* Header Section - Always at top */}
                 <div className="text-center mb-12 md:mb-16">
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 md:mb-4 lg:mb-6">
-                        <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-                            Why Choose Our AI Solutions
-                        </span>
-                    </h3>
+                    <ScrollFloat
+                        animationDuration={1}
+                        ease='back.inOut(2)'
+                        scrollStart='center bottom+=50%'
+                        scrollEnd='bottom bottom-=40%'
+                        stagger={0.03}
+                        containerClassName="text-3xl sm:text-4xl md:text-5xl font-black mb-3 md:mb-4 lg:mb-6"
+                        textClassName="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+                    >
+                        Why Choose Our AI Solutions?
+                    </ScrollFloat>
                     <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4 leading-relaxed">
                         We deliver enterprise-grade AI solutions with proven results, cutting-edge technology, 
                         and unmatched support to transform your business operations.

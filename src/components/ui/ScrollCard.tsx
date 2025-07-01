@@ -4,6 +4,7 @@ import React, { useRef, forwardRef, useEffect } from 'react';
 import { Bot, Globe, Zap, MessageSquare, Brain, Cog } from 'lucide-react';
 import StarBorderButton from './StarBorderButton';
 import { ContainerScroll, CardSticky } from './cards-stack';
+import ScrollFloat from './ScrollFloat';
 
 interface ServiceCardData {
   icon: React.ComponentType<{ className?: string }>;
@@ -115,11 +116,17 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
             <div className='absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#e5e5e52e_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e52e_1px,transparent_1px)] bg-[size:54px_54px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]'></div>
 
             <div className="text-center">
-              <h2 id="services-heading" className="text-5xl md:text-7xl font-black mb-1">
-                <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-                  Our AI Services
-                </span>
-              </h2>
+              <ScrollFloat
+                animationDuration={1}
+                ease='back.inOut(2)'
+                scrollStart='center bottom+=50%'
+                scrollEnd='bottom bottom-=40%'
+                stagger={0.03}
+                containerClassName="text-5xl md:text-7xl font-black mb-1"
+                textClassName="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+              >
+                Our AI Services
+              </ScrollFloat>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Comprehensive AI solutions designed to transform your business operations and drive unprecedented growth.
               </p>
@@ -265,11 +272,17 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
 
         <footer className='bg-gradient-to-b from-gray-50 to-white py-12' role="contentinfo">
           <div className="max-w-4xl mx-auto text-center px-4">
-            <h4 className='text-4xl md:text-5xl font-black mb-6'>
-              <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-                Ready to Get Started?
-              </span>
-            </h4>
+            <ScrollFloat
+              animationDuration={1}
+              ease='back.inOut(2)'
+              scrollStart='center bottom+=50%'
+              scrollEnd='bottom bottom-=40%'
+              stagger={0.03}
+              containerClassName="text-4xl md:text-5xl font-black mb-6"
+              textClassName="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+            >
+              Ready to Get Started?
+            </ScrollFloat>
             <p className="text-gray-600 text-lg mb-8">
               Let's discuss how our AI solutions can transform your business operations and drive growth.
             </p>
