@@ -10,18 +10,19 @@ const ScrollFloat = ({
   containerClassName = "",
   textClassName = "",
   animationDuration = 1,
-  ease = "back.inOut(2)",
-  scrollStart = "top bottom-=100px",  // More reliable trigger point
-  scrollEnd = "bottom top+=100px",    // More reliable end point
-  stagger = 0.03
+  ease = "power2.out",
+  scrollStart = "top 85%",
+  scrollEnd = "top 30%",
+  stagger = 0.1
 }) => {
   const containerRef = useRef(null);
 
   const splitText = useMemo(() => {
     const text = typeof children === "string" ? children : "";
-    return text.split("").map((char, index) => (
-      <span className="inline-block scroll-char" key={index}>
-        {char === " " ? "\u00A0" : char}
+    return text.split(" ").map((word, index) => (
+      <span className="inline-block word-float" key={index}>
+        {word}
+        {index < text.split(" ").length - 1 && <span>&nbsp;</span>}
       </span>
     ));
   }, [children]);
@@ -35,47 +36,47 @@ const ScrollFloat = ({
         ? scrollContainerRef.current
         : window;
 
-    const charElements = el.querySelectorAll(".scroll-char");
+    const wordElements = el.querySelectorAll(".word-float");
     
-    // Debug: Check if elements are found
-    console.log("Found char elements:", charElements.length);
+    if (wordElements.length === 0) return;
 
-    // Set initial state
-    gsap.set(charElements, {
-      opacity: 0.5,
-      yPercent: 120,
-      scaleY: 2.3,
-      scaleX: 0.7,
-      transformOrigin: "50% 0%"
+    // Set initial state - make sure text is visible by default
+    gsap.set(wordElements, {
+      opacity: 1, // Keep visible as fallback
+      x: -30, // Start from left
+      y: 20, // Slightly below
+      scale: 0.9,
+      transformOrigin: "center center"
     });
 
-    // Create animation
-    const tl = gsap.to(charElements, {
+    // Create the floating animation
+    gsap.to(wordElements, {
       duration: animationDuration,
       ease: ease,
-      opacity: 1,
-      yPercent: 0,
-      scaleY: 1,
-      scaleX: 1,
+      x: 0, // Float to original position
+      y: 0, // Float up to original position
+      scale: 1, // Scale to normal size
       stagger: stagger,
       scrollTrigger: {
         trigger: el,
         scroller,
         start: scrollStart,
         end: scrollEnd,
-        scrub: true,
-        markers: false, // Set to true for debugging
-        onEnter: () => console.log("ScrollTrigger entered"),
-        onLeave: () => console.log("ScrollTrigger left"),
-        onUpdate: (self) => console.log("Progress:", self.progress)
+        scrub: 1,
+        toggleActions: "play none none reverse"
       },
     });
 
-    // Cleanup
+    // Cleanup function
     return () => {
-      tl.kill();
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === el) {
+          trigger.kill();
+        }
+      });
     };
   }, [
+    children,
     scrollContainerRef,
     animationDuration,
     ease,
