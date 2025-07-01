@@ -10,6 +10,8 @@ export default {
         'star-movement-top': 'star-movement-top linear infinite alternate',
         'gradient-shift': 'gradient-shift var(--duration, 3s) ease-in-out infinite',
         aurora: "aurora 60s linear infinite",
+        shimmer: 'shimmer 2s ease-in-out infinite',
+        shine: 'shine 3s ease-in-out infinite',
       },
       keyframes: {
         marquee: {
@@ -40,6 +42,14 @@ export default {
           to: {
             backgroundPosition: "350% 50%, 350% 50%",
           },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%) skewX(-12deg)' },
+          '100%': { transform: 'translateX(200%) skewX(-12deg)' },
+        },
+        shine: {
+          '0%': { backgroundPosition: '-200% center' },
+          '100%': { backgroundPosition: '200% center' },
         },
       },
       colors: {
