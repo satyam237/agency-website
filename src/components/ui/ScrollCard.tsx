@@ -123,7 +123,7 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
                 scrollEnd='bottom bottom-=40%'
                 stagger={0.03}
                 containerClassName="text-5xl md:text-7xl font-black mb-1"
-                textClassName="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+                textClassName="bg-gradient-to-b from-black to-silver bg-clip-text text-transparent"
               >
                 Our AI Services
               </ScrollFloat>
@@ -179,7 +179,7 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
             {/* Text Section - Mobile (Now Second with added spacing) */}
             <div className="text-center pt-8">
               <h3 className='text-4xl md:text-5xl font-black mb-6'>
-                <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-b from-black to-silver bg-clip-text text-transparent">
                   Transform Your Business
                 </span>
               </h3>
@@ -244,7 +244,7 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
             <div className='sticky top-0 h-screen grid place-content-center flex-1 max-w-md'>
               <div className="text-center">
                 <h3 className='text-5xl md:text-6xl font-black text-center tracking-tight leading-[120%] mb-6'>
-                  <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-b from-black to-silver bg-clip-text text-transparent">
                     Transform Your Business
                   </span>
                 </h3>
@@ -279,7 +279,7 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
               scrollEnd='bottom bottom-=40%'
               stagger={0.03}
               containerClassName="text-4xl md:text-5xl font-black mb-6"
-              textClassName="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+              textClassName="bg-gradient-to-b from-black to-silver bg-clip-text text-transparent"
             >
               Ready to Get Started?
             </ScrollFloat>

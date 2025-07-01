@@ -125,7 +125,7 @@ const Portfolio = () => {
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
           <h2 id="portfolio-heading" className="text-4xl sm:text-5xl md:text-6xl font-black mb-4 md:mb-6">
-            <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-b from-black to-silver bg-clip-text text-transparent">
               Success Stories
             </span>
           </h2>
@@ -266,7 +266,7 @@ const Portfolio = () => {
         {/* Testimonials with Marquee Effect */}
         <div>
           <h3 className="text-3xl sm:text-4xl font-black text-center text-gray-900 mb-8 md:mb-12">
-            <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-b from-black to-silver bg-clip-text text-transparent">
               What Our Clients Say
             </span>
           </h3>

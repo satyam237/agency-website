@@ -16,7 +16,7 @@ export function AIFeaturesGrid() {
                         scrollEnd='bottom bottom-=40%'
                         stagger={0.03}
                         containerClassName="text-3xl sm:text-4xl md:text-5xl font-black mb-3 md:mb-4 lg:mb-6"
-                        textClassName="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+                        textClassName="bg-gradient-to-b from-black to-silver bg-clip-text text-transparent"
                     >
                         Why Choose Our AI Solutions?
                     </ScrollFloat>

@@ -135,7 +135,7 @@ const Contact = () => {
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
             <h2 id="contact-heading" className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6">
-              <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-b from-black to-silver bg-clip-text text-transparent">
                 Let's Build Something Amazing
               </span>
             </h2>
