@@ -1,6 +1,8 @@
 import React from 'react';
 import { Users, Target, Award, Lightbulb } from 'lucide-react';
 import { CircularTestimonials } from './ui/circular-testimonials';
+import { ScrollReveal } from './ui/scroll-reveal';
+import ScrollFloat from './ui/scroll-float';
 
 const About = () => {
   const values = [
@@ -52,36 +54,82 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 id="about-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
-            <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-              About Our Agency
-            </span>
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+          <ScrollFloat
+            tag="h2"
+            textClassName="text-5xl md:text-7xl font-black mb-4 md:mb-6 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+            scrollStart="top bottom-=10%"
+            scrollEnd="center center"
+            stagger={0.02}
+            ease="back.out(1.7)"
+          >
+            About Our Agency
+          </ScrollFloat>
+          <ScrollReveal
+            baseOpacity={0.3}
+            enableBlur={true}
+            baseRotation={0.5}
+            blurStrength={1}
+            rotationEnd="center center"
+            wordAnimationEnd="center center"
+            textClassName="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4"
+          >
             We're a team of AI experts, engineers, and strategists dedicated to helping businesses 
             harness the transformative power of artificial intelligence.
-          </p>
+          </ScrollReveal>
         </div>
 
         {/* Story Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center mb-16 md:mb-20">
           <div className="order-2 lg:order-1">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-6">Our Story</h3>
+            <ScrollFloat
+              tag="h3"
+              textClassName="text-4xl md:text-5xl font-black text-gray-900 mb-4 md:mb-6 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+              scrollStart="top bottom-=10%"
+              scrollEnd="center center"
+              stagger={0.03}
+              ease="back.out(1.7)"
+            >
+              Our Story
+            </ScrollFloat>
             <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p>
+              <ScrollReveal
+                baseOpacity={0.4}
+                enableBlur={true}
+                baseRotation={0.5}
+                blurStrength={1}
+                rotationEnd="center center"
+                wordAnimationEnd="center center"
+                textClassName=""
+              >
                 Founded in 2021, our agency emerged from a simple belief: AI should be accessible, 
                 practical, and transformative for businesses of all sizes. What started as a small 
                 team of AI enthusiasts has grown into a full-service agency serving clients worldwide.
-              </p>
-              <p>
+              </ScrollReveal>
+              <ScrollReveal
+                baseOpacity={0.4}
+                enableBlur={true}
+                baseRotation={0.5}
+                blurStrength={1}
+                rotationEnd="center center"
+                wordAnimationEnd="center center"
+                textClassName=""
+              >
                 We've helped over 200 companies implement AI solutions that have collectively saved 
                 millions of hours and generated substantial ROI. Our approach combines cutting-edge 
                 technology with deep business understanding to deliver solutions that truly matter.
-              </p>
-              <p>
+              </ScrollReveal>
+              <ScrollReveal
+                baseOpacity={0.4}
+                enableBlur={true}
+                baseRotation={0.5}
+                blurStrength={1}
+                rotationEnd="center center"
+                wordAnimationEnd="center center"
+                textClassName=""
+              >
                 Today, we continue to push the boundaries of what's possible with AI, always keeping 
                 our clients' success at the heart of everything we do.
-              </p>
+              </ScrollReveal>
             </div>
           </div>
           <div className="relative order-1 lg:order-2">
@@ -103,7 +151,16 @@ const About = () => {
 
         {/* Values */}
         <div className="mb-16 md:mb-20">
-          <h3 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8 md:mb-12">Our Values</h3>
+          <ScrollFloat
+            tag="h3"
+            textClassName="text-4xl md:text-5xl font-black text-center text-gray-900 mb-8 md:mb-12 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+            scrollStart="top bottom-=10%"
+            scrollEnd="center center"
+            stagger={0.03}
+            ease="back.out(1.7)"
+          >
+            Our Values
+          </ScrollFloat>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8" role="list">
             {values.map((value, index) => (
               <div key={index} className="text-center group" role="listitem">
@@ -111,7 +168,17 @@ const About = () => {
                   <value.icon className="h-6 w-6 md:h-8 md:w-8 text-gray-700" aria-hidden="true" />
                 </div>
                 <h4 className="text-lg md:text-xl font-semibold text-gray-900 mb-2 md:mb-3">{value.title}</h4>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed">{value.description}</p>
+                <ScrollReveal
+                  baseOpacity={0.4}
+                  enableBlur={true}
+                  baseRotation={0.5}
+                  blurStrength={1}
+                  rotationEnd="center center"
+                  wordAnimationEnd="center center"
+                  textClassName="text-sm md:text-base text-gray-600 leading-relaxed"
+                >
+                  {value.description}
+                </ScrollReveal>
               </div>
             ))}
           </div>
@@ -119,7 +186,16 @@ const About = () => {
 
         {/* Team with Circular Testimonials */}
         <div>
-          <h3 className="text-2xl md:text-3xl font-bold text-center text-gray-900 mb-8 md:mb-12">Meet Our Team</h3>
+          <ScrollFloat
+            tag="h3"
+            textClassName="text-4xl md:text-5xl font-black text-center text-gray-900 mb-8 md:mb-12 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+            scrollStart="top bottom-=10%"
+            scrollEnd="center center"
+            stagger={0.03}
+            ease="back.out(1.7)"
+          >
+            Meet Our Team
+          </ScrollFloat>
           <div className="flex justify-center">
             <CircularTestimonials
               testimonials={team}

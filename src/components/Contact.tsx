@@ -3,6 +3,7 @@ import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import { SlideButton } from './ui/slide-button';
 import { Calendar } from './ui/calendar';
 import { ScrollReveal } from './ui/scroll-reveal';
+import ScrollFloat from './ui/scroll-float';
 import { motion } from 'framer-motion';
 
 interface FormData {
@@ -135,11 +136,16 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
-            <h2 id="contact-heading" className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6">
-              <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-                Let's Build Something Amazing
-              </span>
-            </h2>
+            <ScrollFloat
+              tag="h2"
+              textClassName="text-5xl md:text-7xl font-black mb-4 md:mb-6 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+              scrollStart="top bottom-=10%"
+              scrollEnd="center center"
+              stagger={0.02}
+              ease="back.out(1.7)"
+            >
+              Let's Build Something Amazing
+            </ScrollFloat>
             <ScrollReveal
               baseOpacity={0.3}
               enableBlur={true}

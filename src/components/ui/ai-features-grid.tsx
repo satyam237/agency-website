@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Zap, Bot, TrendingUp, Clock } from 'lucide-react';
 import { ScrollReveal } from './scroll-reveal';
+import ScrollFloat from './scroll-float';
 
 export function AIFeaturesGrid() {
     return (
@@ -9,11 +10,16 @@ export function AIFeaturesGrid() {
             <div className="mx-auto max-w-3xl lg:max-w-5xl px-6">
                 {/* Header Section - Always at top */}
                 <div className="text-center mb-12 md:mb-16">
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 md:mb-4 lg:mb-6">
-                        <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-                            Why Choose Our AI Solutions
-                        </span>
-                    </h3>
+                    <ScrollFloat
+                        tag="h3"
+                        textClassName="text-4xl sm:text-5xl md:text-6xl font-black mb-3 md:mb-4 lg:mb-6 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+                        scrollStart="top bottom-=10%"
+                        scrollEnd="center center"
+                        stagger={0.03}
+                        ease="back.out(1.7)"
+                    >
+                        Why Choose Our AI Solutions
+                    </ScrollFloat>
                     <ScrollReveal
                         baseOpacity={0.3}
                         enableBlur={true}

@@ -2,6 +2,7 @@ import React from 'react';
 import { ExternalLink, ArrowRight, Bot, TrendingUp, Clock, Users, Star } from 'lucide-react';
 import { Marquee } from './ui/Marquee';
 import { ScrollReveal } from './ui/scroll-reveal';
+import ScrollFloat from './ui/scroll-float';
 
 const Portfolio = () => {
   const projects = [
@@ -125,11 +126,16 @@ const Portfolio = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 id="portfolio-heading" className="text-4xl sm:text-5xl md:text-6xl font-black mb-4 md:mb-6">
-            <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-              Success Stories
-            </span>
-          </h2>
+          <ScrollFloat
+            tag="h2"
+            textClassName="text-5xl sm:text-6xl md:text-7xl font-black mb-4 md:mb-6 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+            scrollStart="top bottom-=10%"
+            scrollEnd="center center"
+            stagger={0.02}
+            ease="back.out(1.7)"
+          >
+            Success Stories
+          </ScrollFloat>
           <ScrollReveal
             baseOpacity={0.3}
             enableBlur={true}
@@ -294,11 +300,16 @@ const Portfolio = () => {
 
         {/* Testimonials with Marquee Effect */}
         <div>
-          <h3 className="text-3xl sm:text-4xl font-black text-center text-gray-900 mb-8 md:mb-12">
-            <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-              What Our Clients Say
-            </span>
-          </h3>
+          <ScrollFloat
+            tag="h3"
+            textClassName="text-4xl sm:text-5xl font-black text-center text-gray-900 mb-8 md:mb-12 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
+            scrollStart="top bottom-=10%"
+            scrollEnd="center center"
+            stagger={0.03}
+            ease="back.out(1.7)"
+          >
+            What Our Clients Say
+          </ScrollFloat>
           
           {/* Mobile Testimonials - Horizontal Scroll - NO SCROLL REVEAL */}
           <div className="block sm:hidden">
