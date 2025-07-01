@@ -25,11 +25,11 @@ export function AnimatedTextCycle({
   }, [currentIndex, words.length, interval]);
 
   return (
-    <span className={`relative inline-block ${className}`}>
+    <span className="relative inline-block">
       {words.map((word, index) => (
         <motion.span
           key={index}
-          className="absolute left-0 top-0 whitespace-nowrap"
+          className={`absolute left-0 top-0 whitespace-nowrap ${className}`}
           initial={{ opacity: 0, y: 50, rotateX: -90 }}
           animate={
             currentIndex === index
@@ -60,7 +60,7 @@ export function AnimatedTextCycle({
         </motion.span>
       ))}
       {/* Invisible placeholder to maintain layout */}
-      <span className="invisible">
+      <span className={`invisible ${className}`}>
         {words.reduce((longest, word) => 
           word.length > longest.length ? word : longest, ""
         )}
