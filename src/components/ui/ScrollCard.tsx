@@ -115,8 +115,8 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
             <div className='absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#e5e5e52e_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e52e_1px,transparent_1px)] bg-[size:54px_54px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]'></div>
 
             <div className="text-center">
-              <h2 id="services-heading" className="text-4xl md:text-6xl font-bold mb-1">
-                <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+              <h2 id="services-heading" className="text-5xl md:text-7xl font-black mb-1">
+                <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
                   Our AI Services
                 </span>
               </h2>
@@ -171,8 +171,10 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
 
             {/* Text Section - Mobile (Now Second with added spacing) */}
             <div className="text-center pt-8">
-              <h3 className='text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent'>
-                Transform Your Business
+              <h3 className='text-4xl md:text-5xl font-black mb-6'>
+                <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
+                  Transform Your Business
+                </span>
               </h3>
               <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
                 Each service is designed to integrate seamlessly with your existing operations while delivering measurable results.
@@ -234,8 +236,8 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
             
             <div className='sticky top-0 h-screen grid place-content-center flex-1 max-w-md'>
               <div className="text-center">
-                <h3 className='text-4xl md:text-5xl font-bold text-center tracking-tight leading-[120%] mb-6'>
-                  <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                <h3 className='text-5xl md:text-6xl font-black text-center tracking-tight leading-[120%] mb-6'>
+                  <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
                     Transform Your Business
                   </span>
                 </h3>
@@ -263,8 +265,10 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
 
         <footer className='bg-gradient-to-b from-gray-50 to-white py-12' role="contentinfo">
           <div className="max-w-4xl mx-auto text-center px-4">
-            <h4 className='text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent'>
-              Ready to Get Started?
+            <h4 className='text-4xl md:text-5xl font-black mb-6'>
+              <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
+                Ready to Get Started?
+              </span>
             </h4>
             <p className="text-gray-600 text-lg mb-8">
               Let's discuss how our AI solutions can transform your business operations and drive growth.
