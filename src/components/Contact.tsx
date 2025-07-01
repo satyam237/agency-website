@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import { SlideButton } from './ui/slide-button';
 import { Calendar } from './ui/calendar';
+import { ScrollReveal } from './ui/scroll-reveal';
 import { motion } from 'framer-motion';
 
 interface FormData {
@@ -134,20 +135,28 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
-            <h2 id="contact-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            <h2 id="contact-heading" className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6">
+              <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
                 Let's Build Something Amazing
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+            <ScrollReveal
+              baseOpacity={0.3}
+              enableBlur={true}
+              baseRotation={0.5}
+              blurStrength={1}
+              rotationEnd="center center"
+              wordAnimationEnd="center center"
+              textClassName="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4"
+            >
               Ready to transform your business with AI? Get in touch for a free consultation and discover 
               how we can help you achieve your goals.
-            </p>
+            </ScrollReveal>
           </div>
 
           {/* Main Contact Grid - Send us a message first, Schedule Call second */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-16">
-            {/* Contact Form - Always first */}
+            {/* Contact Form - Always first - NO SCROLL REVEAL */}
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Send us a message</h3>
               
@@ -289,9 +298,17 @@ const Contact = () => {
               <h4 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3 md:mb-4">
                 Prefer to schedule a call?
               </h4>
-              <p className="text-gray-600 mb-4 md:mb-6 text-base md:text-lg max-w-2xl mx-auto">
+              <ScrollReveal
+                baseOpacity={0.4}
+                enableBlur={true}
+                baseRotation={0.5}
+                blurStrength={1}
+                rotationEnd="center center"
+                wordAnimationEnd="center center"
+                textClassName="text-gray-600 mb-4 md:mb-6 text-base md:text-lg max-w-2xl mx-auto"
+              >
                 Book a free 30-minute consultation to discuss your project goals, timeline, and how our AI solutions can transform your business operations.
-              </p>
+              </ScrollReveal>
               <button 
                 onClick={handleScheduleCall}
                 className="bg-gradient-to-r from-gray-800 to-gray-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-medium hover:shadow-lg transition-all duration-300 text-base md:text-lg"
@@ -302,7 +319,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Get in Touch section - Now third */}
+          {/* Get in Touch section - Now third - NO SCROLL REVEAL */}
           <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl p-6 md:p-8 text-white mb-8 md:mb-12">
             <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Get in Touch</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -347,7 +364,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Why Choose Us section - Now fourth */}
+          {/* Why Choose Us section - Now fourth - NO SCROLL REVEAL */}
           <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
             <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8 text-center">Why Choose Us?</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
