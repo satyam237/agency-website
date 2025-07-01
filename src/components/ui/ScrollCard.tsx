@@ -4,8 +4,6 @@ import React, { useRef, forwardRef, useEffect } from 'react';
 import { Bot, Globe, Zap, MessageSquare, Brain, Cog } from 'lucide-react';
 import StarBorderButton from './StarBorderButton';
 import { ContainerScroll, CardSticky } from './cards-stack';
-import { ScrollReveal } from './scroll-reveal';
-import ScrollFloat from './scroll-float';
 
 interface ServiceCardData {
   icon: React.ComponentType<{ className?: string }>;
@@ -117,35 +115,22 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
             <div className='absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#e5e5e52e_1px,transparent_1px),linear-gradient(to_bottom,#e5e5e52e_1px,transparent_1px)] bg-[size:54px_54px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]'></div>
 
             <div className="text-center">
-              <ScrollFloat
-                tag="h2"
-                textClassName="text-6xl md:text-8xl font-black mb-1 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
-                scrollStart="top bottom-=10%"
-                scrollEnd="center center"
-                stagger={0.02}
-                ease="back.out(1.7)"
-              >
-                Our AI Services
-              </ScrollFloat>
-              <ScrollReveal
-                baseOpacity={0.3}
-                enableBlur={true}
-                baseRotation={0.5}
-                blurStrength={1}
-                rotationEnd="center center"
-                wordAnimationEnd="center center"
-                textClassName="text-xl text-gray-600 max-w-3xl mx-auto"
-              >
+              <h2 id="services-heading" className="text-4xl md:text-6xl font-bold mb-1">
+                <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                  Our AI Services
+                </span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 Comprehensive AI solutions designed to transform your business operations and drive unprecedented growth.
-              </ScrollReveal>
+              </p>
             </div>
           </section>
         </div>
 
-        {/* Mobile Layout: Stacked Cards First, Then Text - NO SCROLL REVEAL ON CARDS */}
+        {/* Mobile Layout: Stacked Cards First, Then Text */}
         <section className='block lg:hidden text-gray-900 w-full bg-gradient-to-b from-white to-gray-50 py-16' role="main">
           <div className='px-4 md:px-8'>
-            {/* Animated Stacked Cards Section - Mobile (Now First) - NO SCROLL REVEAL */}
+            {/* Animated Stacked Cards Section - Mobile (Now First) */}
             <ContainerScroll className="min-h-[800px] max-w-sm mx-auto mb-16">
               {servicesData.map((service, i) => (
                 <CardSticky
@@ -186,27 +171,12 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
 
             {/* Text Section - Mobile (Now Second with added spacing) */}
             <div className="text-center pt-8">
-              <ScrollFloat
-                tag="h3"
-                textClassName="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
-                scrollStart="top bottom-=10%"
-                scrollEnd="center center"
-                stagger={0.03}
-                ease="back.out(1.7)"
-              >
+              <h3 className='text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent'>
                 Transform Your Business
-              </ScrollFloat>
-              <ScrollReveal
-                baseOpacity={0.3}
-                enableBlur={true}
-                baseRotation={0.5}
-                blurStrength={1}
-                rotationEnd="center center"
-                wordAnimationEnd="center center"
-                textClassName="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto"
-              >
+              </h3>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
                 Each service is designed to integrate seamlessly with your existing operations while delivering measurable results.
-              </ScrollReveal>
+              </p>
               <div className="space-y-4 max-w-sm mx-auto" role="list" aria-label="Key benefits">
                 <div className="flex items-center space-x-3" role="listitem">
                   <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
@@ -225,7 +195,7 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
           </div>
         </section>
 
-        {/* Desktop Layout: Side by Side with Sticky Cards - NO SCROLL REVEAL ON CARDS */}
+        {/* Desktop Layout: Side by Side with Sticky Cards */}
         <section className='hidden lg:block text-gray-900 w-full bg-gradient-to-b from-white to-gray-50 min-h-screen' role="main">
           <div className='flex justify-between px-4 md:px-16 gap-8'>
             <div className='grid gap-2 flex-1 max-w-2xl'>
@@ -264,27 +234,14 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
             
             <div className='sticky top-0 h-screen grid place-content-center flex-1 max-w-md'>
               <div className="text-center">
-                <ScrollFloat
-                  tag="h3"
-                  textClassName="text-6xl md:text-7xl font-black text-center tracking-tight leading-[120%] mb-6 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
-                  scrollStart="top bottom-=10%"
-                  scrollEnd="center center"
-                  stagger={0.03}
-                  ease="back.out(1.7)"
-                >
-                  Transform Your Business
-                </ScrollFloat>
-                <ScrollReveal
-                  baseOpacity={0.3}
-                  enableBlur={true}
-                  baseRotation={0.5}
-                  blurStrength={1}
-                  rotationEnd="center center"
-                  wordAnimationEnd="center center"
-                  textClassName="text-gray-600 text-lg leading-relaxed mb-8"
-                >
+                <h3 className='text-4xl md:text-5xl font-bold text-center tracking-tight leading-[120%] mb-6'>
+                  <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                    Transform Your Business
+                  </span>
+                </h3>
+                <p className="text-gray-600 text-lg leading-relaxed mb-8">
                   Each service is designed to integrate seamlessly with your existing operations while delivering measurable results.
-                </ScrollReveal>
+                </p>
                 <div className="space-y-4 text-left" role="list" aria-label="Key benefits">
                   <div className="flex items-center space-x-3" role="listitem">
                     <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
@@ -306,27 +263,12 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
 
         <footer className='bg-gradient-to-b from-gray-50 to-white py-12' role="contentinfo">
           <div className="max-w-4xl mx-auto text-center px-4">
-            <ScrollFloat
-              tag="h4"
-              textClassName="text-4xl md:text-5xl font-black mb-6 bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent"
-              scrollStart="top bottom-=10%"
-              scrollEnd="center center"
-              stagger={0.04}
-              ease="back.out(1.7)"
-            >
+            <h4 className='text-3xl md:text-4xl font-bold mb-6 bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent'>
               Ready to Get Started?
-            </ScrollFloat>
-            <ScrollReveal
-              baseOpacity={0.3}
-              enableBlur={true}
-              baseRotation={0.5}
-              blurStrength={1}
-              rotationEnd="center center"
-              wordAnimationEnd="center center"
-              textClassName="text-gray-600 text-lg mb-8"
-            >
+            </h4>
+            <p className="text-gray-600 text-lg mb-8">
               Let's discuss how our AI solutions can transform your business operations and drive growth.
-            </ScrollReveal>
+            </p>
             <StarBorderButton onClick={handleConsultationClick}>
               Schedule Free Consultation
             </StarBorderButton>
