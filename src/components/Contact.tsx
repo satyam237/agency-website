@@ -141,12 +141,12 @@ const Contact = () => {
               </span>
             </h2>
             <ScrollReveal
-              baseOpacity={0.2}
+              baseOpacity={0.3}
               enableBlur={true}
-              baseRotation={2}
-              blurStrength={3}
+              baseRotation={0.5}
+              blurStrength={1}
               rotationEnd="center center"
-              wordAnimationEnd="bottom top-=20%"
+              wordAnimationEnd="center center"
               textClassName="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4"
             >
               Ready to transform your business with AI? Get in touch for a free consultation and discover 
@@ -156,7 +156,7 @@ const Contact = () => {
 
           {/* Main Contact Grid - Send us a message first, Schedule Call second */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-16">
-            {/* Contact Form - Always first */}
+            {/* Contact Form - Always first - NO SCROLL REVEAL */}
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Send us a message</h3>
               
@@ -299,12 +299,12 @@ const Contact = () => {
                 Prefer to schedule a call?
               </h4>
               <ScrollReveal
-                baseOpacity={0.3}
+                baseOpacity={0.4}
                 enableBlur={true}
-                baseRotation={1}
-                blurStrength={2}
+                baseRotation={0.5}
+                blurStrength={1}
                 rotationEnd="center center"
-                wordAnimationEnd="bottom top-=30%"
+                wordAnimationEnd="center center"
                 textClassName="text-gray-600 mb-4 md:mb-6 text-base md:text-lg max-w-2xl mx-auto"
               >
                 Book a free 30-minute consultation to discuss your project goals, timeline, and how our AI solutions can transform your business operations.
@@ -319,7 +319,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Get in Touch section - Now third */}
+          {/* Get in Touch section - Now third - NO SCROLL REVEAL */}
           <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl p-6 md:p-8 text-white mb-8 md:mb-12">
             <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Get in Touch</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -364,7 +364,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Why Choose Us section - Now fourth */}
+          {/* Why Choose Us section - Now fourth - NO SCROLL REVEAL */}
           <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
             <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8 text-center">Why Choose Us?</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">

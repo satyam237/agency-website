@@ -22,12 +22,12 @@ const Footer = () => {
               <span className="text-lg md:text-xl font-bold">AI Agency</span>
             </div>
             <ScrollReveal
-              baseOpacity={0.3}
+              baseOpacity={0.4}
               enableBlur={true}
-              baseRotation={1}
-              blurStrength={2}
+              baseRotation={0.5}
+              blurStrength={1}
               rotationEnd="center center"
-              wordAnimationEnd="bottom top-=30%"
+              wordAnimationEnd="center center"
               textClassName="text-gray-400 leading-relaxed mb-4 md:mb-6 max-w-md text-sm md:text-base"
             >
               Transforming businesses through intelligent AI automation, custom agents, 
@@ -57,12 +57,12 @@ const Footer = () => {
           <div>
             <h3 className="text-xl md:text-2xl font-bold mb-4">Stay Updated</h3>
             <ScrollReveal
-              baseOpacity={0.3}
+              baseOpacity={0.4}
               enableBlur={true}
-              baseRotation={1}
-              blurStrength={2}
+              baseRotation={0.5}
+              blurStrength={1}
               rotationEnd="center center"
-              wordAnimationEnd="bottom top-=30%"
+              wordAnimationEnd="center center"
               textClassName="text-gray-400 text-sm md:text-base mb-6"
             >
               Get the latest insights on AI trends, automation strategies, and industry news.

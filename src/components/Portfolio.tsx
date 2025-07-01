@@ -131,12 +131,12 @@ const Portfolio = () => {
             </span>
           </h2>
           <ScrollReveal
-            baseOpacity={0.2}
+            baseOpacity={0.3}
             enableBlur={true}
-            baseRotation={2}
-            blurStrength={3}
+            baseRotation={0.5}
+            blurStrength={1}
             rotationEnd="center center"
-            wordAnimationEnd="bottom top-=20%"
+            wordAnimationEnd="center center"
             textClassName="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4"
           >
             Real results from real clients. See how our AI solutions have transformed businesses across industries.
@@ -156,18 +156,18 @@ const Portfolio = () => {
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">{project.title}</h3>
                   <ScrollReveal
-                    baseOpacity={0.3}
+                    baseOpacity={0.4}
                     enableBlur={true}
-                    baseRotation={1}
-                    blurStrength={2}
+                    baseRotation={0.5}
+                    blurStrength={1}
                     rotationEnd="center center"
-                    wordAnimationEnd="bottom top-=30%"
+                    wordAnimationEnd="center center"
                     textClassName="text-gray-600 text-base sm:text-lg leading-relaxed mb-6"
                   >
                     {project.description}
                   </ScrollReveal>
 
-                  {/* Results - Mobile */}
+                  {/* Results - Mobile - NO SCROLL REVEAL */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6" role="list" aria-label="Project results">
                     {project.results.map((result, resultIndex) => (
                       <div key={resultIndex} className="text-center bg-gray-50 rounded-xl p-4 border border-gray-100" role="listitem">
@@ -180,7 +180,7 @@ const Portfolio = () => {
                     ))}
                   </div>
 
-                  {/* Technologies - Mobile */}
+                  {/* Technologies - Mobile - NO SCROLL REVEAL */}
                   <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-6" role="list" aria-label="Technologies used">
                     {project.technologies.map((tech, techIndex) => (
                       <span key={techIndex} className="bg-gray-100 border border-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200" role="listitem">
@@ -200,7 +200,7 @@ const Portfolio = () => {
                   </div>
                 </div>
 
-                {/* Project Image - Mobile */}
+                {/* Project Image - Mobile - NO SCROLL REVEAL */}
                 <div className="relative">
                   <div className="aspect-video rounded-2xl overflow-hidden bg-gradient-to-r from-gray-100 to-gray-200 shadow-lg">
                     <img 
@@ -222,7 +222,7 @@ const Portfolio = () => {
               <div className={`hidden lg:grid grid-cols-2 gap-12 items-center ${
                 index % 2 === 1 ? 'grid-flow-col-dense' : ''
               }`}>
-                {/* Project Image - Desktop */}
+                {/* Project Image - Desktop - NO SCROLL REVEAL */}
                 <div className={`relative ${index % 2 === 1 ? 'col-start-2' : ''}`}>
                   <div className="aspect-video rounded-2xl overflow-hidden bg-gradient-to-r from-gray-100 to-gray-200">
                     <img 
@@ -246,18 +246,18 @@ const Portfolio = () => {
                   </div>
                   <h3 className="text-3xl font-bold text-gray-900 mb-4">{project.title}</h3>
                   <ScrollReveal
-                    baseOpacity={0.3}
+                    baseOpacity={0.4}
                     enableBlur={true}
-                    baseRotation={1}
-                    blurStrength={2}
+                    baseRotation={0.5}
+                    blurStrength={1}
                     rotationEnd="center center"
-                    wordAnimationEnd="bottom top-=30%"
+                    wordAnimationEnd="center center"
                     textClassName="text-gray-600 text-lg leading-relaxed mb-6"
                   >
                     {project.description}
                   </ScrollReveal>
 
-                  {/* Results - Desktop */}
+                  {/* Results - Desktop - NO SCROLL REVEAL */}
                   <div className="grid grid-cols-3 gap-4 mb-6" role="list" aria-label="Project results">
                     {project.results.map((result, resultIndex) => (
                       <div key={resultIndex} className="text-center bg-gray-50 rounded-xl p-3 border border-gray-100" role="listitem">
@@ -270,7 +270,7 @@ const Portfolio = () => {
                     ))}
                   </div>
 
-                  {/* Technologies - Desktop */}
+                  {/* Technologies - Desktop - NO SCROLL REVEAL */}
                   <div className="flex flex-wrap gap-2 mb-6" role="list" aria-label="Technologies used">
                     {project.technologies.map((tech, techIndex) => (
                       <span key={techIndex} className="bg-gray-100 border border-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200" role="listitem">
@@ -300,7 +300,7 @@ const Portfolio = () => {
             </span>
           </h3>
           
-          {/* Mobile Testimonials - Horizontal Scroll */}
+          {/* Mobile Testimonials - Horizontal Scroll - NO SCROLL REVEAL */}
           <div className="block sm:hidden">
             <div className="flex overflow-x-auto gap-4 pb-4 px-4 -mx-4 scrollbar-hide">
               {testimonials.map((testimonial, index) => (
@@ -311,7 +311,7 @@ const Portfolio = () => {
             </div>
           </div>
 
-          {/* Desktop/Tablet Testimonials - Vertical Marquee */}
+          {/* Desktop/Tablet Testimonials - Vertical Marquee - NO SCROLL REVEAL */}
           <div className="hidden sm:block">
             <div className="relative flex h-[500px] md:h-[600px] w-full flex-row items-center justify-center overflow-hidden rounded-2xl" role="region" aria-label="Client testimonials">
               <Marquee pauseOnHover vertical className="[--duration:20s]">

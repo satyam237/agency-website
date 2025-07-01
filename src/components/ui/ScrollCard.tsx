@@ -122,12 +122,12 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
                 </span>
               </h2>
               <ScrollReveal
-                baseOpacity={0.2}
+                baseOpacity={0.3}
                 enableBlur={true}
-                baseRotation={2}
-                blurStrength={3}
+                baseRotation={0.5}
+                blurStrength={1}
                 rotationEnd="center center"
-                wordAnimationEnd="bottom top-=20%"
+                wordAnimationEnd="center center"
                 textClassName="text-xl text-gray-600 max-w-3xl mx-auto"
               >
                 Comprehensive AI solutions designed to transform your business operations and drive unprecedented growth.
@@ -136,10 +136,10 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
           </section>
         </div>
 
-        {/* Mobile Layout: Stacked Cards First, Then Text */}
+        {/* Mobile Layout: Stacked Cards First, Then Text - NO SCROLL REVEAL ON CARDS */}
         <section className='block lg:hidden text-gray-900 w-full bg-gradient-to-b from-white to-gray-50 py-16' role="main">
           <div className='px-4 md:px-8'>
-            {/* Animated Stacked Cards Section - Mobile (Now First) */}
+            {/* Animated Stacked Cards Section - Mobile (Now First) - NO SCROLL REVEAL */}
             <ContainerScroll className="min-h-[800px] max-w-sm mx-auto mb-16">
               {servicesData.map((service, i) => (
                 <CardSticky
@@ -186,12 +186,12 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
                 </span>
               </h3>
               <ScrollReveal
-                baseOpacity={0.2}
+                baseOpacity={0.3}
                 enableBlur={true}
-                baseRotation={2}
-                blurStrength={3}
+                baseRotation={0.5}
+                blurStrength={1}
                 rotationEnd="center center"
-                wordAnimationEnd="bottom top-=20%"
+                wordAnimationEnd="center center"
                 textClassName="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto"
               >
                 Each service is designed to integrate seamlessly with your existing operations while delivering measurable results.
@@ -214,7 +214,7 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
           </div>
         </section>
 
-        {/* Desktop Layout: Side by Side with Sticky Cards */}
+        {/* Desktop Layout: Side by Side with Sticky Cards - NO SCROLL REVEAL ON CARDS */}
         <section className='hidden lg:block text-gray-900 w-full bg-gradient-to-b from-white to-gray-50 min-h-screen' role="main">
           <div className='flex justify-between px-4 md:px-16 gap-8'>
             <div className='grid gap-2 flex-1 max-w-2xl'>
@@ -259,12 +259,12 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
                   </span>
                 </h3>
                 <ScrollReveal
-                  baseOpacity={0.2}
+                  baseOpacity={0.3}
                   enableBlur={true}
-                  baseRotation={2}
-                  blurStrength={3}
+                  baseRotation={0.5}
+                  blurStrength={1}
                   rotationEnd="center center"
-                  wordAnimationEnd="bottom top-=20%"
+                  wordAnimationEnd="center center"
                   textClassName="text-gray-600 text-lg leading-relaxed mb-8"
                 >
                   Each service is designed to integrate seamlessly with your existing operations while delivering measurable results.
@@ -296,12 +296,12 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
               </span>
             </h4>
             <ScrollReveal
-              baseOpacity={0.2}
+              baseOpacity={0.3}
               enableBlur={true}
-              baseRotation={2}
-              blurStrength={3}
+              baseRotation={0.5}
+              blurStrength={1}
               rotationEnd="center center"
-              wordAnimationEnd="bottom top-=20%"
+              wordAnimationEnd="center center"
               textClassName="text-gray-600 text-lg mb-8"
             >
               Let's discuss how our AI solutions can transform your business operations and drive growth.

@@ -3,7 +3,6 @@ import { ArrowRight, Sparkles, Zap, Bot } from 'lucide-react';
 import { AnimatedText } from './ui/animated-underline-text-one';
 import { GradientText } from './ui/gradient-text';
 import { AuroraBackground } from './ui/aurora-background';
-import { ScrollReveal } from './ui/scroll-reveal';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -98,7 +97,7 @@ const Hero = () => {
           className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
           <div className="space-y-6 md:space-y-8 pt-16 md:pt-20">
-            {/* Badge with Enhanced Shiny Text Effect */}
+            {/* Badge with Enhanced Shiny Text Effect - NO SCROLL REVEAL */}
             <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-3 py-2 md:px-4 md:py-2 shadow-sm relative overflow-hidden group">
               {/* Shimmer overlay that moves across the entire badge */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-[200%] -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
@@ -109,7 +108,7 @@ const Hero = () => {
               </span>
             </div>
 
-            {/* Main Heading with Gradient AI Text */}
+            {/* Main Heading with Gradient AI Text - NO SCROLL REVEAL */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight">
               <span className="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text text-transparent">
                 Transform Your Business
@@ -136,21 +135,13 @@ const Hero = () => {
               />
             </h1>
 
-            {/* Subtitle with Scroll Reveal */}
-            <ScrollReveal
-              baseOpacity={0.2}
-              enableBlur={true}
-              baseRotation={2}
-              blurStrength={3}
-              rotationEnd="center center"
-              wordAnimationEnd="bottom top-=20%"
-              textClassName="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4"
-            >
+            {/* Subtitle - NO SCROLL REVEAL */}
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4">
               We build intelligent AI agents, automate complex workflows, and create cutting-edge websites 
               that drive growth and efficiency for forward-thinking businesses.
-            </ScrollReveal>
+            </p>
 
-            {/* CTA Buttons - Reduced sizes */}
+            {/* CTA Buttons - NO SCROLL REVEAL */}
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 md:space-x-8 pt-6 md:pt-8 px-4">
               <button 
                 onClick={handleGetStarted}
@@ -172,7 +163,7 @@ const Hero = () => {
         </motion.div>
       </AuroraBackground>
 
-      {/* Stats Section */}
+      {/* Stats Section - NO SCROLL REVEAL */}
       <div className="stats-section w-full bg-gradient-to-r from-gray-100/50 via-gray-50 to-gray-100/50 backdrop-blur-sm border-t border-gray-200/50 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -180,49 +171,19 @@ const Hero = () => {
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.automations < 10 ? `0${animatedStats.automations}` : animatedStats.automations}+
               </div>
-              <ScrollReveal
-                baseOpacity={0.3}
-                enableBlur={true}
-                baseRotation={1}
-                blurStrength={2}
-                rotationEnd="center center"
-                wordAnimationEnd="bottom top-=30%"
-                textClassName="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold"
-              >
-                AI Automations Deployed
-              </ScrollReveal>
+              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Automations Deployed</div>
             </div>
             <div className="text-center">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.satisfaction}%
               </div>
-              <ScrollReveal
-                baseOpacity={0.3}
-                enableBlur={true}
-                baseRotation={1}
-                blurStrength={2}
-                rotationEnd="center center"
-                wordAnimationEnd="bottom top-=30%"
-                textClassName="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold"
-              >
-                Client Satisfaction Rate
-              </ScrollReveal>
+              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">Client Satisfaction Rate</div>
             </div>
             <div className="text-center">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.uptime}/7
               </div>
-              <ScrollReveal
-                baseOpacity={0.3}
-                enableBlur={true}
-                baseRotation={1}
-                blurStrength={2}
-                rotationEnd="center center"
-                wordAnimationEnd="bottom top-=30%"
-                textClassName="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold"
-              >
-                AI Agent Uptime
-              </ScrollReveal>
+              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Agent Uptime</div>
             </div>
           </div>
         </div>

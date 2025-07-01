@@ -22,12 +22,12 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   scrollContainerRef,
   enableBlur = true,
   baseOpacity = 0.1,
-  baseRotation = 3,
-  blurStrength = 4,
+  baseRotation = 1,
+  blurStrength = 1.5,
   containerClassName = "",
   textClassName = "",
-  rotationEnd = "bottom bottom",
-  wordAnimationEnd = "bottom bottom",
+  rotationEnd = "center center",
+  wordAnimationEnd = "center center",
 }) => {
   const containerRef = useRef<HTMLHeadingElement>(null);
   const triggersRef = useRef<ScrollTrigger[]>([]);
@@ -60,34 +60,46 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
 
     const wordElements = el.querySelectorAll<HTMLElement>(".scroll-reveal-word");
 
+    // Softer rotation animation
     const rotationTrigger = ScrollTrigger.create({
         trigger: el,
         scroller,
-        start: "top bottom",
+        start: "top bottom-=10%",
         end: rotationEnd,
-        scrub: true,
-        animation: gsap.fromTo(el, { transformOrigin: "0% 50%", rotate: baseRotation }, { ease: "none", rotate: 0 })
+        scrub: 1.5, // Smoother scrub
+        animation: gsap.fromTo(el, 
+          { transformOrigin: "0% 50%", rotate: baseRotation }, 
+          { ease: "power2.out", rotate: 0 }
+        )
     });
     triggersRef.current.push(rotationTrigger);
 
+    // Opacity animation - fully reveals at center
     const opacityTrigger = ScrollTrigger.create({
         trigger: el,
         scroller,
-        start: "top bottom-=20%",
+        start: "top bottom-=15%",
         end: wordAnimationEnd,
-        scrub: true,
-        animation: gsap.fromTo(wordElements, { opacity: baseOpacity, willChange: "opacity" }, { ease: "none", opacity: 1, stagger: 0.05 })
+        scrub: 1.2, // Smoother scrub
+        animation: gsap.fromTo(wordElements, 
+          { opacity: baseOpacity, willChange: "opacity" }, 
+          { ease: "power2.out", opacity: 1, stagger: 0.03 }
+        )
     });
     triggersRef.current.push(opacityTrigger);
 
+    // Softer blur animation
     if (enableBlur) {
       const blurTrigger = ScrollTrigger.create({
             trigger: el,
             scroller,
-            start: "top bottom-=20%",
+            start: "top bottom-=15%",
             end: wordAnimationEnd,
-            scrub: true,
-            animation: gsap.fromTo(wordElements, { filter: `blur(${blurStrength}px)` }, { ease: "none", filter: "blur(0px)", stagger: 0.05 })
+            scrub: 1.2, // Smoother scrub
+            animation: gsap.fromTo(wordElements, 
+              { filter: `blur(${blurStrength}px)` }, 
+              { ease: "power2.out", filter: "blur(0px)", stagger: 0.03 }
+            )
         });
         triggersRef.current.push(blurTrigger);
     }
