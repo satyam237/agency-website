@@ -1,6 +1,7 @@
 import React from 'react';
 import { ExternalLink, ArrowRight, Bot, TrendingUp, Clock, Users, Star } from 'lucide-react';
 import { Marquee } from './ui/Marquee';
+import { ScrollReveal } from './ui/scroll-reveal';
 
 const Portfolio = () => {
   const projects = [
@@ -129,9 +130,17 @@ const Portfolio = () => {
               Success Stories
             </span>
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+          <ScrollReveal
+            baseOpacity={0.2}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={3}
+            rotationEnd="center center"
+            wordAnimationEnd="bottom top-=20%"
+            textClassName="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4"
+          >
             Real results from real clients. See how our AI solutions have transformed businesses across industries.
-          </p>
+          </ScrollReveal>
         </div>
 
         {/* Portfolio Projects */}
@@ -146,7 +155,17 @@ const Portfolio = () => {
                     {project.category}
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">{project.title}</h3>
-                  <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">{project.description}</p>
+                  <ScrollReveal
+                    baseOpacity={0.3}
+                    enableBlur={true}
+                    baseRotation={1}
+                    blurStrength={2}
+                    rotationEnd="center center"
+                    wordAnimationEnd="bottom top-=30%"
+                    textClassName="text-gray-600 text-base sm:text-lg leading-relaxed mb-6"
+                  >
+                    {project.description}
+                  </ScrollReveal>
 
                   {/* Results - Mobile */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6" role="list" aria-label="Project results">
@@ -226,7 +245,17 @@ const Portfolio = () => {
                     {project.category}
                   </div>
                   <h3 className="text-3xl font-bold text-gray-900 mb-4">{project.title}</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed mb-6">{project.description}</p>
+                  <ScrollReveal
+                    baseOpacity={0.3}
+                    enableBlur={true}
+                    baseRotation={1}
+                    blurStrength={2}
+                    rotationEnd="center center"
+                    wordAnimationEnd="bottom top-=30%"
+                    textClassName="text-gray-600 text-lg leading-relaxed mb-6"
+                  >
+                    {project.description}
+                  </ScrollReveal>
 
                   {/* Results - Desktop */}
                   <div className="grid grid-cols-3 gap-4 mb-6" role="list" aria-label="Project results">

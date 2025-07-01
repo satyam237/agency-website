@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import { SlideButton } from './ui/slide-button';
 import { Calendar } from './ui/calendar';
+import { ScrollReveal } from './ui/scroll-reveal';
 import { motion } from 'framer-motion';
 
 interface FormData {
@@ -139,10 +140,18 @@ const Contact = () => {
                 Let's Build Something Amazing
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+            <ScrollReveal
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={3}
+              rotationEnd="center center"
+              wordAnimationEnd="bottom top-=20%"
+              textClassName="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4"
+            >
               Ready to transform your business with AI? Get in touch for a free consultation and discover 
               how we can help you achieve your goals.
-            </p>
+            </ScrollReveal>
           </div>
 
           {/* Main Contact Grid - Send us a message first, Schedule Call second */}
@@ -289,9 +298,17 @@ const Contact = () => {
               <h4 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3 md:mb-4">
                 Prefer to schedule a call?
               </h4>
-              <p className="text-gray-600 mb-4 md:mb-6 text-base md:text-lg max-w-2xl mx-auto">
+              <ScrollReveal
+                baseOpacity={0.3}
+                enableBlur={true}
+                baseRotation={1}
+                blurStrength={2}
+                rotationEnd="center center"
+                wordAnimationEnd="bottom top-=30%"
+                textClassName="text-gray-600 mb-4 md:mb-6 text-base md:text-lg max-w-2xl mx-auto"
+              >
                 Book a free 30-minute consultation to discuss your project goals, timeline, and how our AI solutions can transform your business operations.
-              </p>
+              </ScrollReveal>
               <button 
                 onClick={handleScheduleCall}
                 className="bg-gradient-to-r from-gray-800 to-gray-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-medium hover:shadow-lg transition-all duration-300 text-base md:text-lg"

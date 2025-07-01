@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bot, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { ScrollReveal } from './ui/scroll-reveal';
 
 const Footer = () => {
   const handleLegalPageClick = (page: string) => {
@@ -20,10 +21,18 @@ const Footer = () => {
               <Bot className="h-6 w-6 md:h-8 md:w-8 text-white" />
               <span className="text-lg md:text-xl font-bold">AI Agency</span>
             </div>
-            <p className="text-gray-400 leading-relaxed mb-4 md:mb-6 max-w-md text-sm md:text-base">
+            <ScrollReveal
+              baseOpacity={0.3}
+              enableBlur={true}
+              baseRotation={1}
+              blurStrength={2}
+              rotationEnd="center center"
+              wordAnimationEnd="bottom top-=30%"
+              textClassName="text-gray-400 leading-relaxed mb-4 md:mb-6 max-w-md text-sm md:text-base"
+            >
               Transforming businesses through intelligent AI automation, custom agents, 
               and cutting-edge solutions that drive growth and efficiency.
-            </p>
+            </ScrollReveal>
             <div className="space-y-2 md:space-y-3">
               <div className="flex items-center space-x-3 text-gray-400 text-sm md:text-base">
                 <Mail className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
@@ -47,9 +56,17 @@ const Footer = () => {
           {/* Newsletter */}
           <div>
             <h3 className="text-xl md:text-2xl font-bold mb-4">Stay Updated</h3>
-            <p className="text-gray-400 text-sm md:text-base mb-6">
+            <ScrollReveal
+              baseOpacity={0.3}
+              enableBlur={true}
+              baseRotation={1}
+              blurStrength={2}
+              rotationEnd="center center"
+              wordAnimationEnd="bottom top-=30%"
+              textClassName="text-gray-400 text-sm md:text-base mb-6"
+            >
               Get the latest insights on AI trends, automation strategies, and industry news.
-            </p>
+            </ScrollReveal>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <input
                 type="email"

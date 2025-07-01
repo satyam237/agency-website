@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, Zap, Bot } from 'lucide-react';
 import { AnimatedText } from './ui/animated-underline-text-one';
 import { GradientText } from './ui/gradient-text';
 import { AuroraBackground } from './ui/aurora-background';
+import { ScrollReveal } from './ui/scroll-reveal';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -135,11 +136,19 @@ const Hero = () => {
               />
             </h1>
 
-            {/* Subtitle - Increased font size */}
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4">
+            {/* Subtitle with Scroll Reveal */}
+            <ScrollReveal
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={3}
+              rotationEnd="center center"
+              wordAnimationEnd="bottom top-=20%"
+              textClassName="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4"
+            >
               We build intelligent AI agents, automate complex workflows, and create cutting-edge websites 
               that drive growth and efficiency for forward-thinking businesses.
-            </p>
+            </ScrollReveal>
 
             {/* CTA Buttons - Reduced sizes */}
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 md:space-x-8 pt-6 md:pt-8 px-4">
@@ -171,19 +180,49 @@ const Hero = () => {
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.automations < 10 ? `0${animatedStats.automations}` : animatedStats.automations}+
               </div>
-              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Automations Deployed</div>
+              <ScrollReveal
+                baseOpacity={0.3}
+                enableBlur={true}
+                baseRotation={1}
+                blurStrength={2}
+                rotationEnd="center center"
+                wordAnimationEnd="bottom top-=30%"
+                textClassName="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold"
+              >
+                AI Automations Deployed
+              </ScrollReveal>
             </div>
             <div className="text-center">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.satisfaction}%
               </div>
-              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">Client Satisfaction Rate</div>
+              <ScrollReveal
+                baseOpacity={0.3}
+                enableBlur={true}
+                baseRotation={1}
+                blurStrength={2}
+                rotationEnd="center center"
+                wordAnimationEnd="bottom top-=30%"
+                textClassName="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold"
+              >
+                Client Satisfaction Rate
+              </ScrollReveal>
             </div>
             <div className="text-center">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.uptime}/7
               </div>
-              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Agent Uptime</div>
+              <ScrollReveal
+                baseOpacity={0.3}
+                enableBlur={true}
+                baseRotation={1}
+                blurStrength={2}
+                rotationEnd="center center"
+                wordAnimationEnd="bottom top-=30%"
+                textClassName="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold"
+              >
+                AI Agent Uptime
+              </ScrollReveal>
             </div>
           </div>
         </div>

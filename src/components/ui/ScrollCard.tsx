@@ -4,6 +4,7 @@ import React, { useRef, forwardRef, useEffect } from 'react';
 import { Bot, Globe, Zap, MessageSquare, Brain, Cog } from 'lucide-react';
 import StarBorderButton from './StarBorderButton';
 import { ContainerScroll, CardSticky } from './cards-stack';
+import { ScrollReveal } from './scroll-reveal';
 
 interface ServiceCardData {
   icon: React.ComponentType<{ className?: string }>;
@@ -120,9 +121,17 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
                   Our AI Services
                 </span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <ScrollReveal
+                baseOpacity={0.2}
+                enableBlur={true}
+                baseRotation={2}
+                blurStrength={3}
+                rotationEnd="center center"
+                wordAnimationEnd="bottom top-=20%"
+                textClassName="text-xl text-gray-600 max-w-3xl mx-auto"
+              >
                 Comprehensive AI solutions designed to transform your business operations and drive unprecedented growth.
-              </p>
+              </ScrollReveal>
             </div>
           </section>
         </div>
@@ -176,9 +185,17 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
                   Transform Your Business
                 </span>
               </h3>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+              <ScrollReveal
+                baseOpacity={0.2}
+                enableBlur={true}
+                baseRotation={2}
+                blurStrength={3}
+                rotationEnd="center center"
+                wordAnimationEnd="bottom top-=20%"
+                textClassName="text-gray-600 text-lg leading-relaxed mb-8 max-w-2xl mx-auto"
+              >
                 Each service is designed to integrate seamlessly with your existing operations while delivering measurable results.
-              </p>
+              </ScrollReveal>
               <div className="space-y-4 max-w-sm mx-auto" role="list" aria-label="Key benefits">
                 <div className="flex items-center space-x-3" role="listitem">
                   <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
@@ -241,9 +258,17 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
                     Transform Your Business
                   </span>
                 </h3>
-                <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                <ScrollReveal
+                  baseOpacity={0.2}
+                  enableBlur={true}
+                  baseRotation={2}
+                  blurStrength={3}
+                  rotationEnd="center center"
+                  wordAnimationEnd="bottom top-=20%"
+                  textClassName="text-gray-600 text-lg leading-relaxed mb-8"
+                >
                   Each service is designed to integrate seamlessly with your existing operations while delivering measurable results.
-                </p>
+                </ScrollReveal>
                 <div className="space-y-4 text-left" role="list" aria-label="Key benefits">
                   <div className="flex items-center space-x-3" role="listitem">
                     <div className="w-2 h-2 bg-gradient-to-r from-gray-600 to-gray-400 rounded-full" aria-hidden="true"></div>
@@ -270,9 +295,17 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
                 Ready to Get Started?
               </span>
             </h4>
-            <p className="text-gray-600 text-lg mb-8">
+            <ScrollReveal
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={3}
+              rotationEnd="center center"
+              wordAnimationEnd="bottom top-=20%"
+              textClassName="text-gray-600 text-lg mb-8"
+            >
               Let's discuss how our AI solutions can transform your business operations and drive growth.
-            </p>
+            </ScrollReveal>
             <StarBorderButton onClick={handleConsultationClick}>
               Schedule Free Consultation
             </StarBorderButton>

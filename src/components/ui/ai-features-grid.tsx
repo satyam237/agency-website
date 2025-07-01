@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Zap, Bot, TrendingUp, Clock } from 'lucide-react';
+import { ScrollReveal } from './scroll-reveal';
 
 export function AIFeaturesGrid() {
     return (
@@ -13,10 +14,18 @@ export function AIFeaturesGrid() {
                             Why Choose Our AI Solutions
                         </span>
                     </h3>
-                    <p className="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4 leading-relaxed">
+                    <ScrollReveal
+                        baseOpacity={0.2}
+                        enableBlur={true}
+                        baseRotation={2}
+                        blurStrength={3}
+                        rotationEnd="center center"
+                        wordAnimationEnd="bottom top-=20%"
+                        textClassName="text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4 leading-relaxed"
+                    >
                         We deliver enterprise-grade AI solutions with proven results, cutting-edge technology, 
                         and unmatched support to transform your business operations.
-                    </p>
+                    </ScrollReveal>
                 </div>
                 
                 {/* Cards Grid - Mobile: Single column, Desktop: Complex grid */}
@@ -49,7 +58,17 @@ export function AIFeaturesGrid() {
                                         <Shield className="m-auto h-12 w-12 text-gray-700" strokeWidth={1} />
                                     </div>
                                     <h2 className="text-lg font-medium transition dark:text-white text-gray-900 mb-2">Enterprise Security</h2>
-                                    <p className="text-gray-600 text-sm">Bank-level encryption and security protocols protect your data while our AI solutions deliver exceptional performance.</p>
+                                    <ScrollReveal
+                                        baseOpacity={0.3}
+                                        enableBlur={true}
+                                        baseRotation={1}
+                                        blurStrength={2}
+                                        rotationEnd="center center"
+                                        wordAnimationEnd="bottom top-=30%"
+                                        textClassName="text-gray-600 text-sm"
+                                    >
+                                        Bank-level encryption and security protocols protect your data while our AI solutions deliver exceptional performance.
+                                    </ScrollReveal>
                                 </div>
                             </CardContent>
                         </Card>
@@ -94,7 +113,17 @@ export function AIFeaturesGrid() {
                                         </svg>
                                     </div>
                                     <h2 className="text-lg font-medium transition text-gray-900 mb-2">Real-time Analytics</h2>
-                                    <p className="text-gray-600 text-sm">Monitor AI performance with comprehensive dashboards and detailed insights into your automation workflows.</p>
+                                    <ScrollReveal
+                                        baseOpacity={0.3}
+                                        enableBlur={true}
+                                        baseRotation={1}
+                                        blurStrength={2}
+                                        rotationEnd="center center"
+                                        wordAnimationEnd="bottom top-=30%"
+                                        textClassName="text-gray-600 text-sm"
+                                    >
+                                        Monitor AI performance with comprehensive dashboards and detailed insights into your automation workflows.
+                                    </ScrollReveal>
                                 </div>
                             </CardContent>
                         </Card>
@@ -107,7 +136,17 @@ export function AIFeaturesGrid() {
                                         <Clock className="m-auto w-8 h-8 text-gray-700" strokeWidth={1} />
                                     </div>
                                     <h2 className="text-lg font-medium text-gray-900 transition dark:text-white mb-2">24/7 AI Support</h2>
-                                    <p className="text-gray-600 text-sm mb-4">Round-the-clock monitoring and support ensures your AI systems run smoothly with minimal downtime.</p>
+                                    <ScrollReveal
+                                        baseOpacity={0.3}
+                                        enableBlur={true}
+                                        baseRotation={1}
+                                        blurStrength={2}
+                                        rotationEnd="center center"
+                                        wordAnimationEnd="bottom top-=30%"
+                                        textClassName="text-gray-600 text-sm mb-4"
+                                    >
+                                        Round-the-clock monitoring and support ensures your AI systems run smoothly with minimal downtime.
+                                    </ScrollReveal>
                                     
                                     <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
                                         <div className="space-y-2">
@@ -137,7 +176,17 @@ export function AIFeaturesGrid() {
                                         <Users className="m-auto w-8 h-8 text-gray-700" strokeWidth={1} />
                                     </div>
                                     <h2 className="text-lg font-medium transition text-gray-900 mb-2">Expert AI Team</h2>
-                                    <p className="text-gray-600 text-sm mb-4">Our certified AI engineers and data scientists bring years of experience in machine learning and automation.</p>
+                                    <ScrollReveal
+                                        baseOpacity={0.3}
+                                        enableBlur={true}
+                                        baseRotation={1}
+                                        blurStrength={2}
+                                        rotationEnd="center center"
+                                        wordAnimationEnd="bottom top-=30%"
+                                        textClassName="text-gray-600 text-sm mb-4"
+                                    >
+                                        Our certified AI engineers and data scientists bring years of experience in machine learning and automation.
+                                    </ScrollReveal>
                                     
                                     <div className="flex justify-center space-x-4">
                                         <div className="text-center">
@@ -190,7 +239,17 @@ export function AIFeaturesGrid() {
                                 </div>
                                 <div className="relative z-10 mt-6 space-y-2 text-center">
                                     <h2 className="group-hover:text-secondary-950 text-lg font-medium transition dark:text-white text-gray-900">Enterprise Security</h2>
-                                    <p className="text-gray-600">Bank-level encryption and security protocols protect your data while our AI solutions deliver exceptional performance.</p>
+                                    <ScrollReveal
+                                        baseOpacity={0.3}
+                                        enableBlur={true}
+                                        baseRotation={1}
+                                        blurStrength={2}
+                                        rotationEnd="center center"
+                                        wordAnimationEnd="bottom top-=30%"
+                                        textClassName="text-gray-600"
+                                    >
+                                        Bank-level encryption and security protocols protect your data while our AI solutions deliver exceptional performance.
+                                    </ScrollReveal>
                                 </div>
                             </CardContent>
                         </Card>
@@ -235,7 +294,17 @@ export function AIFeaturesGrid() {
                                 </div>
                                 <div className="relative z-10 mt-14 space-y-2 text-center">
                                     <h2 className="text-lg font-medium transition text-gray-900">Real-time Analytics</h2>
-                                    <p className="text-gray-600">Monitor AI performance with comprehensive dashboards and detailed insights into your automation workflows.</p>
+                                    <ScrollReveal
+                                        baseOpacity={0.3}
+                                        enableBlur={true}
+                                        baseRotation={1}
+                                        blurStrength={2}
+                                        rotationEnd="center center"
+                                        wordAnimationEnd="bottom top-=30%"
+                                        textClassName="text-gray-600"
+                                    >
+                                        Monitor AI performance with comprehensive dashboards and detailed insights into your automation workflows.
+                                    </ScrollReveal>
                                 </div>
                             </CardContent>
                         </Card>
@@ -249,7 +318,17 @@ export function AIFeaturesGrid() {
                                     </div>
                                     <div className="space-y-2">
                                         <h2 className="group-hover:text-secondary-950 text-lg font-medium text-gray-900 transition dark:text-white">24/7 AI Support</h2>
-                                        <p className="text-gray-600">Round-the-clock monitoring and support ensures your AI systems run smoothly with minimal downtime.</p>
+                                        <ScrollReveal
+                                            baseOpacity={0.3}
+                                            enableBlur={true}
+                                            baseRotation={1}
+                                            blurStrength={2}
+                                            rotationEnd="center center"
+                                            wordAnimationEnd="bottom top-=30%"
+                                            textClassName="text-gray-600"
+                                        >
+                                            Round-the-clock monitoring and support ensures your AI systems run smoothly with minimal downtime.
+                                        </ScrollReveal>
                                     </div>
                                 </div>
                                 <div className="rounded-tl-(--radius) relative -mb-6 -mr-6 mt-6 h-fit border-l border-t p-6 py-6 sm:ml-6">
@@ -289,7 +368,17 @@ export function AIFeaturesGrid() {
                                     </div>
                                     <div className="space-y-2">
                                         <h2 className="text-lg font-medium transition text-gray-900">Expert AI Team</h2>
-                                        <p className="text-gray-600">Our certified AI engineers and data scientists bring years of experience in machine learning and automation.</p>
+                                        <ScrollReveal
+                                            baseOpacity={0.3}
+                                            enableBlur={true}
+                                            baseRotation={1}
+                                            blurStrength={2}
+                                            rotationEnd="center center"
+                                            wordAnimationEnd="bottom top-=30%"
+                                            textClassName="text-gray-600"
+                                        >
+                                            Our certified AI engineers and data scientists bring years of experience in machine learning and automation.
+                                        </ScrollReveal>
                                     </div>
                                 </div>
                                 <div className="before:bg-gray-200 relative mt-6 before:absolute before:inset-0 before:mx-auto before:w-px sm:-my-6 sm:-mr-6">
