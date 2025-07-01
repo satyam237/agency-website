@@ -52,7 +52,8 @@ export default {
         'gradient-start': '#000000', // Black
         'gradient-middle': '#6b7280', // Gray-500
         'gradient-end': '#d1d5db', // Gray-300 (light silver)
-        'silver': '#C0C0C0', // Added silver color
+        'silver': '#C0C0C0', // Silver color
+        'dark-silver': '#A8A8A8', // Darker silver for better contrast
       },
     },
   },
