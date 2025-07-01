@@ -25,42 +25,51 @@ export function AnimatedTextCycle({
   }, [currentIndex, words.length, interval]);
 
   return (
-    <span className="relative inline-block">
-      {words.map((word, index) => (
-        <motion.span
-          key={index}
-          className={`absolute left-0 top-0 whitespace-nowrap ${className}`}
-          initial={{ opacity: 0, y: 50, rotateX: -90 }}
-          animate={
-            currentIndex === index
-              ? {
-                  opacity: 1,
-                  y: 0,
-                  rotateX: 0,
-                }
-              : {
-                  opacity: 0,
-                  y: currentIndex > index ? -50 : 50,
-                  rotateX: currentIndex > index ? 90 : -90,
-                }
-          }
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 20,
-            mass: 0.8,
-            duration: 0.6,
-          }}
-          style={{
-            transformOrigin: "center center",
-            transformStyle: "preserve-3d",
-          }}
-        >
-          {word}
-        </motion.span>
-      ))}
-      {/* Invisible placeholder to maintain layout */}
-      <span className={`invisible ${className}`}>
+    <span className="relative inline-block overflow-hidden">
+      {/* Container with proper masking */}
+      <div className="relative h-[1.2em] overflow-hidden">
+        {words.map((word, index) => (
+          <motion.span
+            key={index}
+            className={`absolute left-0 top-0 whitespace-nowrap ${className}`}
+            initial={{ 
+              opacity: 0, 
+              y: "100%",
+              filter: "blur(4px)"
+            }}
+            animate={
+              currentIndex === index
+                ? {
+                    opacity: 1,
+                    y: "0%",
+                    filter: "blur(0px)"
+                  }
+                : {
+                    opacity: 0,
+                    y: currentIndex > index ? "-100%" : "100%",
+                    filter: "blur(4px)"
+                  }
+            }
+            transition={{
+              type: "spring",
+              stiffness: 200,
+              damping: 25,
+              mass: 0.5,
+              duration: 0.8,
+              opacity: { duration: 0.3 },
+              filter: { duration: 0.3 }
+            }}
+            style={{
+              transformOrigin: "center center",
+            }}
+          >
+            {word}
+          </motion.span>
+        ))}
+      </div>
+      
+      {/* Invisible placeholder to maintain layout width */}
+      <span className={`invisible ${className}`} aria-hidden="true">
         {words.reduce((longest, word) => 
           word.length > longest.length ? word : longest, ""
         )}
