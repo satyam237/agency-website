@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, Zap, Bot } from 'lucide-react';
 import { AnimatedText } from './ui/animated-underline-text-one';
 import { GradientText } from './ui/gradient-text';
 import { AuroraBackground } from './ui/aurora-background';
+import { AnimatedTextCycle } from './ui/animated-text-cycle';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -17,6 +18,9 @@ const Hero = () => {
     satisfaction: 98,
     uptime: 24
   };
+
+  // AI-related words for cycling animation
+  const aiWords = ['Automation', 'Agents', 'Workflows', 'Solutions'];
 
   useEffect(() => {
     const animateStats = () => {
@@ -108,7 +112,7 @@ const Hero = () => {
               </span>
             </div>
 
-            {/* Main Heading with Gradient AI Text */}
+            {/* Main Heading with Animated Cycling Text */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight">
               <span className="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text text-transparent">
                 Transform Your Business
@@ -124,14 +128,10 @@ const Hero = () => {
                 AI
               </GradientText>
               {' '}
-              <AnimatedText 
-                text="Automation"
-                textClassName="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black"
-                underlineClassName="text-gray-400"
-                underlinePath="M 0,10 Q 100,0 200,10 Q 300,20 400,10"
-                underlineHoverPath="M 0,10 Q 100,20 200,10 Q 300,0 400,10"
-                underlineDuration={2}
-                className="inline-block"
+              <AnimatedTextCycle 
+                words={aiWords}
+                className="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black"
+                interval={2500}
               />
             </h1>
 
