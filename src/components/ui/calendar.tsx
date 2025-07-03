@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { X, Mail } from "lucide-react";
+import { MeetingButton } from "./form-submit-button";
 
 const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -110,6 +110,11 @@ export function Calendar({ onClose, onDateSelect }: CalendarProps) {
     onClose();
   };
 
+  const handleMeetingScheduled = () => {
+    // Additional logic after confetti
+    console.log('Meeting scheduled with confetti effect!');
+  };
+
   const renderCalendarDays = () => {
     let days: React.ReactNode[] = [
       ...dayNames.map((day, i) => (
@@ -213,20 +218,21 @@ export function Calendar({ onClose, onDateSelect }: CalendarProps) {
           </div>
 
           <div className="flex gap-3">
-            <Button 
-              variant="outline" 
+            <button 
               onClick={onClose}
-              className="flex-1"
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
             >
               Cancel
-            </Button>
-            <Button 
+            </button>
+            <MeetingButton 
               onClick={handleBookNow}
+              onMeetingScheduled={handleMeetingScheduled}
               disabled={!isBookingEnabled}
-              className="flex-1 bg-gray-600 hover:bg-gray-700 text-white disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+              confettiType="meeting"
+              className="flex-1 bg-gray-600 hover:bg-gray-700 text-white disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed rounded-lg px-4 py-2 transition-colors"
             >
               Book Now
-            </Button>
+            </MeetingButton>
           </div>
         </div>
       </div>

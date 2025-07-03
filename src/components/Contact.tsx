@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
-import { SlideButton } from './ui/slide-button';
+import { FormSubmitButton, MeetingButton } from './ui/form-submit-button';
 import { Calendar } from './ui/calendar';
 import { ScrollReveal } from './ui/scroll-reveal';
 import { motion } from 'framer-motion';
@@ -64,7 +64,9 @@ const Contact = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSlideComplete = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
     if (!validateForm()) {
       setSubmitError(true);
       setTimeout(() => setSubmitError(false), 2000);
@@ -120,6 +122,11 @@ const Contact = () => {
     // Here you would typically integrate with your booking system
   };
 
+  const handleMeetingScheduled = () => {
+    // Additional logic after meeting is scheduled
+    console.log('Meeting scheduled with confetti!');
+  };
+
   const services = [
     "AI Agents & Automation",
     "AI-Powered Websites",
@@ -167,7 +174,7 @@ const Contact = () => {
                 </div>
               )}
 
-              <form className="space-y-4 md:space-y-6" noValidate>
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -280,15 +287,18 @@ const Contact = () => {
                   )}
                 </div>
 
-                {/* Slide Button - Centered and properly sized */}
+                {/* Form Submit Button with Confetti */}
                 <div className="flex justify-center pt-4">
-                  <SlideButton
-                    onSlideComplete={handleSlideComplete}
-                    isSubmitting={isSubmitting}
-                    isSuccess={submitSuccess}
-                    isError={submitError}
-                    aria-label="Slide to send your message"
-                  />
+                  <FormSubmitButton
+                    type="submit"
+                    disabled={isSubmitting}
+                    confettiType="success"
+                    successMessage="Thank you! Your message has been sent successfully."
+                    className="bg-gradient-to-r from-gray-800 to-gray-600 text-white px-8 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    aria-label="Send your message"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </FormSubmitButton>
                 </div>
               </form>
             </div>
@@ -309,13 +319,14 @@ const Contact = () => {
               >
                 Book a free 30-minute consultation to discuss your project goals, timeline, and how our AI solutions can transform your business operations.
               </ScrollReveal>
-              <button 
+              <MeetingButton 
                 onClick={handleScheduleCall}
+                onMeetingScheduled={handleMeetingScheduled}
                 className="bg-gradient-to-r from-gray-800 to-gray-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-medium hover:shadow-lg transition-all duration-300 text-base md:text-lg"
                 aria-label="Schedule a free consultation call"
               >
                 Schedule Free Call
-              </button>
+              </MeetingButton>
             </div>
           </div>
 
