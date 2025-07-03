@@ -105,7 +105,7 @@ const Hero = () => {
               
               <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-gray-600 relative z-10" />
               <AnimatedShinyText 
-                className="text-xs md:text-sm font-medium relative z-10 bg-gradient-to-r from-gray-600 via-gray-800 via-gray-900 via-gray-800 to-gray-600"
+                className="text-xs md:text-sm font-medium relative z-10 text-gray-700"
                 shimmerWidth={120}
               >
                 AI-Powered Solutions
