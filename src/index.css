@@ -25,4 +25,17 @@
     background-size: 200% 100%;
     animation: gradient-shift var(--duration, 3s) ease-in-out infinite;
   }
+
+  .animate-shiny-text {
+    animation: shiny-text 8s ease-in-out infinite;
+  }
+}
+
+@keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100px) 0;
+  }
+  30%, 60% {
+    background-position: calc(100% + 100px) 0;
+  }
 }

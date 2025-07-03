@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, Zap, Bot } from 'lucide-react';
 import { AnimatedText } from './ui/animated-underline-text-one';
 import { GradientText } from './ui/gradient-text';
 import { AuroraBackground } from './ui/aurora-background';
+import { AnimatedShinyText } from './ui/animated-shiny-text';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -103,9 +104,12 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-[200%] -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
               
               <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-gray-600 relative z-10" />
-              <span className="text-xs md:text-sm font-medium relative z-10 bg-gradient-to-r from-gray-600 via-gray-800 via-gray-900 via-gray-800 to-gray-600 bg-[length:200%_100%] bg-clip-text text-transparent animate-shine">
-                AI-Powered Solutions
-              </span>
+              <AnimatedShinyText 
+                className="text-gray-800 dark:text-gray-800 text-xs md:text-sm font-medium relative z-10"
+                shimmerWidth={120}
+              >
+                ✨ AI-Powered Solutions
+              </AnimatedShinyText>
             </div>
 
             {/* Main Heading with Gradient AI Text - NO SCROLL REVEAL */}
