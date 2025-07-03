@@ -2,18 +2,18 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users, Zap, Bot, TrendingUp, Clock } from 'lucide-react';
 import { ScrollReveal } from './scroll-reveal';
+import { TextRevealByWord } from './text-reveal';
 
 export function AIFeaturesGrid() {
     return (
         <section className="bg-gray-50 py-16 md:py-32 dark:bg-transparent">
             <div className="mx-auto max-w-3xl lg:max-w-5xl px-6">
-                {/* Header Section - Always at top */}
+                {/* Header Section with Text Reveal Effect */}
                 <div className="text-center mb-12 md:mb-16">
-                    <h3 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 md:mb-4 lg:mb-6">
-                        <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-                            Why Choose Our AI Solutions
-                        </span>
-                    </h3>
+                    <TextRevealByWord 
+                        text="Why Choose Our AI Solutions"
+                        className="h-[150vh]"
+                    />
                     <ScrollReveal
                         baseOpacity={0.3}
                         enableBlur={true}
