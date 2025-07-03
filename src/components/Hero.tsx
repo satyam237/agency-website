@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, Zap, Bot } from 'lucide-react';
 import { AnimatedText } from './ui/animated-underline-text-one';
 import { GradientText } from './ui/gradient-text';
 import { AuroraBackground } from './ui/aurora-background';
+import { AnimatedShinyText } from './ui/animated-shiny-text';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -97,15 +98,18 @@ const Hero = () => {
           className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
           <div className="space-y-6 md:space-y-8 pt-16 md:pt-20">
-            {/* Badge with Enhanced Shiny Text Effect - NO SCROLL REVEAL */}
+            {/* Badge with AnimatedShinyText - NO SCROLL REVEAL */}
             <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-3 py-2 md:px-4 md:py-2 shadow-sm relative overflow-hidden group">
               {/* Shimmer overlay that moves across the entire badge */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-[200%] -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
               
               <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-gray-600 relative z-10" />
-              <span className="text-xs md:text-sm font-medium relative z-10 bg-gradient-to-r from-gray-600 via-gray-800 via-gray-900 via-gray-800 to-gray-600 bg-[length:200%_100%] bg-clip-text text-transparent animate-shine">
+              <AnimatedShinyText 
+                className="text-xs md:text-sm font-medium relative z-10 bg-gradient-to-r from-gray-600 via-gray-800 via-gray-900 via-gray-800 to-gray-600 bg-clip-text text-transparent"
+                shimmerWidth={120}
+              >
                 AI-Powered Solutions
-              </span>
+              </AnimatedShinyText>
             </div>
 
             {/* Main Heading with Gradient AI Text - NO SCROLL REVEAL */}
