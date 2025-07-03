@@ -118,91 +118,91 @@ export function MeetingConfirmationModal({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onClick={handleClose}
           style={{
-            background: 'rgba(0, 0, 0, 0.5)',
-            backdropFilter: 'blur(4px)',
-            WebkitBackdropFilter: 'blur(4px)'
+            background: 'rgba(0, 0, 0, 0.6)',
+            backdropFilter: 'blur(8px)',
+            WebkitBackdropFilter: 'blur(8px)'
           }}
         >
           <motion.div
-            className="bg-white rounded-2xl max-w-sm w-full mx-4 relative overflow-hidden"
-            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl max-w-xs sm:max-w-sm w-full mx-2 sm:mx-4 relative overflow-hidden border border-gray-700/50 shadow-2xl"
+            initial={{ scale: 0.8, opacity: 0, y: 30 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            exit={{ scale: 0.8, opacity: 0, y: 30 }}
             transition={{ 
-              duration: 0.4,
+              duration: 0.5,
               type: "spring",
-              stiffness: 300,
+              stiffness: 280,
               damping: 30
             }}
             onClick={(e) => e.stopPropagation()}
             style={{ 
               borderRadius: '16px',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05)'
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
             }}
           >
-            {/* Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 opacity-60" />
+            {/* Subtle gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-black/10 pointer-events-none" />
             
             {/* Close button */}
             {!isSubmitting && !isSuccess && (
               <button
                 onClick={handleClose}
-                className="absolute top-3 right-3 p-1.5 hover:bg-gray-100 rounded-full transition-colors duration-200 z-10"
+                className="absolute top-3 right-3 p-1.5 hover:bg-white/10 rounded-full transition-colors duration-200 z-10 group"
                 aria-label="Close modal"
               >
-                <X className="h-4 w-4 text-gray-400" />
+                <X className="h-4 w-4 text-gray-400 group-hover:text-gray-200 transition-colors" />
               </button>
             )}
 
             {/* Content */}
-            <div className="relative p-6">
+            <div className="relative p-5 sm:p-6">
               {!isSuccess ? (
                 <>
                   {/* Header with Icon */}
                   <div className="text-center mb-5">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+                    <div className="w-12 h-12 bg-gradient-to-br from-gray-700 to-gray-800 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg border border-gray-600/50">
                       <motion.div
                         animate={isSubmitting ? { rotate: 360 } : {}}
                         transition={{ duration: 1, repeat: isSubmitting ? Infinity : 0, ease: "linear" }}
                       >
-                        <Calendar className="h-6 w-6 text-white" />
+                        <Calendar className="h-6 w-6 text-gray-300" />
                       </motion.div>
                     </div>
                     
-                    <h2 className="text-xl font-bold text-gray-900 mb-1">
+                    <h2 className="text-lg sm:text-xl font-bold text-white mb-1">
                       Confirm Meeting
                     </h2>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-xs sm:text-sm text-gray-400">
                       30-minute consultation call
                     </p>
                   </div>
                   
                   {/* Meeting Details */}
                   <div className="space-y-3 mb-6">
-                    <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
-                      <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <Calendar className="h-4 w-4 text-blue-600" />
+                    <div className="flex items-center space-x-3 p-3 bg-gray-800/50 rounded-xl border border-gray-700/50 backdrop-blur-sm">
+                      <div className="w-8 h-8 bg-gradient-to-br from-gray-600 to-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Calendar className="h-4 w-4 text-gray-300" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900">{formatDate(meetingDate)}</p>
-                        <p className="text-xs text-gray-500">We'll send calendar invite</p>
+                        <p className="text-sm font-medium text-white truncate">{formatDate(meetingDate)}</p>
+                        <p className="text-xs text-gray-400">We'll send calendar invite</p>
                       </div>
                     </div>
                     
-                    <div className="flex items-center space-x-3 p-3 bg-gray-50 rounded-xl">
-                      <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                        <Mail className="h-4 w-4 text-green-600" />
+                    <div className="flex items-center space-x-3 p-3 bg-gray-800/50 rounded-xl border border-gray-700/50 backdrop-blur-sm">
+                      <div className="w-8 h-8 bg-gradient-to-br from-gray-600 to-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Mail className="h-4 w-4 text-gray-300" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">{email}</p>
-                        <p className="text-xs text-gray-500">Contact email</p>
+                        <p className="text-sm font-medium text-white truncate">{email}</p>
+                        <p className="text-xs text-gray-400">Contact email</p>
                       </div>
                     </div>
                   </div>
@@ -212,7 +212,7 @@ export function MeetingConfirmationModal({
                     <button
                       onClick={handleClose}
                       disabled={isSubmitting}
-                      className="flex-1 px-4 py-2.5 border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
+                      className="flex-1 px-3 sm:px-4 py-2.5 border border-gray-600 rounded-xl text-gray-300 hover:bg-gray-700/50 hover:border-gray-500 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium"
                     >
                       Cancel
                     </button>
@@ -220,11 +220,17 @@ export function MeetingConfirmationModal({
                     <motion.button
                       onClick={handleConfirm}
                       disabled={isSubmitting}
-                      className="flex-1 px-4 py-2.5 rounded-xl text-white font-medium transition-all duration-300 relative overflow-hidden text-sm"
+                      className="flex-1 px-3 sm:px-4 py-2.5 rounded-xl text-white font-medium transition-all duration-300 relative overflow-hidden text-sm shadow-lg"
                       style={{
-                        background: isSubmitting ? 'linear-gradient(135deg, #6b7280, #9ca3af)' : 'linear-gradient(135deg, #3b82f6, #8b5cf6)'
+                        background: isSubmitting 
+                          ? 'linear-gradient(135deg, #4b5563, #6b7280)' 
+                          : 'linear-gradient(135deg, #374151, #4b5563, #6b7280)'
                       }}
                       whileTap={{ scale: 0.98 }}
+                      whileHover={{ 
+                        boxShadow: '0 8px 25px -8px rgba(0, 0, 0, 0.5)',
+                        y: -1
+                      }}
                     >
                       <AnimatePresence mode="wait">
                         {isSubmitting ? (
@@ -273,7 +279,7 @@ export function MeetingConfirmationModal({
                   >
                     {/* Animated Background Circle */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full"
+                      className="absolute inset-0 bg-gradient-to-br from-gray-600 via-gray-500 to-gray-400 rounded-full shadow-lg"
                       initial={{ scale: 0, rotate: -180 }}
                       animate={{ scale: 1, rotate: 0 }}
                       transition={{ 
@@ -306,7 +312,7 @@ export function MeetingConfirmationModal({
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ delay: 0.6 }}
                     >
-                      <Sparkles className="h-4 w-4 text-yellow-400" />
+                      <Sparkles className="h-4 w-4 text-gray-300" />
                     </motion.div>
                     <motion.div
                       className="absolute -bottom-1 -left-1"
@@ -314,7 +320,7 @@ export function MeetingConfirmationModal({
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ delay: 0.8 }}
                     >
-                      <Sparkles className="h-3 w-3 text-blue-400" />
+                      <Sparkles className="h-3 w-3 text-gray-400" />
                     </motion.div>
                   </motion.div>
                   
@@ -324,10 +330,10 @@ export function MeetingConfirmationModal({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
                   >
-                    <h2 className="text-xl font-bold text-gray-900 mb-2">
+                    <h2 className="text-lg sm:text-xl font-bold text-white mb-2">
                       Meeting Scheduled! 🎉
                     </h2>
-                    <p className="text-sm text-gray-600 leading-relaxed">
+                    <p className="text-sm text-gray-300 leading-relaxed px-2">
                       We'll send you a calendar invitation and meeting details within 24 hours.
                     </p>
                   </motion.div>
