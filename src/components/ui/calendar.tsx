@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { X, Mail } from "lucide-react";
-import { MeetingButton } from "./form-submit-button";
+import confetti from 'canvas-confetti';
 
 const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -88,6 +88,34 @@ export function Calendar({ onClose, onDateSelect }: CalendarProps) {
     }
   };
 
+  const triggerMeetingConfetti = () => {
+    // Multi-colored confetti with red, blue, green, yellow, purple, and orange
+    confetti({
+      particleCount: 120,
+      spread: 60,
+      origin: { y: 0.6 },
+      colors: ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#f97316'],
+      gravity: 0.6,
+      decay: 0.95,
+      startVelocity: 25,
+      ticks: 80
+    });
+
+    // Additional burst for celebration
+    setTimeout(() => {
+      confetti({
+        particleCount: 80,
+        spread: 100,
+        origin: { y: 0.7 },
+        colors: ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#f97316'],
+        gravity: 0.7,
+        decay: 0.96,
+        startVelocity: 20,
+        ticks: 60
+      });
+    }, 200);
+  };
+
   const handleBookNow = () => {
     // Validate email first
     if (!email.trim()) {
@@ -105,14 +133,15 @@ export function Calendar({ onClose, onDateSelect }: CalendarProps) {
     }
 
     const selected = new Date(currentYear, currentDate.getMonth(), selectedDate);
-    // Here you would typically integrate with a real booking system
-    alert(`Booking consultation for ${selected.toLocaleDateString()} with email: ${email}. We'll contact you within 24 hours to confirm the time.`);
-    onClose();
-  };
-
-  const handleMeetingScheduled = () => {
-    // Additional logic after confetti
-    console.log('Meeting scheduled with confetti effect!');
+    
+    // Simulate successful booking
+    setTimeout(() => {
+      // Trigger confetti only on successful booking
+      triggerMeetingConfetti();
+      
+      alert(`Meeting scheduled for ${selected.toLocaleDateString()} with email: ${email}. We'll contact you within 24 hours to confirm the time.`);
+      onClose();
+    }, 100);
   };
 
   const renderCalendarDays = () => {
@@ -224,15 +253,13 @@ export function Calendar({ onClose, onDateSelect }: CalendarProps) {
             >
               Cancel
             </button>
-            <MeetingButton 
+            <button 
               onClick={handleBookNow}
-              onMeetingScheduled={handleMeetingScheduled}
               disabled={!isBookingEnabled}
-              confettiType="meeting"
               className="flex-1 bg-gray-600 hover:bg-gray-700 text-white disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed rounded-lg px-4 py-2 transition-colors"
             >
               Book Now
-            </MeetingButton>
+            </button>
           </div>
         </div>
       </div>

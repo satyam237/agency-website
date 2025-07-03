@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
-import { FormSubmitButton, MeetingButton } from './ui/form-submit-button';
+import { SlideButton } from './ui/slide-button';
 import { Calendar } from './ui/calendar';
 import { ScrollReveal } from './ui/scroll-reveal';
 import { motion } from 'framer-motion';
+import confetti from 'canvas-confetti';
 
 interface FormData {
   name: string;
@@ -64,9 +65,36 @@ const Contact = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
+  const triggerSuccessConfetti = () => {
+    // Multi-colored confetti with red, blue, green, yellow, purple, and orange
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#f97316'],
+      gravity: 0.5,
+      decay: 0.94,
+      startVelocity: 30,
+      ticks: 100
+    });
+
+    // Additional burst for extra celebration
+    setTimeout(() => {
+      confetti({
+        particleCount: 100,
+        spread: 120,
+        origin: { y: 0.7 },
+        colors: ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#f97316'],
+        gravity: 0.6,
+        decay: 0.95,
+        startVelocity: 25,
+        ticks: 80
+      });
+    }, 250);
+  };
+
+  const handleSlideComplete = async () => {
+    // First validate the form
     if (!validateForm()) {
       setSubmitError(true);
       setTimeout(() => setSubmitError(false), 2000);
@@ -80,8 +108,15 @@ const Contact = () => {
     // Simulate form submission
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Only trigger confetti on successful submission
       setSubmitSuccess(true);
       setIsSubmitted(true);
+      
+      // Trigger the multi-colored confetti effect
+      triggerSuccessConfetti();
+      
+      // Reset form data
       setFormData({ name: '', email: '', company: '', service: '', message: '' });
       setFormErrors({});
       
@@ -120,11 +155,6 @@ const Contact = () => {
   const handleDateSelect = (date: Date) => {
     console.log('Selected date:', date);
     // Here you would typically integrate with your booking system
-  };
-
-  const handleMeetingScheduled = () => {
-    // Additional logic after meeting is scheduled
-    console.log('Meeting scheduled with confetti!');
   };
 
   const services = [
@@ -174,7 +204,7 @@ const Contact = () => {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6" noValidate>
+              <form className="space-y-4 md:space-y-6" noValidate>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -287,18 +317,15 @@ const Contact = () => {
                   )}
                 </div>
 
-                {/* Form Submit Button with Confetti */}
+                {/* Slide Button - Centered and properly sized */}
                 <div className="flex justify-center pt-4">
-                  <FormSubmitButton
-                    type="submit"
-                    disabled={isSubmitting}
-                    confettiType="success"
-                    successMessage="Thank you! Your message has been sent successfully."
-                    className="bg-gradient-to-r from-gray-800 to-gray-600 text-white px-8 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    aria-label="Send your message"
-                  >
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </FormSubmitButton>
+                  <SlideButton
+                    onSlideComplete={handleSlideComplete}
+                    isSubmitting={isSubmitting}
+                    isSuccess={submitSuccess}
+                    isError={submitError}
+                    aria-label="Slide to send your message"
+                  />
                 </div>
               </form>
             </div>
@@ -319,14 +346,13 @@ const Contact = () => {
               >
                 Book a free 30-minute consultation to discuss your project goals, timeline, and how our AI solutions can transform your business operations.
               </ScrollReveal>
-              <MeetingButton 
+              <button 
                 onClick={handleScheduleCall}
-                onMeetingScheduled={handleMeetingScheduled}
                 className="bg-gradient-to-r from-gray-800 to-gray-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-medium hover:shadow-lg transition-all duration-300 text-base md:text-lg"
                 aria-label="Schedule a free consultation call"
               >
                 Schedule Free Call
-              </MeetingButton>
+              </button>
             </div>
           </div>
 
