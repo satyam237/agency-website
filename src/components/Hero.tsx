@@ -103,7 +103,7 @@ const Hero = () => {
               {/* Shimmer overlay that moves across the entire badge */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-[200%] -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
               
-              <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-yellow-500 relative z-10" />
+              <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-gray-400 relative z-10" />
               <AnimatedShinyText 
                 className="text-xs md:text-sm font-medium relative z-10"
                 shimmerWidth={120}

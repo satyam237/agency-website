@@ -21,7 +21,7 @@ export function AnimatedShinyText({
         className,
       )}
       style={{
-        backgroundImage: `linear-gradient(110deg, #000000 25%, #FFD700 35%, #FFEA00 45%, #FFD700 55%, #000000 65%)`,
+        backgroundImage: `linear-gradient(110deg, #000000 25%, #E5E7EB 35%, #F3F4F6 45%, #E5E7EB 55%, #000000 65%)`,
         backgroundSize: '200% 100%',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent',
