@@ -94,10 +94,9 @@ const Hero = () => {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center min-h-[100vh] flex flex-col justify-center"
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
-          {/* Add top padding to account for fixed navigation bar */}
-          <div className="space-y-6 md:space-y-8 pt-20 md:pt-24 pb-8 md:pb-12">
+          <div className="space-y-6 md:space-y-8 pt-16 md:pt-20">
             {/* Badge with Enhanced Shiny Text Effect - NO SCROLL REVEAL */}
             <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-3 py-2 md:px-4 md:py-2 shadow-sm relative overflow-hidden group">
               {/* Shimmer overlay that moves across the entire badge */}
@@ -142,7 +141,7 @@ const Hero = () => {
               that drive growth and efficiency for forward-thinking businesses.
             </p>
 
-            {/* CTA Buttons - NO SCROLL REVEAL - Fixed spacing and positioning */}
+            {/* CTA Buttons - NO SCROLL REVEAL */}
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 md:space-x-8 pt-6 md:pt-8 px-4">
               <button 
                 onClick={handleGetStarted}
@@ -164,27 +163,27 @@ const Hero = () => {
         </motion.div>
       </AuroraBackground>
 
-      {/* Stats Section - Seamless connection with no gaps */}
-      <div className="stats-section w-full bg-gradient-to-r from-gray-100/50 via-gray-50 to-gray-100/50 backdrop-blur-sm py-16 md:py-20">
+      {/* Stats Section - NO SCROLL REVEAL */}
+      <div className="stats-section w-full bg-gradient-to-r from-gray-100/50 via-gray-50 to-gray-100/50 backdrop-blur-sm border-t border-gray-200/50 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.automations < 10 ? `0${animatedStats.automations}` : animatedStats.automations}+
               </div>
-              <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Automations Deployed</div>
+              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Automations Deployed</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.satisfaction}%
               </div>
-              <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">Client Satisfaction Rate</div>
+              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">Client Satisfaction Rate</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
+              <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.uptime}/7
               </div>
-              <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Agent Uptime</div>
+              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Agent Uptime</div>
             </div>
           </div>
         </div>
