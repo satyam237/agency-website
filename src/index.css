@@ -29,6 +29,9 @@
     background-size: var(--shiny-width, 100px) 100%;
     background-repeat: no-repeat;
     background-position: -100px 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 
   .animate-shine {
@@ -50,13 +53,25 @@
 }
 
 @keyframes gradient-shift {
-  0% { backgroundPosition: '0% 50%' }
-  50% { backgroundPosition: '100% 50%' }
-  100% { backgroundPosition: '0% 50%' }
+  0% { 
+    background-position: 0% 50%;
+  }
+  50% { 
+    background-position: 100% 50%;
+  }
+  100% { 
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes shine {
-  0% { background-position: '-200% center' }
-  50% { background-position: '0% center' }
-  100% { background-position: '200% center' }
+  0% { 
+    background-position: -200% center;
+  }
+  50% { 
+    background-position: 0% center;
+  }
+  100% { 
+    background-position: 200% center;
+  }
 }

@@ -20,17 +20,17 @@ export const AnimatedShinyText: FC<AnimatedShinyTextProps> = ({
         } as CSSProperties
       }
       className={cn(
-        // Base text styling
-        "inline-block",
+        // Base styling
+        "inline-block relative",
         
-        // Shine effect with proper background setup
-        "animate-shiny-text bg-clip-text bg-no-repeat",
+        // Shine effect
+        "animate-shiny-text",
         
-        // Shine gradient - works for both light and dark themes
-        "bg-gradient-to-r from-transparent via-current via-50% to-transparent",
+        // Shine gradient background
+        "bg-gradient-to-r from-transparent via-white/80 via-50% to-transparent",
         
-        // Default text color that will be enhanced by the shine
-        "text-current",
+        // Ensure text is visible when animation isn't active
+        "[&:not(.animate-shiny-text)]:text-current",
         
         className,
       )}

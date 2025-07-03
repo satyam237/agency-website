@@ -3,6 +3,7 @@ import { ArrowRight, Zap, Bot } from 'lucide-react';
 import { AnimatedText } from './ui/animated-underline-text-one';
 import { GradientText } from './ui/gradient-text';
 import { AuroraBackground } from './ui/aurora-background';
+import { AnimatedShinyText } from './ui/animated-shiny-text';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -103,9 +104,9 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent w-[200%] -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
               
               <Bot className="h-3 w-3 md:h-4 md:w-4 text-gray-600 relative z-10" />
-              <span className="text-xs md:text-sm font-medium relative z-10 bg-gradient-to-r from-gray-600 via-gray-800 via-gray-900 via-gray-800 to-gray-600 bg-[length:200%_100%] bg-clip-text text-transparent animate-shine">
+              <AnimatedShinyText className="text-xs md:text-sm font-medium relative z-10 text-gray-800" shimmerWidth={120}>
                 AI-Powered Solutions
-              </span>
+              </AnimatedShinyText>
             </div>
 
             {/* Main Heading with Gradient AI Text */}
@@ -135,11 +136,13 @@ const Hero = () => {
               />
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4">
-              We build intelligent AI agents, automate complex workflows, and create cutting-edge websites 
-              that drive growth and efficiency for forward-thinking businesses.
-            </p>
+            {/* Subtitle with Shiny Text */}
+            <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4">
+              <AnimatedShinyText className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-600" shimmerWidth={200}>
+                We build intelligent AI agents, automate complex workflows, and create cutting-edge websites 
+                that drive growth and efficiency for forward-thinking businesses.
+              </AnimatedShinyText>
+            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 md:space-x-8 pt-6 md:pt-8 px-4">
@@ -147,7 +150,9 @@ const Hero = () => {
                 onClick={handleGetStarted}
                 className="group bg-gradient-to-r from-gray-900 to-gray-700 text-white px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-base md:text-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center"
               >
-                <span>Start Your AI Journey</span>
+                <AnimatedShinyText className="text-white font-semibold" shimmerWidth={150}>
+                  Start Your AI Journey
+                </AnimatedShinyText>
                 <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
               </button>
               
@@ -155,7 +160,9 @@ const Hero = () => {
                 onClick={handleViewWork}
                 className="group relative bg-white/90 backdrop-blur-sm border-2 border-gray-300 text-gray-700 px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-base md:text-lg hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 w-full sm:w-auto justify-center shadow-lg hover:shadow-xl"
               >
-                <span>View Our Work</span>
+                <AnimatedShinyText className="text-gray-700 font-semibold" shimmerWidth={120}>
+                  View Our Work
+                </AnimatedShinyText>
                 <Zap className="h-4 w-4 md:h-5 md:w-5 group-hover:rotate-12 transition-transform" />
               </button>
             </div>
@@ -171,19 +178,25 @@ const Hero = () => {
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.automations < 10 ? `0${animatedStats.automations}` : animatedStats.automations}+
               </div>
-              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Automations Deployed</div>
+              <AnimatedShinyText className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold" shimmerWidth={180}>
+                AI Automations Deployed
+              </AnimatedShinyText>
             </div>
             <div className="text-center">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.satisfaction}%
               </div>
-              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">Client Satisfaction Rate</div>
+              <AnimatedShinyText className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold" shimmerWidth={160}>
+                Client Satisfaction Rate
+              </AnimatedShinyText>
             </div>
             <div className="text-center">
               <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-2">
                 {animatedStats.uptime}/7
               </div>
-              <div className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">AI Agent Uptime</div>
+              <AnimatedShinyText className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold" shimmerWidth={140}>
+                AI Agent Uptime
+              </AnimatedShinyText>
             </div>
           </div>
         </div>
