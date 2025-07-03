@@ -15,19 +15,21 @@ export function AnimatedShinyText({
   shimmerWidth = 100,
 }: AnimatedShinyTextProps) {
   return (
-    <p
+    <span
       className={cn(
-        "mx-auto max-w-md text-neutral-600/70 dark:text-neutral-400/70",
-        "animate-shiny-text bg-clip-text bg-no-repeat",
-        "[background-position:0_0] [background-size:var(--shiny-width)_100%] [transition:background-position_1s_cubic-bezier(.6,.6,0,1)_infinite]",
+        "inline-block animate-shiny-text bg-clip-text text-transparent bg-gradient-to-r",
+        "from-current via-white to-current bg-[length:200%_100%]",
         className,
       )}
       style={{
-        "--shiny-width": `${shimmerWidth}px`,
-        backgroundImage: `linear-gradient(110deg, transparent 25%, rgba(255,255,255,0.8) 35%, rgba(255,255,255,0.9) 45%, rgba(255,255,255,0.8) 55%, transparent 65%)`,
+        backgroundImage: `linear-gradient(110deg, currentColor 25%, rgba(255,255,255,0.8) 35%, rgba(255,255,255,1) 45%, rgba(255,255,255,0.8) 55%, currentColor 65%)`,
+        backgroundSize: '200% 100%',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        backgroundClip: 'text',
       } as React.CSSProperties}
     >
       {children}
-    </p>
+    </span>
   );
 }

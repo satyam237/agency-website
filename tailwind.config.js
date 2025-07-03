@@ -11,7 +11,7 @@ export default {
         'gradient-shift': 'gradient-shift var(--duration, 3s) ease-in-out infinite',
         aurora: "aurora 60s linear infinite",
         shine: 'shine 2s ease-in-out infinite',
-        "shiny-text": "shiny-text 8s infinite",
+        "shiny-text": "shiny-text 3s ease-in-out infinite",
       },
       keyframes: {
         marquee: {
@@ -49,11 +49,11 @@ export default {
           '100%': { backgroundPosition: '200% center' },
         },
         "shiny-text": {
-          "0%, 90%, 100%": {
-            "background-position": "calc(-100% - var(--shiny-width)) 0",
-          }, 
-          "30%, 60%": {
-            "background-position": "calc(100% + var(--shiny-width)) 0",
+          "0%": {
+            "background-position": "-200% center",
+          },
+          "100%": {
+            "background-position": "200% center",
           },
         },
       },
