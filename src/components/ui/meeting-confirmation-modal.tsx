@@ -23,7 +23,6 @@ export function MeetingConfirmationModal({
 }: MeetingConfirmationModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [showCheckmark, setShowCheckmark] = useState(false);
 
   const triggerFullScreenConfetti = () => {
     // Multi-colored confetti overlaying the entire screen
@@ -81,7 +80,6 @@ export function MeetingConfirmationModal({
     
     setIsSubmitting(false);
     setIsSuccess(true);
-    setShowCheckmark(true);
     
     // Trigger full-screen confetti
     triggerFullScreenConfetti();
@@ -103,7 +101,6 @@ export function MeetingConfirmationModal({
     if (isOpen) {
       setIsSubmitting(false);
       setIsSuccess(false);
-      setShowCheckmark(false);
     }
   }, [isOpen]);
 
@@ -179,7 +176,7 @@ export function MeetingConfirmationModal({
                     
                     <h2 className="text-lg sm:text-xl font-bold text-white mb-1">
                       <AnimatedShinyText 
-                        className="text-white dark:text-white font-bold text-lg sm:text-xl"
+                        className="text-white font-bold text-lg sm:text-xl"
                         shimmerWidth={120}
                       >
                         Confirm Meeting
@@ -262,7 +259,7 @@ export function MeetingConfirmationModal({
                             exit={{ opacity: 0 }}
                           >
                             <AnimatedShinyText 
-                              className="text-white dark:text-white font-medium text-sm"
+                              className="text-white font-medium text-sm"
                               shimmerWidth={80}
                             >
                               Confirm Meeting
@@ -343,7 +340,7 @@ export function MeetingConfirmationModal({
                   >
                     <h2 className="text-lg sm:text-xl font-bold text-white mb-2">
                       <AnimatedShinyText 
-                        className="text-white dark:text-white font-bold text-lg sm:text-xl"
+                        className="text-white font-bold text-lg sm:text-xl"
                         shimmerWidth={150}
                       >
                         Meeting Scheduled! 🎉
@@ -351,7 +348,7 @@ export function MeetingConfirmationModal({
                     </h2>
                     <p className="text-sm text-gray-300 leading-relaxed px-2">
                       <AnimatedShinyText 
-                        className="text-gray-300 dark:text-gray-300 text-sm"
+                        className="text-gray-300 text-sm"
                         shimmerWidth={200}
                       >
                         We'll send you a calendar invitation and meeting details within 24 hours.
