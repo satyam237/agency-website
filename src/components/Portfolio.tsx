@@ -364,43 +364,6 @@ const Portfolio = () => {
           }
         }
       `}</style>
-              {testimonials.map((testimonial, index) => (
-                <div key={`mobile-${index}`} className="flex-shrink-0">
-                  <TestimonialCard testimonial={testimonial} />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Desktop/Tablet Testimonials - Vertical Marquee - NO SCROLL REVEAL */}
-          <div className="hidden sm:block">
-            <div className="relative flex h-[500px] md:h-[600px] w-full flex-row items-center justify-center overflow-hidden rounded-2xl" role="region" aria-label="Client testimonials">
-              <Marquee pauseOnHover vertical className="[--duration:20s]">
-                {firstRow.map((testimonial, index) => (
-                  <TestimonialCard key={`first-${index}`} testimonial={testimonial} />
-                ))}
-              </Marquee>
-              <Marquee reverse pauseOnHover vertical className="[--duration:20s]">
-                {secondRow.map((testimonial, index) => (
-                  <TestimonialCard key={`second-${index}`} testimonial={testimonial} />
-                ))}
-              </Marquee>
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-1/5 bg-gradient-to-b from-gray-50"></div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/5 bg-gradient-to-t from-gray-50"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 };
