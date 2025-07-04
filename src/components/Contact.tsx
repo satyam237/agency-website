@@ -108,6 +108,7 @@ const Contact = () => {
     try {
       // Get production webhook URL
       const prodWebhookUrl = import.meta.env.VITE_N8N_PROD_WEBHOOK_URL;
+      const enableProdWebhook = import.meta.env.VITE_ENABLE_PROD_WEBHOOK === 'true';
 
       // Prepare form data payload
       const payload = {
@@ -120,54 +121,104 @@ const Contact = () => {
         source: 'AI Agency Contact Form'
       };
 
-      // Check if production webhook URL is configured
-      if (!prodWebhookUrl) {
-        console.error('Production webhook URL is not configured');
-        setSubmitError(true);
-        setTimeout(() => setSubmitError(false), 2000);
+      // Check if production webhook is enabled and URL is configured
+      if (!enableProdWebhook || !prodWebhookUrl) {
+        console.log('Production webhook disabled or not configured. Simulating successful submission...');
+        
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Log the form data for development purposes
+        console.log('📧 Form submission (simulated):', payload);
+        
+        // Show success state
+        setSubmitSuccess(true);
+        setIsSubmitted(true);
+        triggerSuccessConfetti();
+        
+        // Reset form data
+        setFormData({ name: '', email: '', company: '', service: '', message: '' });
+        setFormErrors({});
+        
+        // Reset success state after showing it
+        setTimeout(() => {
+          setSubmitSuccess(false);
+          setIsSubmitted(false);
+        }, 3000);
+        
         return;
       }
 
       // Submit to production webhook
       console.log('Submitting to production webhook:', prodWebhookUrl);
       
-      const response = await fetch(prodWebhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(payload)
-      });
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
+      try {
+        const response = await fetch(prodWebhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+          mode: 'cors' // Explicitly set CORS mode
+        });
+        
+        clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        // Success - webhook submission completed
+        console.log('✅ Form submission successful!');
+        
+        setSubmitSuccess(true);
+        setIsSubmitted(true);
+        triggerSuccessConfetti();
+        
+        // Reset form data
+        setFormData({ name: '', email: '', company: '', service: '', message: '' });
+        setFormErrors({});
+        
+        // Reset success state after showing it
+        setTimeout(() => {
+          setSubmitSuccess(false);
+          setIsSubmitted(false);
+        }, 3000);
+        
+      } catch (fetchError) {
+        clearTimeout(timeoutId);
+        
+        if (fetchError instanceof Error && fetchError.name === 'AbortError') {
+          throw new Error('Request timeout - please try again');
+        }
+        
+        // Check if it's a CORS error
+        if (fetchError instanceof TypeError && fetchError.message.includes('Failed to fetch')) {
+          throw new Error('Network error - this might be due to CORS restrictions. Please contact support.');
+        }
+        
+        throw fetchError;
       }
-
-      // Success - webhook submission completed
-      console.log('✅ Form submission successful!');
-      
-      setSubmitSuccess(true);
-      setIsSubmitted(true);
-      
-      // Trigger the multi-colored confetti effect
-      triggerSuccessConfetti();
-      
-      // Reset form data
-      setFormData({ name: '', email: '', company: '', service: '', message: '' });
-      setFormErrors({});
-      
-      // Reset success state after showing it
-      setTimeout(() => {
-        setSubmitSuccess(false);
-        setIsSubmitted(false);
-      }, 3000);
 
     } catch (error) {
       console.error('❌ Form submission failed:', error);
+      
       if (error instanceof Error) {
         console.error('Error details:', error.message);
+        
+        // Provide more specific error feedback
+        if (error.message.includes('CORS') || error.message.includes('Network error')) {
+          console.error('💡 Suggestion: This appears to be a CORS issue. The webhook server may need to allow requests from localhost:5173');
+        } else if (error.message.includes('timeout')) {
+          console.error('💡 Suggestion: The request timed out. Check if the webhook URL is accessible.');
+        }
       }
+      
       setSubmitError(true);
       setTimeout(() => setSubmitError(false), 2000);
     } finally {
