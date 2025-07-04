@@ -106,8 +106,8 @@ const Contact = () => {
     setSubmitSuccess(false);
     
     try {
-      // Get production webhook URL
-      const prodWebhookUrl = import.meta.env.VITE_N8N_PROD_WEBHOOK_URL;
+      // Use the production webhook URL directly
+      const prodWebhookUrl = 'https://kneadovnadlmvblkad.app.n8n.cloud/webhook/c82765bb-4451-488c-abda-9a48c45d5668';
 
       // Prepare form data payload
       const payload = {
@@ -120,14 +120,6 @@ const Contact = () => {
         source: 'AI Agency Contact Form'
       };
 
-      // Check if production webhook URL is configured
-      if (!prodWebhookUrl) {
-        console.error('Production webhook URL is not configured');
-        setSubmitError(true);
-        setTimeout(() => setSubmitError(false), 2000);
-        return;
-      }
-
       // Submit to production webhook
       console.log('Submitting to production webhook:', prodWebhookUrl);
       
@@ -135,7 +127,6 @@ const Contact = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
         body: JSON.stringify(payload)
       });
