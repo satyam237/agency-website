@@ -20,6 +20,12 @@ interface FormErrors {
   message?: string;
 }
 
+interface WebhookResult {
+  url: string;
+  success: boolean;
+  error?: string;
+}
+
 const Contact = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -93,6 +99,34 @@ const Contact = () => {
     }, 250);
   };
 
+  const submitToWebhook = async (url: string, data: any): Promise<WebhookResult> => {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      return {
+        url,
+        success: true
+      };
+    } catch (error) {
+      return {
+        url,
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      };
+    }
+  };
+
   const handleSlideComplete = async () => {
     // First validate the form
     if (!validateForm()) {
@@ -106,46 +140,99 @@ const Contact = () => {
     setSubmitSuccess(false);
     
     try {
-      // Send form data to n8n webhook (production URL)
-      const response = await fetch('https://kneadovnadlmvblkad.app.n8n.cloud/webhook/c82765bb-4451-488c-abda-9a48c45d5668', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          service: formData.service,
-          message: formData.message,
-          timestamp: new Date().toISOString(),
-          source: 'AI Agency Contact Form'
-        })
-      });
+      // Get webhook configuration from environment variables
+      const prodWebhookUrl = import.meta.env.VITE_N8N_PROD_WEBHOOK_URL;
+      const testWebhookUrl = import.meta.env.VITE_N8N_TEST_WEBHOOK_URL;
+      const enableProdWebhook = import.meta.env.VITE_ENABLE_PROD_WEBHOOK === 'true';
+      const enableTestWebhook = import.meta.env.VITE_ENABLE_TEST_WEBHOOK === 'true';
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      // Prepare form data payload
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        service: formData.service,
+        message: formData.message,
+        timestamp: new Date().toISOString(),
+        source: 'AI Agency Contact Form'
+      };
+
+      // Create array of webhook submissions
+      const webhookPromises: Promise<WebhookResult>[] = [];
+
+      if (enableProdWebhook && prodWebhookUrl) {
+        console.log('Submitting to production webhook:', prodWebhookUrl);
+        webhookPromises.push(submitToWebhook(prodWebhookUrl, payload));
       }
 
-      // Success - trigger confetti and show success state
-      setSubmitSuccess(true);
-      setIsSubmitted(true);
+      if (enableTestWebhook && testWebhookUrl) {
+        console.log('Submitting to test webhook:', testWebhookUrl);
+        webhookPromises.push(submitToWebhook(testWebhookUrl, payload));
+      }
+
+      // If no webhooks are enabled, show error
+      if (webhookPromises.length === 0) {
+        console.error('No webhooks are enabled or configured');
+        setSubmitError(true);
+        setTimeout(() => setSubmitError(false), 2000);
+        return;
+      }
+
+      // Execute all webhook submissions concurrently
+      const results = await Promise.allSettled(webhookPromises);
       
-      // Trigger the multi-colored confetti effect
-      triggerSuccessConfetti();
-      
-      // Reset form data
-      setFormData({ name: '', email: '', company: '', service: '', message: '' });
-      setFormErrors({});
-      
-      // Reset success state after showing it
-      setTimeout(() => {
-        setSubmitSuccess(false);
-        setIsSubmitted(false);
-      }, 3000);
+      // Process results
+      const webhookResults: WebhookResult[] = [];
+      let successCount = 0;
+      let failureCount = 0;
+
+      results.forEach((result, index) => {
+        if (result.status === 'fulfilled') {
+          const webhookResult = result.value;
+          webhookResults.push(webhookResult);
+          
+          if (webhookResult.success) {
+            successCount++;
+            console.log(`✅ Webhook submission successful: ${webhookResult.url}`);
+          } else {
+            failureCount++;
+            console.error(`❌ Webhook submission failed: ${webhookResult.url}`, webhookResult.error);
+          }
+        } else {
+          failureCount++;
+          console.error(`❌ Webhook submission promise rejected:`, result.reason);
+        }
+      });
+
+      // Determine overall success based on results
+      if (successCount > 0) {
+        // At least one webhook succeeded
+        console.log(`✅ Form submission successful! ${successCount}/${successCount + failureCount} webhooks succeeded`);
+        
+        setSubmitSuccess(true);
+        setIsSubmitted(true);
+        
+        // Trigger the multi-colored confetti effect
+        triggerSuccessConfetti();
+        
+        // Reset form data
+        setFormData({ name: '', email: '', company: '', service: '', message: '' });
+        setFormErrors({});
+        
+        // Reset success state after showing it
+        setTimeout(() => {
+          setSubmitSuccess(false);
+          setIsSubmitted(false);
+        }, 3000);
+      } else {
+        // All webhooks failed
+        console.error(`❌ Form submission failed! All ${failureCount} webhook(s) failed`);
+        setSubmitError(true);
+        setTimeout(() => setSubmitError(false), 2000);
+      }
 
     } catch (error) {
+      console.error('Unexpected error during form submission:', error);
       setSubmitError(true);
       setTimeout(() => setSubmitError(false), 2000);
     } finally {
