@@ -106,8 +106,8 @@ const Contact = () => {
     setSubmitSuccess(false);
     
     try {
-      // Use the proxied webhook URL for development
-      const webhookUrl = '/api/webhook';
+      // Get production webhook URL
+      const prodWebhookUrl = import.meta.env.VITE_N8N_PROD_WEBHOOK_URL;
 
       // Prepare form data payload
       const payload = {
@@ -120,38 +120,28 @@ const Contact = () => {
         source: 'AI Agency Contact Form'
       };
 
-      // Submit to webhook via proxy
-      console.log('Submitting to webhook via proxy:', webhookUrl);
+      // Check if production webhook URL is configured
+      if (!prodWebhookUrl) {
+        console.error('Production webhook URL is not configured');
+        setSubmitError(true);
+        setTimeout(() => setSubmitError(false), 2000);
+        return;
+      }
+
+      // Submit to production webhook
+      console.log('Submitting to production webhook:', prodWebhookUrl);
       
-      const response = await fetch(webhookUrl, {
+      const response = await fetch(prodWebhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify(payload)
       });
 
       if (!response.ok) {
-        let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-        
-        // Try to get more detailed error information
-        try {
-          const errorData = await response.text();
-          if (errorData) {
-            errorMessage += ` - ${errorData}`;
-          }
-        } catch (e) {
-          // If we can't parse the error response, use the basic error message
-        }
-        
-        // Provide user-friendly error messages for common HTTP status codes
-        if (response.status === 500) {
-          errorMessage = "Our contact service is temporarily unavailable. Please try again later or contact us directly.";
-        } else if (response.status >= 400 && response.status < 500) {
-          errorMessage = "There was an issue with your submission. Please check your information and try again.";
-        }
-        
-        throw new Error(errorMessage);
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
       // Success - webhook submission completed
@@ -170,16 +160,10 @@ const Contact = () => {
       // Reset success state after showing it
       setTimeout(() => {
         setSubmitSuccess(false);
-      }, 2000);
+        setIsSubmitted(false);
+      }, 3000);
+
     } catch (error) {
-      console.error('Form submission failed:', error);
-      
-      // Provide user-friendly error message for network errors
-      if (error instanceof TypeError && error.message.includes('fetch')) {
-        throw new Error("Unable to connect to our contact service. Please check your internet connection and try again.");
-      }
-      
-      throw error;
       console.error('❌ Form submission failed:', error);
       if (error instanceof Error) {
         console.error('Error details:', error.message);
