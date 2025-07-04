@@ -106,8 +106,8 @@ const Contact = () => {
     setSubmitSuccess(false);
     
     try {
-      // Use the production webhook URL directly
-      const prodWebhookUrl = 'https://kneadovnadlmvblkad.app.n8n.cloud/webhook/c82765bb-4451-488c-abda-9a48c45d5668';
+      // Use the proxied webhook URL for development
+      const webhookUrl = '/api/webhook';
 
       // Prepare form data payload
       const payload = {
@@ -120,10 +120,10 @@ const Contact = () => {
         source: 'AI Agency Contact Form'
       };
 
-      // Submit to production webhook
-      console.log('Submitting to production webhook:', prodWebhookUrl);
+      // Submit to webhook via proxy
+      console.log('Submitting to webhook via proxy:', webhookUrl);
       
-      const response = await fetch(prodWebhookUrl, {
+      const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
