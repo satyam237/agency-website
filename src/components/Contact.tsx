@@ -106,8 +106,8 @@ const Contact = () => {
     setSubmitSuccess(false);
     
     try {
-      // Send form data to n8n webhook
-      const response = await fetch('https://kneadovnadlmvblkad.app.n8n.cloud/webhook-test/c82765bb-4451-488c-abda-9a48c45d5668', {
+      // Send form data to n8n webhook (production URL)
+      const response = await fetch('https://kneadovnadlmvblkad.app.n8n.cloud/webhook/c82765bb-4451-488c-abda-9a48c45d5668', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
