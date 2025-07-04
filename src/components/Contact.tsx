@@ -132,7 +132,26 @@ const Contact = () => {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        let errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+        
+        // Try to get more detailed error information
+        try {
+          const errorData = await response.text();
+          if (errorData) {
+            errorMessage += ` - ${errorData}`;
+          }
+        } catch (e) {
+          // If we can't parse the error response, use the basic error message
+        }
+        
+        // Provide user-friendly error messages for common HTTP status codes
+        if (response.status === 500) {
+          errorMessage = "Our contact service is temporarily unavailable. Please try again later or contact us directly.";
+        } else if (response.status >= 400 && response.status < 500) {
+          errorMessage = "There was an issue with your submission. Please check your information and try again.";
+        }
+        
+        throw new Error(errorMessage);
       }
 
       // Success - webhook submission completed
@@ -151,10 +170,15 @@ const Contact = () => {
       // Reset success state after showing it
       setTimeout(() => {
         setSubmitSuccess(false);
-        setIsSubmitted(false);
-      }, 3000);
-
     } catch (error) {
+      console.error('Form submission failed:', error);
+      
+      // Provide user-friendly error message for network errors
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new Error("Unable to connect to our contact service. Please check your internet connection and try again.");
+      }
+      
+      throw error;
       console.error('❌ Form submission failed:', error);
       if (error instanceof Error) {
         console.error('Error details:', error.message);
