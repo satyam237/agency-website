@@ -34,6 +34,7 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [showCalendar, setShowCalendar] = useState(false);
 
   const validateForm = (): boolean => {
@@ -97,20 +98,31 @@ const Contact = () => {
     // First validate the form
     if (!validateForm()) {
       setSubmitError(true);
-      setTimeout(() => setSubmitError(false), 2000);
+      setErrorMessage('Please fill in all required fields correctly.');
+      setTimeout(() => {
+        setSubmitError(false);
+        setErrorMessage('');
+      }, 3000);
       return;
     }
 
     setIsSubmitting(true);
     setSubmitError(false);
     setSubmitSuccess(false);
+    setErrorMessage('');
     
     try {
+      console.log('🚀 Sending form data to Pipedream...', {
+        url: 'https://eol7ad242kmdjkh.m.pipedream.net',
+        data: formData
+      });
+
       // Send form data to Pipedream URL
       const response = await fetch('https://eol7ad242kmdjkh.m.pipedream.net', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
           name: formData.name,
@@ -119,15 +131,34 @@ const Contact = () => {
           service: formData.service,
           message: formData.message,
           timestamp: new Date().toISOString(),
-          source: 'AI Agency Contact Form'
+          source: 'AI Agency Contact Form',
+          userAgent: navigator.userAgent,
+          url: window.location.href
         })
       });
 
+      console.log('📡 Response received:', {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+        headers: Object.fromEntries(response.headers.entries())
+      });
+
+      // Try to get response text for debugging
+      let responseText = '';
+      try {
+        responseText = await response.text();
+        console.log('📄 Response body:', responseText);
+      } catch (textError) {
+        console.warn('⚠️ Could not read response text:', textError);
+      }
+
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP ${response.status}: ${response.statusText}${responseText ? ` - ${responseText}` : ''}`);
       }
 
       // Success - trigger confetti and show success state
+      console.log('✅ Form submitted successfully!');
       setSubmitSuccess(true);
       setIsSubmitted(true);
       
@@ -145,9 +176,45 @@ const Contact = () => {
       }, 3000);
 
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('❌ Form submission error:', error);
+      
+      let userFriendlyMessage = 'Failed to send message. Please try again.';
+      
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        // Network error (CORS, no internet, etc.)
+        userFriendlyMessage = 'Network error. Please check your connection and try again.';
+        console.error('🌐 Network error details:', {
+          message: error.message,
+          stack: error.stack,
+          possibleCauses: [
+            'CORS policy blocking the request',
+            'No internet connection',
+            'Pipedream endpoint is down',
+            'Firewall blocking the request'
+          ]
+        });
+      } else if (error instanceof Error) {
+        // HTTP error or other known error
+        if (error.message.includes('HTTP 4')) {
+          userFriendlyMessage = 'Invalid request. Please check your information and try again.';
+        } else if (error.message.includes('HTTP 5')) {
+          userFriendlyMessage = 'Server error. Please try again in a few minutes.';
+        }
+        
+        console.error('🔥 HTTP error details:', {
+          message: error.message,
+          stack: error.stack,
+          timestamp: new Date().toISOString()
+        });
+      }
+      
       setSubmitError(true);
-      setTimeout(() => setSubmitError(false), 2000);
+      setErrorMessage(userFriendlyMessage);
+      
+      setTimeout(() => {
+        setSubmitError(false);
+        setErrorMessage('');
+      }, 5000);
     } finally {
       setIsSubmitting(false);
     }
@@ -220,6 +287,26 @@ const Contact = () => {
                 <div className="mb-4 md:mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center space-x-3" role="alert" aria-live="polite">
                   <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" aria-hidden="true" />
                   <span className="text-sm md:text-base text-green-700">Thank you! We'll get back to you within 24 hours.</span>
+                </div>
+              )}
+
+              {/* Enhanced Error Display */}
+              {submitError && errorMessage && (
+                <div className="mb-4 md:mb-6 p-4 bg-red-50 border border-red-200 rounded-xl" role="alert" aria-live="polite">
+                  <div className="flex items-start space-x-3">
+                    <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <div>
+                      <div className="text-sm md:text-base text-red-700 font-medium mb-1">
+                        Submission Failed
+                      </div>
+                      <div className="text-sm text-red-600">
+                        {errorMessage}
+                      </div>
+                      <div className="text-xs text-red-500 mt-2">
+                        Check the browser console (F12) for technical details.
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 
