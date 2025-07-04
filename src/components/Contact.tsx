@@ -105,11 +105,29 @@ const Contact = () => {
     setSubmitError(false);
     setSubmitSuccess(false);
     
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Only trigger confetti on successful submission
+      // Send form data to Pipedream URL
+      const response = await fetch('https://eol7ad242kmdjkh.m.pipedream.net', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          service: formData.service,
+          message: formData.message,
+          timestamp: new Date().toISOString(),
+          source: 'AI Agency Contact Form'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Success - trigger confetti and show success state
       setSubmitSuccess(true);
       setIsSubmitted(true);
       
@@ -125,6 +143,7 @@ const Contact = () => {
         setSubmitSuccess(false);
         setIsSubmitted(false);
       }, 3000);
+
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitError(true);
