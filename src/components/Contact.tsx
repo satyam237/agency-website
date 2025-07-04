@@ -95,8 +95,14 @@ const Contact = () => {
   };
 
   const handleSlideComplete = async () => {
+    // INITIAL DEBUG LOG - This should appear first
+    console.log('🎯 handleSlideComplete function triggered!');
+    console.log('📋 Current form data:', formData);
+    console.log('🔍 Form validation check starting...');
+    
     // First validate the form
     if (!validateForm()) {
+      console.log('❌ Form validation failed');
       setSubmitError(true);
       setErrorMessage('Please fill in all required fields correctly.');
       setTimeout(() => {
@@ -106,6 +112,8 @@ const Contact = () => {
       return;
     }
 
+    console.log('✅ Form validation passed, proceeding with submission...');
+    
     setIsSubmitting(true);
     setSubmitError(false);
     setSubmitSuccess(false);
