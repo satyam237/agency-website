@@ -129,7 +129,7 @@ const Contact = () => {
         await new Promise(resolve => setTimeout(resolve, 1500));
         
         // Log the form data for development purposes
-        console.log('📧 Form submission (simulated):', payload);
+        console.log('📧 Form submission (simulated) - sending to team@brightlabs.in:', payload);
         
         // Show success state
         setSubmitSuccess(true);
@@ -478,7 +478,7 @@ const Contact = () => {
                   <div className="text-gray-300 text-sm md:text-base">Mon-Fri 9AM-6PM EST</div>
                 </div>
               </div>
-
+                  <span className="text-gray-600 ml-2">team@brightlabs.in</span>
               <div className="flex items-start space-x-3 md:space-x-4">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <MapPin className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />

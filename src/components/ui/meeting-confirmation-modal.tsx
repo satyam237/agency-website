@@ -75,8 +75,15 @@ export function MeetingConfirmationModal({
   const handleConfirm = async () => {
     setIsSubmitting(true);
     
-    // Simulate API call
+    // Simulate API call - in production this would send to team@brightlabs.in
     await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Log meeting details for development
+    console.log('📅 Meeting scheduled - notification will be sent to team@brightlabs.in:', {
+      email,
+      meetingDate: meetingDate.toISOString(),
+      timestamp: new Date().toISOString()
+    });
     
     setIsSubmitting(false);
     setIsSuccess(true);
@@ -334,7 +341,7 @@ export function MeetingConfirmationModal({
                       Meeting Scheduled! 🎉
                     </h2>
                     <p className="text-sm text-gray-300 leading-relaxed px-2">
-                      We'll send you a calendar invitation and meeting details within 24 hours.
+                      We'll send you a calendar invitation and meeting details within 24 hours to both your email and team@brightlabs.in.
                     </p>
                   </motion.div>
 
