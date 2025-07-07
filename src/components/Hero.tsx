@@ -115,7 +115,7 @@ const Hero = () => {
                 Transform Your Business
               </span>
               <br />
-              <span className="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black">
                 with{' '}
               </span>
               <GradientText 
@@ -127,7 +127,7 @@ const Hero = () => {
               {' '}
               <AnimatedText 
                 text="Automation"
-                textClassName="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black"
+                textClassName="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight"
                 underlineClassName="text-gray-400"
                 underlinePath="M 0,10 Q 100,0 200,10 Q 300,20 400,10"
                 underlineHoverPath="M 0,10 Q 100,20 200,10 Q 300,0 400,10"
