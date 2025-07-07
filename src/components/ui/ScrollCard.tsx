@@ -216,8 +216,8 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
 
         {/* Desktop Layout: Side by Side with Sticky Cards - NO SCROLL REVEAL ON CARDS */}
         <section className='hidden lg:block text-gray-900 w-full bg-gradient-to-b from-white to-gray-50 min-h-screen' role="main">
-          <div className='flex justify-between px-4 md:px-16 gap-8'>
-            <div className='grid gap-2 flex-1 max-w-2xl'>
+          <div className='flex px-4 md:px-16 gap-8'>
+            <div className='grid gap-2 flex-1'>
               {servicesData.map((service, i) => (
                 <figure key={i} className='sticky top-0 h-screen grid place-content-center'>
                   <article
@@ -251,7 +251,7 @@ const ScrollCardServices = forwardRef<HTMLElement>((props, ref) => {
               ))}
             </div>
             
-            <div className='sticky top-0 h-screen grid place-content-center flex-1 max-w-md'>
+            <div className='sticky top-0 h-screen grid place-content-center flex-1'>
               <div className="text-center">
                 <h3 className='text-5xl md:text-6xl font-black text-center tracking-tight leading-[120%] mb-6'>
                   <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
