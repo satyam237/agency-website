@@ -55,9 +55,6 @@ const HomePage = () => (
     <Suspense fallback={<LoadingSpinner />}>
       <Footer />
     </Suspense>
-    
-    {/* AI Assistant Widget */}
-    <DappierWidget />
   </div>
 );
 
@@ -97,9 +94,6 @@ function App() {
         {/* Catch all route - redirect to homepage */}
         <Route path="*" element={<HomePage />} />
       </Routes>
-      
-      {/* Global AI Assistant Widget - only show on homepage */}
-      <DappierWidget />
     </Router>
   );
 }

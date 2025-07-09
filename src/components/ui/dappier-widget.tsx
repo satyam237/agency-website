@@ -9,6 +9,7 @@ declare global {
     interface IntrinsicElements {
       'dappier-ask-ai-widget': {
         widgetId: string;
+        apiKey?: string;
       };
     }
   }
@@ -171,7 +172,10 @@ export const DappierWidget: React.FC = () => {
                     className="w-full h-full"
                     style={{ minHeight: '500px' }}
                   >
-                    <dappier-ask-ai-widget widgetId="wd_01jw8xz7ztf4zr22e2whnsxp7s" />
+                    <dappier-ask-ai-widget 
+                      widgetId="wd_01jw8xz7ztf4zr22e2whnsxp7s"
+                      apiKey="ak_01jzqvez0qffdr5e40k5x0h2mm"
+                    />
                   </div>
                 ) : (
                   <div className="flex items-center justify-center h-full">
