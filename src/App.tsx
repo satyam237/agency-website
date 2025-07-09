@@ -55,6 +55,9 @@ const HomePage = () => (
     <Suspense fallback={<LoadingSpinner />}>
       <Footer />
     </Suspense>
+    
+    {/* AI Assistant Widget */}
+    <DappierWidget />
   </div>
 );
 
