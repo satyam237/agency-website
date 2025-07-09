@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import { GlassFilter } from './components/ui/liquid-glass-button';
 import { ScrollProgress } from './components/ui/scroll-progress';
+import { DappierWidget } from './components/ui/dappier-widget';
 
 // Lazy load components that are not immediately visible
 const Services = React.lazy(() => import('./components/Services'));
@@ -54,6 +55,9 @@ const HomePage = () => (
     <Suspense fallback={<LoadingSpinner />}>
       <Footer />
     </Suspense>
+    
+    {/* AI Assistant Widget */}
+    <DappierWidget />
   </div>
 );
 
@@ -93,6 +97,9 @@ function App() {
         {/* Catch all route - redirect to homepage */}
         <Route path="*" element={<HomePage />} />
       </Routes>
+      
+      {/* Global AI Assistant Widget - only show on homepage */}
+      <DappierWidget />
     </Router>
   );
 }
