@@ -10,6 +10,8 @@ declare global {
       'dappier-ask-ai-widget': {
         widgetId: string;
         apiKey?: string;
+        dataModelId?: string;
+        aiModelId?: string;
       };
     }
   }
@@ -175,6 +177,8 @@ export const DappierWidget: React.FC = () => {
                     <dappier-ask-ai-widget 
                       widgetId="wd_01jw8xz7ztf4zr22e2whnsxp7s"
                       apiKey="ak_01jzqvez0qffdr5e40k5x0h2mm"
+                      dataModelId="dm_01jztg475xe5tvtah6a5js87d2"
+                      aiModelId="am_01jztg4763e5v95b80ddhwkxnx"
                     />
                   </div>
                 ) : (
