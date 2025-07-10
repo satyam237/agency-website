@@ -174,12 +174,7 @@ export const DappierWidget: React.FC = () => {
                     className="w-full h-full"
                     style={{ minHeight: '500px' }}
                   >
-                    <dappier-ask-ai-widget 
-                      widgetId="wd_01jw8xz7ztf4zr22e2whnsxp7s"
-                      apiKey="ak_01jzqvez0qffdr5e40k5x0h2mm"
-                      dataModelId="dm_01jztg475xe5tvtah6a5js87d2"
-                      aiModelId="am_01jztg4763e5v95b80ddhwkxnx"
-                    />
+                    <dappier-ask-ai-widget widgetId="wd_01jztr3xyve1arx9pksawmf837" />
                   </div>
                 ) : (
                   <div className="flex items-center justify-center h-full">
