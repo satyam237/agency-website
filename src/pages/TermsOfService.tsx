@@ -57,7 +57,7 @@ const TermsOfService = () => {
               <span>Agreement to Terms</span>
             </h2>
             <p className="text-gray-600 leading-relaxed mb-4">
-              These Terms of Service ("Terms") govern your use of AI Agency's website and services. By accessing 
+              These Terms of Service ("Terms") govern your use of brightLabs' website and services. By accessing 
               or using our services, you agree to be bound by these Terms. If you do not agree to these Terms, 
               please do not use our services.
             </p>
@@ -72,7 +72,7 @@ const TermsOfService = () => {
           <section className="mb-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Description of Services</h2>
             <p className="text-gray-600 leading-relaxed mb-4">
-              AI Agency provides artificial intelligence automation services, including but not limited to:
+              brightLabs provides artificial intelligence automation services, including but not limited to:
             </p>
             <ul className="list-disc list-inside text-gray-600 space-y-2 mb-6">
               <li>Custom AI agent development and deployment</li>
@@ -129,7 +129,7 @@ const TermsOfService = () => {
             </h2>
             <p className="text-gray-600 leading-relaxed mb-4">
               All content, features, and functionality of our services, including but not limited to text, 
-              graphics, logos, software, and AI models, are owned by AI Agency or our licensors and are 
+              graphics, logos, software, and AI models, are owned by brightLabs or our licensors and are 
               protected by copyright, trademark, and other intellectual property laws.
             </p>
             
@@ -178,6 +178,7 @@ const TermsOfService = () => {
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Limitation of Liability</h3>
             <p className="text-gray-600 leading-relaxed mb-4">
               To the maximum extent permitted by law, AI Agency shall not be liable for any indirect, 
+              To the maximum extent permitted by law, brightLabs shall not be liable for any indirect, 
               incidental, special, consequential, or punitive damages, including but not limited to loss 
               of profits, data, or business opportunities.
             </p>
@@ -239,7 +240,7 @@ const TermsOfService = () => {
               <div className="space-y-3">
                 <div>
                   <strong className="text-gray-900">Email:</strong>
-                  <span className="text-gray-600 ml-2">legal@aiagency.com</span>
+                  <span className="text-gray-600 ml-2">legal@brightlabs.in</span>
                 </div>
                 <div>
                   <strong className="text-gray-900">Phone:</strong>
@@ -247,7 +248,7 @@ const TermsOfService = () => {
                 </div>
                 <div>
                   <strong className="text-gray-900">Address:</strong>
-                  <span className="text-gray-600 ml-2">123 Innovation Drive, San Francisco, CA 94105</span>
+                  <span className="text-gray-600 ml-2">Bright Labs Office, India</span>
                 </div>
               </div>
             </div>

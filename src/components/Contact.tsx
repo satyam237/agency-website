@@ -458,10 +458,10 @@ const Contact = () => {
                 <div>
                   <div className="font-semibold mb-1 text-sm md:text-base">Email Us</div>
                   <div className="text-gray-300 text-sm md:text-base">
-                    <a href="mailto:hello@aiagency.com" className="hover:text-white transition-colors">hello@aiagency.com</a>
+                    <a href="mailto:hello@brightlabs.in" className="hover:text-white transition-colors">hello@brightlabs.in</a>
                   </div>
                   <div className="text-gray-300 text-sm md:text-base">
-                    <a href="mailto:support@aiagency.com" className="hover:text-white transition-colors">support@aiagency.com</a>
+                    <a href="mailto:support@brightlabs.in" className="hover:text-white transition-colors">support@brightlabs.in</a>
                   </div>
                 </div>
               </div>
@@ -485,8 +485,8 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="font-semibold mb-1 text-sm md:text-base">Visit Us</div>
-                  <div className="text-gray-300 text-sm md:text-base">123 Innovation Drive</div>
-                  <div className="text-gray-300 text-sm md:text-base">San Francisco, CA 94105</div>
+                  <div className="text-gray-300 text-sm md:text-base">Bright Labs Office</div>
+                  <div className="text-gray-300 text-sm md:text-base">India</div>
                 </div>
               </div>
             </div>

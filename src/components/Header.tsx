@@ -80,7 +80,7 @@ const Header = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-600 opacity-20 rounded-full blur-sm"></div>
             </div>
             <span className="text-lg font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-              AI Agency
+              brightLabs
             </span>
           </div>
 

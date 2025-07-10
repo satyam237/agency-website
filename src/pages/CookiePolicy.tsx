@@ -238,7 +238,7 @@ const CookiePolicy = () => {
               <div className="space-y-3">
                 <div>
                   <strong className="text-gray-900">Email:</strong>
-                  <span className="text-gray-600 ml-2">privacy@aiagency.com</span>
+                  <span className="text-gray-600 ml-2">privacy@brightlabs.in</span>
                 </div>
                 <div>
                   <strong className="text-gray-900">Phone:</strong>
@@ -246,7 +246,7 @@ const CookiePolicy = () => {
                 </div>
                 <div>
                   <strong className="text-gray-900">Address:</strong>
-                  <span className="text-gray-600 ml-2">123 Innovation Drive, San Francisco, CA 94105</span>
+                  <span className="text-gray-600 ml-2">Bright Labs Office, India</span>
                 </div>
               </div>
             </div>
