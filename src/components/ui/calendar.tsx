@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { X, Mail } from "lucide-react";
+import { MeetingConfirmationModal } from "./meeting-confirmation-modal";
 
 const dayNames = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -54,6 +54,7 @@ export function Calendar({ onClose, onDateSelect }: CalendarProps) {
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const currentMonth = currentDate.toLocaleString("default", { month: "long" });
   const currentYear = currentDate.getFullYear();
   const firstDayOfMonth = new Date(currentYear, currentDate.getMonth(), 1);
@@ -104,9 +105,13 @@ export function Calendar({ onClose, onDateSelect }: CalendarProps) {
       return;
     }
 
-    const selected = new Date(currentYear, currentDate.getMonth(), selectedDate);
-    // Here you would typically integrate with a real booking system
-    alert(`Booking consultation for ${selected.toLocaleDateString()} with email: ${email}. We'll contact you within 24 hours to confirm the time.`);
+    // Show confirmation modal instead of alert
+    setShowConfirmationModal(true);
+  };
+
+  const handleConfirmationClose = () => {
+    setShowConfirmationModal(false);
+    // Close the calendar after successful booking
     onClose();
   };
 
@@ -144,93 +149,103 @@ export function Calendar({ onClose, onDateSelect }: CalendarProps) {
   };
 
   const isBookingEnabled = selectedDate && email.trim() && validateEmail(email);
+  const selectedDateObject = selectedDate ? new Date(currentYear, currentDate.getMonth(), selectedDate) : new Date();
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 relative">
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
-          aria-label="Close calendar"
-        >
-          <X className="h-5 w-5 text-gray-500" />
-        </button>
+    <>
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-2xl p-6 max-w-md w-full mx-4 relative">
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+            aria-label="Close calendar"
+          >
+            <X className="h-5 w-5 text-gray-500" />
+          </button>
 
-        <div className="grid gap-6">
-          <div>
-            <h2 className="mb-4 text-xl md:text-2xl font-semibold text-gray-900">
-              Schedule Your Free Consultation
-            </h2>
-            <p className="mb-4 text-sm md:text-base text-gray-600">
-              Select a date and provide your email. We'll contact you to schedule your 30-minute consultation call.
-            </p>
-          </div>
-          
-          <div className="transition-all duration-500 ease-out">
-            <div className="w-full rounded-2xl border border-gray-200 p-4 transition-colors duration-100">
-              <div className="rounded-xl border border-gray-100 p-4 shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <p className="text-base font-medium text-gray-900">
-                    {currentMonth}, {currentYear}
-                  </p>
-                  <p className="text-sm text-gray-500">30 min call</p>
-                </div>
-                <div className="grid grid-cols-7 gap-2 px-2">
-                  {renderCalendarDays()}
+          <div className="grid gap-6">
+            <div>
+              <h2 className="mb-4 text-xl md:text-2xl font-semibold text-gray-900">
+                Schedule Your Free Consultation
+              </h2>
+              <p className="mb-4 text-sm md:text-base text-gray-600">
+                Select a date and provide your email. We'll contact you to schedule your 30-minute consultation call.
+              </p>
+            </div>
+            
+            <div className="transition-all duration-500 ease-out">
+              <div className="w-full rounded-2xl border border-gray-200 p-4 transition-colors duration-100">
+                <div className="rounded-xl border border-gray-100 p-4 shadow-sm">
+                  <div className="flex items-center justify-between mb-4">
+                    <p className="text-base font-medium text-gray-900">
+                      {currentMonth}, {currentYear}
+                    </p>
+                    <p className="text-sm text-gray-500">30 min call</p>
+                  </div>
+                  <div className="grid grid-cols-7 gap-2 px-2">
+                    {renderCalendarDays()}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Email Input Section */}
-          <div className="space-y-2">
-            <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700">
-              Contact Email *
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail className="h-4 w-4 text-gray-400" />
+            {/* Email Input Section */}
+            <div className="space-y-2">
+              <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700">
+                Contact Email *
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Mail className="h-4 w-4 text-gray-400" />
+                </div>
+                <input
+                  type="email"
+                  id="contact-email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-all duration-200 text-sm ${
+                    emailError ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  }`}
+                  placeholder="add contact email here..."
+                  aria-describedby={emailError ? 'email-error' : undefined}
+                  aria-invalid={emailError ? 'true' : 'false'}
+                />
               </div>
-              <input
-                type="email"
-                id="contact-email"
-                value={email}
-                onChange={handleEmailChange}
-                className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-all duration-200 text-sm ${
-                  emailError ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                }`}
-                placeholder="add contact email here..."
-                aria-describedby={emailError ? 'email-error' : undefined}
-                aria-invalid={emailError ? 'true' : 'false'}
-              />
+              {emailError && (
+                <div id="email-error" className="flex items-center space-x-1 text-red-600" role="alert">
+                  <span className="text-sm">{emailError}</span>
+                </div>
+              )}
             </div>
-            {emailError && (
-              <div id="email-error" className="flex items-center space-x-1 text-red-600" role="alert">
-                <span className="text-sm">{emailError}</span>
-              </div>
-            )}
-          </div>
 
-          <div className="flex gap-3">
-            <Button 
-              variant="outline" 
-              onClick={onClose}
-              className="flex-1"
-            >
-              Cancel
-            </Button>
-            <Button 
-              onClick={handleBookNow}
-              disabled={!isBookingEnabled}
-              className="flex-1 bg-gray-600 hover:bg-gray-700 text-white disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
-            >
-              Book Now
-            </Button>
+            <div className="flex gap-3">
+              <button 
+                onClick={onClose}
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleBookNow}
+                disabled={!isBookingEnabled}
+                className="flex-1 bg-gray-600 hover:bg-gray-700 text-white disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed rounded-lg px-4 py-2 transition-colors"
+              >
+                Book Now
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Meeting Confirmation Modal */}
+      <MeetingConfirmationModal
+        isOpen={showConfirmationModal}
+        onClose={handleConfirmationClose}
+        meetingDate={selectedDateObject}
+        email={email}
+      />
+    </>
   );
 }
 

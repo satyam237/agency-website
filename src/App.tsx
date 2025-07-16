@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import { GlassFilter } from './components/ui/liquid-glass-button';
+import { ScrollProgress } from './components/ui/scroll-progress';
 
 // Lazy load components that are not immediately visible
 const Services = React.lazy(() => import('./components/Services'));
@@ -24,7 +25,20 @@ const LoadingSpinner = () => (
 
 // Main homepage component
 const HomePage = () => (
-  <div className="min-h-screen">
+  <div className="min-h-screen relative">
+    {/* Scroll Progress Bar - Fixed at top, ultra-thin */}
+    <div className="fixed top-0 left-0 right-0 z-[60] pointer-events-none">
+      <div className="absolute left-0 top-0 h-0.5 w-full bg-gray-200/30"></div>
+      <ScrollProgress 
+        className="absolute top-0 h-0.5 bg-gradient-to-r from-gray-800 via-gray-600 to-gray-400"
+        springOptions={{ 
+          stiffness: 280, 
+          damping: 30, 
+          mass: 0.2 
+        }}
+      />
+    </div>
+    
     <GlassFilter />
     <Header />
     <Hero />

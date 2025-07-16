@@ -46,7 +46,7 @@ const AnimatedText = React.forwardRef<HTMLDivElement, AnimatedTextProps>(
       >
         <div className="relative">
           <motion.span
-            className={cn("text-4xl font-bold text-center", textClassName)}
+            className={cn(textClassName)}
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}

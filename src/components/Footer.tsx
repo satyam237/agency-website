@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bot, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { ScrollReveal } from './ui/scroll-reveal';
 
 const Footer = () => {
   const handleLegalPageClick = (page: string) => {
@@ -18,17 +19,25 @@ const Footer = () => {
           <div>
             <div className="flex items-center space-x-2 mb-4 md:mb-6">
               <Bot className="h-6 w-6 md:h-8 md:w-8 text-white" />
-              <span className="text-lg md:text-xl font-bold">AI Agency</span>
+              <span className="text-lg md:text-xl font-bold">brightLabs</span>
             </div>
-            <p className="text-gray-400 leading-relaxed mb-4 md:mb-6 max-w-md text-sm md:text-base">
+            <ScrollReveal
+              baseOpacity={0.4}
+              enableBlur={true}
+              baseRotation={0.5}
+              blurStrength={1}
+              rotationEnd="center center"
+              wordAnimationEnd="center center"
+              textClassName="text-gray-400 leading-relaxed mb-4 md:mb-6 max-w-md text-sm md:text-base"
+            >
               Transforming businesses through intelligent AI automation, custom agents, 
               and cutting-edge solutions that drive growth and efficiency.
-            </p>
+            </ScrollReveal>
             <div className="space-y-2 md:space-y-3">
               <div className="flex items-center space-x-3 text-gray-400 text-sm md:text-base">
                 <Mail className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
-                <a href="mailto:hello@aiagency.com" className="hover:text-white transition-colors">
-                  hello@aiagency.com
+                <a href="mailto:team@brightlabs.in" className="hover:text-white transition-colors">
+                  team@brightlabs.in
                 </a>
               </div>
               <div className="flex items-center space-x-3 text-gray-400 text-sm md:text-base">
@@ -47,9 +56,17 @@ const Footer = () => {
           {/* Newsletter */}
           <div>
             <h3 className="text-xl md:text-2xl font-bold mb-4">Stay Updated</h3>
-            <p className="text-gray-400 text-sm md:text-base mb-6">
+            <ScrollReveal
+              baseOpacity={0.4}
+              enableBlur={true}
+              baseRotation={0.5}
+              blurStrength={1}
+              rotationEnd="center center"
+              wordAnimationEnd="center center"
+              textClassName="text-gray-400 text-sm md:text-base mb-6"
+            >
               Get the latest insights on AI trends, automation strategies, and industry news.
-            </p>
+            </ScrollReveal>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               <input
                 type="email"
@@ -70,7 +87,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:space-y-0">
             <div className="text-gray-400 text-xs md:text-sm">
-              © 2025 AI Agency. All rights reserved.
+              © 2025 brightLabs. All rights reserved.
             </div>
             <div className="flex space-x-4 md:space-x-6 text-xs md:text-sm">
               <button 

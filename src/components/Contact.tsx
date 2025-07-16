@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import { SlideButton } from './ui/slide-button';
 import { Calendar } from './ui/calendar';
+import { ScrollReveal } from './ui/scroll-reveal';
 import { motion } from 'framer-motion';
+import confetti from 'canvas-confetti';
 
 interface FormData {
   name: string;
@@ -63,7 +65,36 @@ const Contact = () => {
     return Object.keys(errors).length === 0;
   };
 
+  const triggerSuccessConfetti = () => {
+    // Multi-colored confetti with red, blue, green, yellow, purple, and orange
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#f97316'],
+      gravity: 0.5,
+      decay: 0.94,
+      startVelocity: 30,
+      ticks: 100
+    });
+
+    // Additional burst for extra celebration
+    setTimeout(() => {
+      confetti({
+        particleCount: 100,
+        spread: 120,
+        origin: { y: 0.7 },
+        colors: ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#f97316'],
+        gravity: 0.6,
+        decay: 0.95,
+        startVelocity: 25,
+        ticks: 80
+      });
+    }, 250);
+  };
+
   const handleSlideComplete = async () => {
+    // First validate the form
     if (!validateForm()) {
       setSubmitError(true);
       setTimeout(() => setSubmitError(false), 2000);
@@ -74,21 +105,120 @@ const Contact = () => {
     setSubmitError(false);
     setSubmitSuccess(false);
     
-    // Simulate form submission
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSubmitSuccess(true);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', company: '', service: '', message: '' });
-      setFormErrors({});
+      // Get production webhook URL
+      const prodWebhookUrl = import.meta.env.VITE_N8N_PROD_WEBHOOK_URL;
+      const enableProdWebhook = import.meta.env.VITE_ENABLE_PROD_WEBHOOK === 'true';
+
+      // Prepare form data payload
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        service: formData.service,
+        message: formData.message,
+        timestamp: new Date().toISOString(),
+        source: 'AI Agency Contact Form'
+      };
+
+      // Check if production webhook is enabled and URL is configured
+      if (!enableProdWebhook || !prodWebhookUrl) {
+        console.log('Production webhook disabled or not configured. Simulating successful submission...');
+        
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Log the form data for development purposes
+        console.log('📧 Form submission (simulated) - sending to team@brightlabs.in:', payload);
+        
+        // Show success state
+        setSubmitSuccess(true);
+        setIsSubmitted(true);
+        triggerSuccessConfetti();
+        
+        // Reset form data
+        setFormData({ name: '', email: '', company: '', service: '', message: '' });
+        setFormErrors({});
+        
+        // Reset success state after showing it
+        setTimeout(() => {
+          setSubmitSuccess(false);
+          setIsSubmitted(false);
+        }, 3000);
+        
+        return;
+      }
+
+      // Submit to production webhook
+      console.log('Submitting to production webhook:', prodWebhookUrl);
       
-      // Reset success state after showing it
-      setTimeout(() => {
-        setSubmitSuccess(false);
-        setIsSubmitted(false);
-      }, 3000);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
+      try {
+        const response = await fetch(prodWebhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal,
+          mode: 'cors' // Explicitly set CORS mode
+        });
+        
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        // Success - webhook submission completed
+        console.log('✅ Form submission successful!');
+        
+        setSubmitSuccess(true);
+        setIsSubmitted(true);
+        triggerSuccessConfetti();
+        
+        // Reset form data
+        setFormData({ name: '', email: '', company: '', service: '', message: '' });
+        setFormErrors({});
+        
+        // Reset success state after showing it
+        setTimeout(() => {
+          setSubmitSuccess(false);
+          setIsSubmitted(false);
+        }, 3000);
+        
+      } catch (fetchError) {
+        clearTimeout(timeoutId);
+        
+        if (fetchError instanceof Error && fetchError.name === 'AbortError') {
+          throw new Error('Request timeout - please try again');
+        }
+        
+        // Check if it's a CORS error
+        if (fetchError instanceof TypeError && fetchError.message.includes('Failed to fetch')) {
+          throw new Error('Network error - this might be due to CORS restrictions. Please contact support.');
+        }
+        
+        throw fetchError;
+      }
+
     } catch (error) {
-      console.error('Form submission error:', error);
+      console.error('❌ Form submission failed:', error);
+      
+      if (error instanceof Error) {
+        console.error('Error details:', error.message);
+        
+        // Provide more specific error feedback
+        if (error.message.includes('CORS') || error.message.includes('Network error')) {
+          console.error('💡 Suggestion: This appears to be a CORS issue. The webhook server may need to allow requests from localhost:5173');
+        } else if (error.message.includes('timeout')) {
+          console.error('💡 Suggestion: The request timed out. Check if the webhook URL is accessible.');
+        }
+      }
+      
       setSubmitError(true);
       setTimeout(() => setSubmitError(false), 2000);
     } finally {
@@ -115,13 +245,12 @@ const Contact = () => {
   };
 
   const handleDateSelect = (date: Date) => {
-    console.log('Selected date:', date);
     // Here you would typically integrate with your booking system
   };
 
   const services = [
     "AI Agents & Automation",
-    "AI-Powered Websites",
+    "AI-Powered Websites", 
     "NLP & Text Processing",
     "Workflow Automation",
     "AI Consulting",
@@ -134,20 +263,28 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
-            <h2 id="contact-heading" className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">
-              <span className="bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+            <h2 id="contact-heading" className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6">
+              <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
                 Let's Build Something Amazing
               </span>
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
+            <ScrollReveal
+              baseOpacity={0.3}
+              enableBlur={true}
+              baseRotation={0.5}
+              blurStrength={1}
+              rotationEnd="center center"
+              wordAnimationEnd="center center"
+              textClassName="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4"
+            >
               Ready to transform your business with AI? Get in touch for a free consultation and discover 
               how we can help you achieve your goals.
-            </p>
+            </ScrollReveal>
           </div>
 
           {/* Main Contact Grid - Send us a message first, Schedule Call second */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-16">
-            {/* Contact Form - Always first */}
+            {/* Contact Form - Always first - NO SCROLL REVEAL */}
             <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
               <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 md:mb-6">Send us a message</h3>
               
@@ -289,9 +426,17 @@ const Contact = () => {
               <h4 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3 md:mb-4">
                 Prefer to schedule a call?
               </h4>
-              <p className="text-gray-600 mb-4 md:mb-6 text-base md:text-lg max-w-2xl mx-auto">
+              <ScrollReveal
+                baseOpacity={0.4}
+                enableBlur={true}
+                baseRotation={0.5}
+                blurStrength={1}
+                rotationEnd="center center"
+                wordAnimationEnd="center center"
+                textClassName="text-gray-600 mb-4 md:mb-6 text-base md:text-lg max-w-2xl mx-auto"
+              >
                 Book a free 30-minute consultation to discuss your project goals, timeline, and how our AI solutions can transform your business operations.
-              </p>
+              </ScrollReveal>
               <button 
                 onClick={handleScheduleCall}
                 className="bg-gradient-to-r from-gray-800 to-gray-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-medium hover:shadow-lg transition-all duration-300 text-base md:text-lg"
@@ -302,7 +447,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Get in Touch section - Now third */}
+          {/* Get in Touch section - Now third - NO SCROLL REVEAL */}
           <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl p-6 md:p-8 text-white mb-8 md:mb-12">
             <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Get in Touch</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -313,10 +458,10 @@ const Contact = () => {
                 <div>
                   <div className="font-semibold mb-1 text-sm md:text-base">Email Us</div>
                   <div className="text-gray-300 text-sm md:text-base">
-                    <a href="mailto:hello@aiagency.com" className="hover:text-white transition-colors">hello@aiagency.com</a>
+                    <a href="mailto:hello@brightlabs.in" className="hover:text-white transition-colors">hello@brightlabs.in</a>
                   </div>
                   <div className="text-gray-300 text-sm md:text-base">
-                    <a href="mailto:support@aiagency.com" className="hover:text-white transition-colors">support@aiagency.com</a>
+                    <a href="mailto:support@brightlabs.in" className="hover:text-white transition-colors">support@brightlabs.in</a>
                   </div>
                 </div>
               </div>
@@ -333,21 +478,21 @@ const Contact = () => {
                   <div className="text-gray-300 text-sm md:text-base">Mon-Fri 9AM-6PM EST</div>
                 </div>
               </div>
-
+                  <span className="text-gray-600 ml-2">team@brightlabs.in</span>
               <div className="flex items-start space-x-3 md:space-x-4">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <MapPin className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
                 </div>
                 <div>
                   <div className="font-semibold mb-1 text-sm md:text-base">Visit Us</div>
-                  <div className="text-gray-300 text-sm md:text-base">123 Innovation Drive</div>
-                  <div className="text-gray-300 text-sm md:text-base">San Francisco, CA 94105</div>
+                  <div className="text-gray-300 text-sm md:text-base">Bright Labs Office</div>
+                  <div className="text-gray-300 text-sm md:text-base">India</div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Why Choose Us section - Now fourth */}
+          {/* Why Choose Us section - Now fourth - NO SCROLL REVEAL */}
           <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
             <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8 text-center">Why Choose Us?</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">

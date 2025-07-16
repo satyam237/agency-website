@@ -62,7 +62,7 @@ const Header = () => {
 
   return (
     <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
+      className={`fixed top-1 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       } ${
         isScrolled 
@@ -80,7 +80,7 @@ const Header = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-gray-400 to-gray-600 opacity-20 rounded-full blur-sm"></div>
             </div>
             <span className="text-lg font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-              AI Agency
+              brightLabs
             </span>
           </div>
 

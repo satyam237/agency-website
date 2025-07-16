@@ -3,6 +3,7 @@ import { ArrowRight, Sparkles, Zap, Bot } from 'lucide-react';
 import { AnimatedText } from './ui/animated-underline-text-one';
 import { GradientText } from './ui/gradient-text';
 import { AuroraBackground } from './ui/aurora-background';
+import { AnimatedShinyText } from './ui/animated-shiny-text';
 import { motion } from 'framer-motion';
 
 const Hero = () => {
@@ -97,19 +98,24 @@ const Hero = () => {
           className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
         >
           <div className="space-y-6 md:space-y-8 pt-16 md:pt-20">
-            {/* Badge - Made smaller and moved down */}
-            <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-3 py-2 md:px-4 md:py-2 shadow-sm">
-              <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-gray-600" />
-              <span className="text-xs md:text-sm font-medium text-gray-700">AI-Powered Solutions</span>
+            {/* Badge with AnimatedShinyText - NO SCROLL REVEAL */}
+            <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm border border-gray-200 rounded-full px-3 py-2 md:px-4 md:py-2 shadow-sm relative overflow-hidden group">
+              <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-gray-600 relative z-10" />
+              <AnimatedShinyText 
+                className="text-xs md:text-sm font-medium relative z-10"
+                shimmerWidth={120}
+              >
+                AI-Powered Solutions
+              </AnimatedShinyText>
             </div>
 
-            {/* Main Heading with Gradient AI Text */}
+            {/* Main Heading with Gradient AI Text - NO SCROLL REVEAL */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight">
               <span className="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 bg-clip-text text-transparent">
                 Transform Your Business
               </span>
               <br />
-              <span className="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black">
                 with{' '}
               </span>
               <GradientText 
@@ -121,7 +127,7 @@ const Hero = () => {
               {' '}
               <AnimatedText 
                 text="Automation"
-                textClassName="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black"
+                textClassName="bg-gradient-to-r from-gray-600 via-gray-500 to-gray-400 bg-clip-text text-transparent text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-tight"
                 underlineClassName="text-gray-400"
                 underlinePath="M 0,10 Q 100,0 200,10 Q 300,20 400,10"
                 underlineHoverPath="M 0,10 Q 100,20 200,10 Q 300,0 400,10"
@@ -130,13 +136,13 @@ const Hero = () => {
               />
             </h1>
 
-            {/* Subtitle - Increased font size */}
+            {/* Subtitle - NO SCROLL REVEAL */}
             <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4">
               We build intelligent AI agents, automate complex workflows, and create cutting-edge websites 
               that drive growth and efficiency for forward-thinking businesses.
             </p>
 
-            {/* CTA Buttons - Reduced sizes */}
+            {/* CTA Buttons - NO SCROLL REVEAL */}
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 md:space-x-8 pt-6 md:pt-8 px-4">
               <button 
                 onClick={handleGetStarted}
@@ -158,7 +164,7 @@ const Hero = () => {
         </motion.div>
       </AuroraBackground>
 
-      {/* Stats Section */}
+      {/* Stats Section - NO SCROLL REVEAL */}
       <div className="stats-section w-full bg-gradient-to-r from-gray-100/50 via-gray-50 to-gray-100/50 backdrop-blur-sm border-t border-gray-200/50 py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-6xl mx-auto">

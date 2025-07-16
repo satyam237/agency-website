@@ -57,7 +57,7 @@ const PrivacyPolicy = () => {
               <span>Introduction</span>
             </h2>
             <p className="text-gray-600 leading-relaxed mb-4">
-              AI Agency ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy 
+              brightLabs ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy 
               explains how we collect, use, disclose, and safeguard your information when you visit our website 
               or use our AI automation services.
             </p>
@@ -215,7 +215,7 @@ const PrivacyPolicy = () => {
               <div className="space-y-3">
                 <div>
                   <strong className="text-gray-900">Email:</strong>
-                  <span className="text-gray-600 ml-2">privacy@aiagency.com</span>
+                  <span className="text-gray-600 ml-2">privacy@brightlabs.in</span>
                 </div>
                 <div>
                   <strong className="text-gray-900">Phone:</strong>
@@ -223,7 +223,7 @@ const PrivacyPolicy = () => {
                 </div>
                 <div>
                   <strong className="text-gray-900">Address:</strong>
-                  <span className="text-gray-600 ml-2">123 Innovation Drive, San Francisco, CA 94105</span>
+                  <span className="text-gray-600 ml-2">Bright Labs Office, India</span>
                 </div>
               </div>
             </div>
