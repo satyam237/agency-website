@@ -1,5 +1,5 @@
 import React from 'react';
-import { Bot, Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import { Bot, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { ScrollReveal } from './ui/scroll-reveal';
 
 const Footer = () => {
@@ -41,14 +41,8 @@ const Footer = () => {
                 </a>
               </div>
               <div className="flex items-center space-x-3 text-gray-400 text-sm md:text-base">
-                <Phone className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
-                <a href="tel:+15551234567" className="hover:text-white transition-colors">
-                  +1 (555) 123-4567
-                </a>
-              </div>
-              <div className="flex items-center space-x-3 text-gray-400 text-sm md:text-base">
                 <MapPin className="h-3 w-3 md:h-4 md:w-4 flex-shrink-0" />
-                <span>San Francisco, CA</span>
+                <span>Pune, India</span>
               </div>
             </div>
           </div>

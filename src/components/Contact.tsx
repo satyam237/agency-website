@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
+import { Mail, MapPin, CheckCircle, AlertCircle } from 'lucide-react';
 import { SlideButton } from './ui/slide-button';
 import { Calendar } from './ui/calendar';
 import { ScrollReveal } from './ui/scroll-reveal';
@@ -450,7 +450,7 @@ const Contact = () => {
           {/* Get in Touch section - Now third - NO SCROLL REVEAL */}
           <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-2xl p-6 md:p-8 text-white mb-8 md:mb-12">
             <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">Get in Touch</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
               <div className="flex items-start space-x-3 md:space-x-4">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Mail className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
@@ -468,49 +468,13 @@ const Contact = () => {
 
               <div className="flex items-start space-x-3 md:space-x-4">
                 <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Phone className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
-                </div>
-                <div>
-                  <div className="font-semibold mb-1 text-sm md:text-base">Call Us</div>
-                  <div className="text-gray-300 text-sm md:text-base">
-                    <a href="tel:+15551234567" className="hover:text-white transition-colors">+1 (555) 123-4567</a>
-                  </div>
-                  <div className="text-gray-300 text-sm md:text-base">Mon-Fri 9AM-6PM EST</div>
-                </div>
-              </div>
-                  <span className="text-gray-600 ml-2">team@brightlabs.in</span>
-              <div className="flex items-start space-x-3 md:space-x-4">
-                <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <MapPin className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
                 </div>
                 <div>
                   <div className="font-semibold mb-1 text-sm md:text-base">Visit Us</div>
                   <div className="text-gray-300 text-sm md:text-base">Bright Labs Office</div>
-                  <div className="text-gray-300 text-sm md:text-base">India</div>
+                  <div className="text-gray-300 text-sm md:text-base">Pune, India</div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Why Choose Us section - Now fourth - NO SCROLL REVEAL */}
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100">
-            <h4 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8 text-center">Why Choose Us?</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{'< 24h'}</div>
-                <div className="text-sm md:text-base text-gray-600">Response Time</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">98%</div>
-                <div className="text-sm md:text-base text-gray-600">Project Success Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">95%</div>
-                <div className="text-sm md:text-base text-gray-600">Client Retention</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">300%</div>
-                <div className="text-sm md:text-base text-gray-600">Average ROI</div>
               </div>
             </div>
           </div>

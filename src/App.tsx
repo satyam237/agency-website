@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import { GlassFilter } from './components/ui/liquid-glass-button';
 import { ScrollProgress } from './components/ui/scroll-progress';
+import ScrollToTop from './components/ui/scroll-to-top';
 
 // Lazy load components that are not immediately visible
 const Services = React.lazy(() => import('./components/Services'));
@@ -93,6 +94,9 @@ function App() {
         {/* Catch all route - redirect to homepage */}
         <Route path="*" element={<HomePage />} />
       </Routes>
+      
+      {/* Scroll to top button - available on all pages */}
+      <ScrollToTop />
     </Router>
   );
 }

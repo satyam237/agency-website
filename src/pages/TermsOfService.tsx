@@ -242,13 +242,10 @@ const TermsOfService = () => {
                   <strong className="text-gray-900">Email:</strong>
                   <span className="text-gray-600 ml-2">legal@brightlabs.in</span>
                 </div>
-                <div>
-                  <strong className="text-gray-900">Phone:</strong>
-                  <span className="text-gray-600 ml-2">+1 (555) 123-4567</span>
-                </div>
+
                 <div>
                   <strong className="text-gray-900">Address:</strong>
-                  <span className="text-gray-600 ml-2">Bright Labs Office, India</span>
+                  <span className="text-gray-600 ml-2">Bright Labs Office, Pune, India</span>
                 </div>
               </div>
             </div>

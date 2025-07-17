@@ -1,135 +1,346 @@
-import React from 'react';
-import { ExternalLink, ArrowRight, Bot, TrendingUp, Clock, Users, Star } from 'lucide-react';
-import { Marquee } from './ui/Marquee';
+"use client";
+
+import { ArrowRight, ExternalLink, TrendingUp, Zap, Bot, Workflow, Globe, Cpu } from "lucide-react";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ScrollReveal } from './ui/scroll-reveal';
 
-const Portfolio = () => {
-  const projects = [
-    {
-      title: "E-commerce AI Assistant",
-      category: "AI Chatbot",
-      description: "Intelligent shopping assistant that increased conversion rates by 45% and reduced customer service workload by 60%.",
-      image: "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-      results: [
-        { icon: TrendingUp, label: "45% Conversion Increase", value: "45%" },
-        { icon: Clock, label: "60% Faster Response", value: "2.3s" },
-        { icon: Users, label: "Customer Satisfaction", value: "98%" }
-      ],
-      technologies: ["GPT-4", "React", "Node.js", "MongoDB"]
-    },
-    {
-      title: "Document Processing Automation",
-      category: "NLP Automation",
-      description: "Automated invoice processing system that handles 10,000+ documents daily with 99.8% accuracy.",
-      image: "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=800",
-      results: [
-        { icon: Bot, label: "Documents Processed", value: "10K+" },
-        { icon: TrendingUp, label: "Accuracy Rate", value: "99.8%" },
-        { icon: Clock, label: "Time Saved", value: "80%" }
-      ],
-      technologies: ["Python", "TensorFlow", "OCR", "AWS"]
-    },
-    {
-      title: "Smart CRM Integration",
-      category: "Workflow Automation",
-      description: "AI-powered CRM that automatically qualifies leads, schedules meetings, and personalizes outreach.",
-      image: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800",
-      results: [
-        { icon: Users, label: "Lead Quality", value: "+65%" },
-        { icon: TrendingUp, label: "Sales Efficiency", value: "+40%" },
-        { icon: Clock, label: "Setup Time", value: "2 weeks" }
-      ],
-      technologies: ["Salesforce", "OpenAI", "Zapier", "Python"]
-    }
-  ];
+import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselApi,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 
-  const testimonials = [
-    {
-      name: "Jennifer Walsh",
-      role: "CEO, TechStart Inc.",
-      content: "The AI automation they built for us has been a game-changer. We've seen a 300% ROI in just 6 months.",
-      image: "https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=200",
-      rating: 5
-    },
-    {
-      name: "Michael Chen",
-      role: "Operations Director, LogiFlow",
-      content: "Their NLP solution processes our documents faster and more accurately than our entire previous team.",
-      image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200",
-      rating: 5
-    },
-    {
-      name: "Sarah Martinez",
-      role: "Marketing Head, GrowthCo",
-      content: "The AI website they created for us generates qualified leads 24/7. It's like having a sales team that never sleeps.",
-      image: "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=200",
-      rating: 5
-    },
-    {
-      name: "David Rodriguez",
-      role: "CTO, InnovateLabs",
-      content: "Exceptional AI implementation. Their automation saved us 40 hours per week and improved accuracy by 95%.",
-      image: "https://images.pexels.com/photos/3778876/pexels-photo-3778876.jpeg?auto=compress&cs=tinysrgb&w=200",
-      rating: 5
-    },
-    {
-      name: "Emily Thompson",
-      role: "Founder, DataDriven Co",
-      content: "The custom AI agent they developed understands our business better than some of our employees. Incredible work!",
-      image: "https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=200",
-      rating: 5
-    },
-    {
-      name: "Alex Kumar",
-      role: "VP Operations, ScaleUp Inc",
-      content: "From concept to deployment, their team delivered beyond expectations. Our efficiency increased by 60%.",
-      image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200",
-      rating: 5
-    }
-  ];
+export interface PortfolioProject {
+  id: string;
+  title: string;
+  description: string;
+  impact: string;
+  category: string;
+  image: string;
+  href: string;
+  metrics: {
+    label: string;
+    value: string;
+  }[];
+}
 
-  const firstRow = testimonials.slice(0, Math.ceil(testimonials.length / 2));
-  const secondRow = testimonials.slice(Math.ceil(testimonials.length / 2));
+export interface AIPortfolioProps {
+  title?: string;
+  description?: string;
+  projects?: PortfolioProject[];
+}
 
-  const TestimonialCard = ({ testimonial }: { testimonial: typeof testimonials[0] }) => (
-    <figure className="relative w-80 sm:w-96 cursor-pointer overflow-hidden rounded-2xl border border-gray-100 bg-white p-6 sm:p-7 shadow-lg hover:shadow-xl transition-all duration-300 mx-2">
-      <div className="flex items-center space-x-3 sm:space-x-4 mb-4">
-        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden bg-gradient-to-r from-gray-100 to-gray-200 ring-2 ring-gray-100 flex-shrink-0">
-          <img 
-            src={testimonial.image} 
-            alt={`${testimonial.name}, ${testimonial.role}`}
-            className="w-full h-full object-cover"
-            width="56"
-            height="56"
-            loading="lazy"
-          />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="font-semibold text-gray-900 text-sm sm:text-base truncate">{testimonial.name}</div>
-          <div className="text-xs sm:text-sm text-gray-600 truncate">{testimonial.role}</div>
-        </div>
-        <div className="flex space-x-1 flex-shrink-0" role="img" aria-label={`${testimonial.rating} out of 5 stars`}>
-          {[...Array(testimonial.rating)].map((_, i) => (
-            <Star key={i} className="h-3 w-3 sm:h-4 sm:w-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
-          ))}
-        </div>
-      </div>
-      <blockquote className="text-gray-700 leading-relaxed italic font-medium text-sm sm:text-base">
-        "{testimonial.content}"
-      </blockquote>
-    </figure>
-  );
+const cn = (...classes: string[]) => {
+  return classes.filter(Boolean).join(' ');
+};
+
+const defaultProjects: PortfolioProject[] = [
+  {
+    id: "ai-chatbot",
+    title: "AI Customer Support Agent",
+    description: "Intelligent chatbot that handles 90% of customer inquiries automatically, reducing response time from hours to seconds.",
+    impact: "90% reduction in response time",
+    category: "AI Agents",
+    image: "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+    href: "#",
+    metrics: [
+      { label: "Response Time", value: "< 2 sec" },
+      { label: "Accuracy", value: "94%" },
+      { label: "Cost Savings", value: "$50K/year" }
+    ]
+  },
+  {
+    id: "workflow-automation",
+    title: "Sales Pipeline Automation",
+    description: "End-to-end automation system that streamlines lead qualification, follow-ups, and deal progression.",
+    impact: "300% increase in lead conversion",
+    category: "Workflow Automation",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+    href: "#",
+    metrics: [
+      { label: "Conversion Rate", value: "+300%" },
+      { label: "Time Saved", value: "40 hrs/week" },
+      { label: "Revenue Growth", value: "+150%" }
+    ]
+  },
+  {
+    id: "ai-website",
+    title: "AI-Powered E-commerce Platform",
+    description: "Smart website with personalized product recommendations and dynamic pricing optimization.",
+    impact: "250% boost in sales revenue",
+    category: "AI Website Design",
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+    href: "#",
+    metrics: [
+      { label: "Sales Increase", value: "+250%" },
+      { label: "User Engagement", value: "+180%" },
+      { label: "Cart Conversion", value: "+85%" }
+    ]
+  },
+  {
+    id: "custom-ai-solution",
+    title: "Predictive Analytics Dashboard",
+    description: "Custom AI solution for inventory management with demand forecasting and automated reordering.",
+    impact: "60% reduction in inventory costs",
+    category: "Custom AI Solutions",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
+    href: "#",
+    metrics: [
+      { label: "Cost Reduction", value: "60%" },
+      { label: "Accuracy", value: "96%" },
+      { label: "Efficiency", value: "+400%" }
+    ]
+  }
+];
+
+const categoryIcons = {
+  "AI Agents": Bot,
+  "Workflow Automation": Workflow,
+  "AI Website Design": Globe,
+  "Custom AI Solutions": Cpu
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 30,
+      mass: 0.8,
+    },
+  },
+  hover: {
+    y: -8,
+    scale: 1.02,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 25,
+    },
+  },
+};
+
+const overlayVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+const contentVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 10,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 300,
+      damping: 25,
+    },
+  },
+};
+
+function ProjectCard({ project }: { project: PortfolioProject }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const IconComponent = categoryIcons[project.category as keyof typeof categoryIcons] || Zap;
 
   return (
-    <section id="portfolio" className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50" role="main" aria-labelledby="portfolio-heading">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h2 id="portfolio-heading" className="text-4xl sm:text-5xl md:text-6xl font-black mb-4 md:mb-6">
-            <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-              Success Stories
+    <motion.div
+      variants={cardVariants}
+      initial="hidden"
+      animate="visible"
+      whileHover="hover"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className="group relative h-full min-h-[32rem] max-w-full overflow-hidden rounded-2xl bg-white border border-gray-200 shadow-lg"
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+      </div>
+
+      {/* Glassmorphism overlay on hover */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            className="absolute inset-0 backdrop-blur-sm bg-black/10 border border-white/10"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Content */}
+      <motion.div
+        variants={contentVariants}
+        className="absolute inset-0 flex flex-col justify-between p-6 text-white"
+      >
+        {/* Header */}
+        <motion.div variants={itemVariants} className="flex items-start justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm border border-white/20">
+              <IconComponent className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <span className="inline-block rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-xs font-medium text-white border border-white/20">
+                {project.category}
+              </span>
+            </div>
+          </div>
+          <motion.a
+            href={project.href}
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/20 backdrop-blur-sm border border-white/20 transition-colors hover:bg-white/30"
+          >
+            <ExternalLink className="h-4 w-4 text-white" />
+          </motion.a>
+        </motion.div>
+
+        {/* Main Content */}
+        <div className="space-y-4">
+          <motion.div variants={itemVariants}>
+            <h3 className="text-xl font-bold leading-tight text-white mb-2">
+              {project.title}
+            </h3>
+            <p className="text-sm text-white/90 leading-relaxed line-clamp-3">
+              {project.description}
+            </p>
+          </motion.div>
+
+          {/* Impact Badge */}
+          <motion.div
+            variants={itemVariants}
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-emerald-500/20 to-blue-500/20 backdrop-blur-sm px-4 py-2 border border-white/20"
+          >
+            <TrendingUp className="h-4 w-4 text-emerald-400" />
+            <span className="text-sm font-semibold text-white">
+              {project.impact}
             </span>
-          </h2>
+          </motion.div>
+
+          {/* Metrics */}
+          <motion.div variants={itemVariants} className="grid grid-cols-3 gap-3">
+            {project.metrics.map((metric, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="rounded-xl bg-white/10 backdrop-blur-sm p-3 border border-white/10"
+              >
+                <div className="text-lg font-bold text-white">
+                  {metric.value}
+        </div>
+                <div className="text-xs text-white/80">
+                  {metric.label}
+        </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center justify-between pt-2"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 rounded-xl bg-white text-black px-4 py-2 text-sm font-semibold transition-all hover:bg-white/90"
+            >
+              View Case Study
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </motion.button>
+          </motion.div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+const AIPortfolio = ({
+  title = "Our AI Automation Success Stories",
+  description = "Discover how we've transformed businesses with cutting-edge AI solutions, delivering measurable results and driving unprecedented growth.",
+  projects = defaultProjects,
+}: AIPortfolioProps) => {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    if (!carouselApi) {
+      return;
+    }
+    const updateSelection = () => {
+      setCanScrollPrev(carouselApi.canScrollPrev());
+      setCanScrollNext(carouselApi.canScrollNext());
+      setCurrentSlide(carouselApi.selectedScrollSnap());
+    };
+    updateSelection();
+    carouselApi.on("select", updateSelection);
+    return () => {
+      carouselApi.off("select", updateSelection);
+    };
+  }, [carouselApi]);
+
+  return (
+    <section id="portfolio" className="py-16 md:py-20 bg-gradient-to-b from-white to-gray-50">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 flex items-end justify-between">
+          <div className="flex flex-col gap-4 max-w-2xl">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-black mb-4 md:mb-6"
+            >
+            <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
+                {title}
+            </span>
+            </motion.h2>
           <ScrollReveal
             baseOpacity={0.3}
             enableBlur={true}
@@ -139,233 +350,84 @@ const Portfolio = () => {
             wordAnimationEnd="center center"
             textClassName="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4"
           >
-            Real results from real clients. See how our AI solutions have transformed businesses across industries.
+              {description}
           </ScrollReveal>
         </div>
-
-        {/* Portfolio Projects */}
-        <div className="space-y-16 md:space-y-20 mb-16 md:mb-20">
-          {projects.map((project, index) => (
-            <article key={index} className="group">
-              {/* Mobile Layout: Content First, Image Second */}
-              <div className="block lg:hidden space-y-8">
-                {/* Project Content - Mobile */}
-                <div className="text-center sm:text-left">
-                  <div className="inline-block bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
-                    {project.category}
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">{project.title}</h3>
-                  <ScrollReveal
-                    baseOpacity={0.4}
-                    enableBlur={true}
-                    baseRotation={0.5}
-                    blurStrength={1}
-                    rotationEnd="center center"
-                    wordAnimationEnd="center center"
-                    textClassName="text-gray-600 text-base sm:text-lg leading-relaxed mb-6"
-                  >
-                    {project.description}
-                  </ScrollReveal>
-
-                  {/* Results - Mobile - NO SCROLL REVEAL */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6" role="list" aria-label="Project results">
-                    {project.results.map((result, resultIndex) => (
-                      <div key={resultIndex} className="text-center bg-gray-50 rounded-xl p-4 border border-gray-100" role="listitem">
-                        <div className="w-10 h-10 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl flex items-center justify-center mx-auto mb-2">
-                          <result.icon className="h-5 w-5 text-gray-700" aria-hidden="true" />
-                        </div>
-                        <div className="text-lg font-bold text-gray-900">{result.value}</div>
-                        <div className="text-xs text-gray-600">{result.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Technologies - Mobile - NO SCROLL REVEAL */}
-                  <div className="flex flex-wrap justify-center sm:justify-start gap-2 mb-6" role="list" aria-label="Technologies used">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className="bg-gray-100 border border-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200" role="listitem">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex justify-center sm:justify-start">
-                    <button 
-                      className="group bg-gradient-to-r from-gray-800 to-gray-600 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2"
-                      aria-label={`View case study for ${project.title}`}
-                    >
-                      <span>View Case Study</span>
-                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Project Image - Mobile - NO SCROLL REVEAL */}
-                <div className="relative">
-                  <div className="aspect-video rounded-2xl overflow-hidden bg-gradient-to-r from-gray-100 to-gray-200 shadow-lg">
-                    <img 
-                      src={project.image} 
-                      alt={`${project.title} - ${project.description}`}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                      width="800"
-                      height="450"
-                    />
-                  </div>
-                  <div className="absolute -bottom-4 -right-4 bg-gray-50 border border-gray-100 rounded-xl p-3 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <ExternalLink className="h-6 w-6 text-gray-600" aria-hidden="true" />
+          <div className="hidden shrink-0 gap-2 md:flex">
+            <Button
+              size="icon"
+              variant="outline"
+              onClick={() => {
+                carouselApi?.scrollPrev();
+              }}
+              disabled={!canScrollPrev}
+              className="h-12 w-12 rounded-full border-gray-200 hover:bg-gray-100"
+            >
+              <ArrowRight className="h-5 w-5 rotate-180" />
+            </Button>
+            <Button
+              size="icon"
+              variant="outline"
+              onClick={() => {
+                carouselApi?.scrollNext();
+              }}
+              disabled={!canScrollNext}
+              className="h-12 w-12 rounded-full border-gray-200 hover:bg-gray-100"
+            >
+              <ArrowRight className="h-5 w-5" />
+            </Button>
                   </div>
                 </div>
               </div>
-
-              {/* Desktop Layout: Side by Side */}
-              <div className={`hidden lg:grid grid-cols-2 gap-12 items-center ${
-                index % 2 === 1 ? 'grid-flow-col-dense' : ''
-              }`}>
-                {/* Project Image - Desktop - NO SCROLL REVEAL */}
-                <div className={`relative ${index % 2 === 1 ? 'col-start-2' : ''}`}>
-                  <div className="aspect-video rounded-2xl overflow-hidden bg-gradient-to-r from-gray-100 to-gray-200">
-                    <img 
-                      src={project.image} 
-                      alt={`${project.title} - ${project.description}`}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                      width="800"
-                      height="450"
-                    />
-                  </div>
-                  <div className="absolute -bottom-4 -right-4 bg-gray-50 border border-gray-100 rounded-xl p-3 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    <ExternalLink className="h-6 w-6 text-gray-600" aria-hidden="true" />
-                  </div>
-                </div>
-
-                {/* Project Content - Desktop */}
-                <div className={index % 2 === 1 ? 'col-start-1' : ''}>
-                  <div className="inline-block bg-gradient-to-r from-gray-100 to-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
-                    {project.category}
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-4">{project.title}</h3>
-                  <ScrollReveal
-                    baseOpacity={0.4}
-                    enableBlur={true}
-                    baseRotation={0.5}
-                    blurStrength={1}
-                    rotationEnd="center center"
-                    wordAnimationEnd="center center"
-                    textClassName="text-gray-600 text-lg leading-relaxed mb-6"
-                  >
-                    {project.description}
-                  </ScrollReveal>
-
-                  {/* Results - Desktop - NO SCROLL REVEAL */}
-                  <div className="grid grid-cols-3 gap-4 mb-6" role="list" aria-label="Project results">
-                    {project.results.map((result, resultIndex) => (
-                      <div key={resultIndex} className="text-center bg-gray-50 rounded-xl p-3 border border-gray-100" role="listitem">
-                        <div className="w-10 h-10 bg-gradient-to-r from-gray-100 to-gray-200 rounded-xl flex items-center justify-center mx-auto mb-2">
-                          <result.icon className="h-5 w-5 text-gray-700" aria-hidden="true" />
-                        </div>
-                        <div className="text-base font-bold text-gray-900">{result.value}</div>
-                        <div className="text-xs text-gray-600">{result.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Technologies - Desktop - NO SCROLL REVEAL */}
-                  <div className="flex flex-wrap gap-2 mb-6" role="list" aria-label="Technologies used">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span key={techIndex} className="bg-gray-100 border border-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm hover:bg-gray-200 transition-colors duration-200" role="listitem">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
+      <div className="w-full">
+        <Carousel
+          setApi={setCarouselApi}
+          opts={{
+            breakpoints: {
+              "(max-width: 768px)": {
+                dragFree: true,
+              },
+            },
+          }}
+        >
+          <CarouselContent className="ml-0 2xl:ml-[max(8rem,calc(50vw-700px))] 2xl:mr-[max(0rem,calc(50vw-700px))]">
+            {projects.map((project, index) => (
+              <CarouselItem
+                key={project.id}
+                className="max-w-[340px] pl-[20px] md:max-w-[380px] lg:max-w-[420px]"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.1,
+                  }}
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+        <div className="mt-8 flex justify-center gap-2">
+          {projects.map((_, index) => (
                   <button 
-                    className="group bg-gradient-to-r from-gray-800 to-gray-600 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg transition-all duration-300 flex items-center space-x-2"
-                    aria-label={`View case study for ${project.title}`}
-                  >
-                    <span>View Case Study</span>
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
-            </article>
+              key={index}
+              className={cn(
+                "h-2 w-2 rounded-full transition-all duration-300",
+                currentSlide === index 
+                  ? "bg-black w-8" 
+                  : "bg-gray-300 hover:bg-gray-400"
+              )}
+              onClick={() => carouselApi?.scrollTo(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
           ))}
         </div>
-
-        {/* Testimonials with Marquee Effect */}
-        <div>
-          <h3 className="text-3xl sm:text-4xl font-black text-center text-gray-900 mb-8 md:mb-12">
-            <span className="bg-gradient-to-b from-black to-gray-400 bg-clip-text text-transparent">
-              What Our Clients Say
-            </span>
-          </h3>
-          
-          {/* Mobile Testimonials - Horizontal Scroll - NO SCROLL REVEAL */}
-          <div className="block sm:hidden">
-            <div className="relative overflow-hidden">
-              <div className="flex gap-4 pb-4 px-4 -mx-4 scrollbar-hide animate-marquee" style={{ width: 'max-content', animationDuration: '30s' }}>
-                {testimonials.map((testimonial, index) => (
-                  <div key={`mobile-${index}`} className="flex-shrink-0">
-                    <TestimonialCard testimonial={testimonial} />
-                  </div>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {testimonials.map((testimonial, index) => (
-                  <div key={`mobile-duplicate-${index}`} className="flex-shrink-0">
-                    <TestimonialCard testimonial={testimonial} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Desktop/Tablet Testimonials - Vertical Marquee - NO SCROLL REVEAL */}
-          <div className="hidden sm:block">
-            <div className="relative flex h-[500px] md:h-[600px] w-full flex-row items-center justify-center overflow-hidden rounded-2xl" role="region" aria-label="Client testimonials">
-              <Marquee pauseOnHover vertical className="[--duration:20s]">
-                {firstRow.map((testimonial, index) => (
-                  <TestimonialCard key={`first-${index}`} testimonial={testimonial} />
-                ))}
-              </Marquee>
-              <Marquee reverse pauseOnHover vertical className="[--duration:20s]">
-                {secondRow.map((testimonial, index) => (
-                  <TestimonialCard key={`second-${index}`} testimonial={testimonial} />
-                ))}
-              </Marquee>
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-1/5 bg-gradient-to-b from-gray-50"></div>
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/5 bg-gradient-to-t from-gray-50"></div>
-            </div>
-          </div>
-        </div>
       </div>
-
-      <style jsx>{`
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-        
-        /* Mobile auto-scroll animation */
-        @media (max-width: 639px) {
-          .animate-marquee {
-            animation: marquee-mobile 30s linear infinite;
-          }
-          
-          @keyframes marquee-mobile {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-        }
-      `}</style>
     </section>
   );
 };
 
-export default Portfolio;
+export default AIPortfolio;
